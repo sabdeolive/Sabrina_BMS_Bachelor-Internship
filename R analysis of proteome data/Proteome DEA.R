@@ -20,3 +20,9 @@ library(Biobase)
 #Creating ExpressionSet object
 eset <- ExpressionSet(assayData = prot,
                       phenoData= AnnotatedDataFrame(subj))
+
+#Install limma
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("limma")
