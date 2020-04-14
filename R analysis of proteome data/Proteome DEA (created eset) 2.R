@@ -33,4 +33,23 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 
 BiocManager::install("limma")
 
-#
+#Translate statistical model to R code (creation of design matrix)
+design<- model.matrix(~IR_IS_classification, data = pData(eset))
+head(design,2)
+colSums(design)
+
+#Load limma
+library(limma)
+
+#Fit the model with lmFit 
+fit<- lmFit(eset,design)
+
+#Calculate the t-statistics 
+fit<- eBayes(fit)
+
+#Summarize results
+results<- decideTests(fit[,"IR_IS_classificationIS"])
+summary(results)
+
+
+
