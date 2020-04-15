@@ -79,5 +79,12 @@ results <- topTable(fit, number=20009, coef="InsgroupIR")
 write.table(results, file="proteome_limma_analysis.txt", sep="\t", row.names = TRUE, col.names = NA)
 
 
+fit
 
+#Extracting top ranked proteins from fit
+TableProt <- topTable(fit,coef=2)
 
+#Export TableProt
+write.table(TableProt,
+            file = "c:/Users/sabde/Documents/TopRankedProteinsFromR.txt", 
+            sep="\t")

@@ -50,3 +50,13 @@ fit<- eBayes(fit)
 #Summarize results
 results<- decideTests(fit[,"IR_IS_classificationIS"])
 summary(results)
+
+fit
+
+#Extracting top ranked metabolites from fit
+TableMet <- topTable(fit,coef=2)
+
+#Export TableMet
+write.table(TableMet,
+            file = "c:/Users/sabde/Documents/TopRankedMetabolitesFromR.txt", 
+            sep="\t")
