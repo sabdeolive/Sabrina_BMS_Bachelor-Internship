@@ -12,7 +12,7 @@ library(Biobase)
 library(limma)
 
 #change working directory to one incl. necessary files
-DATA.DIR <- "C:/Users/sabde/OneDrive/Documents/UM documents/BMS Year 3/Internship + Thesis/Sabrina_BMS_Bachelor-Internship/T2DM iHMP Data/metabolome data/"
+DATA.DIR <- "C:/Users/sabde/OneDrive/Documents/UM documents/BMS Year 3/Internship + Thesis/Sabrina_BMS_Bachelor-Internship/T2DM iHMP Data/R analysis of metabolome data/"
 setwd(DATA.DIR)
 getwd()
 
@@ -20,12 +20,15 @@ getwd()
 metabolome <- read.delim("metabolome_abundance 13.txt", as.is=TRUE)
 rownames(metabolome) <- metabolome[,1]
 metabolome <- metabolome[,-1]
+dim(metabolome)
+class(metabolome)
 
 #load study description
 desc <- read.delim("Subject data T2DM iHMP 5.txt", as.is=TRUE)
+dim(desc)
 
 #check order of description and normalised data columns
-colnames(prot) == desc$SubjectID
+colnames(metabolome) == desc$SubjectID
 # OK
 
 #groups
