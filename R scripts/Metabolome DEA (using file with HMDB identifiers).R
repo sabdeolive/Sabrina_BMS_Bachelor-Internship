@@ -12,16 +12,25 @@ library(Biobase)
 library(limma)
 
 #change working directory to one incl. necessary files
-DATA.DIR <- "C:/Users/sabde/OneDrive/Documents/UM documents/BMS Year 3/Internship + Thesis/Sabrina_BMS_Bachelor-Internship/T2DM iHMP Data/R analysis of metabolome data/"
+DATA.DIR <- "C:/Users/sabde/"
 setwd(DATA.DIR)
 getwd()
 
 # Read the metabolome data
-metabolome <- read.delim("metabolome_abundance 13.txt", as.is=TRUE)
-rownames(metabolome) <- metabolome[,1]
-metabolome <- metabolome[,-1]
+metabolome <- read.delim("metabolome_abundance 13.txt", header = TRUE, sep = "\t", row.names = NULL)
+dim(metabolome)
+df = data.frame(matrix(1:323))
+df
+rownames(df) = make.names(metabolome[,1],unique=TRUE)
+#
+rownames(metabolome) <- df[,1]
+metabolome <- metabolome[,2:61]
+#metabolome <- metabolome[,-1]
 dim(metabolome)
 class(metabolome)
+metabolomeMat <- data.matrix(metabolome)
+dim(metabolomeMat)
+class(metabolomeMat)
 
 #load study description
 desc <- read.delim("Subject data T2DM iHMP 5.txt", as.is=TRUE)
