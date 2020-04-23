@@ -20,12 +20,14 @@ getwd()
 metabolome <- read.delim("metabolome_abundance 11.txt", as.is=TRUE)
 rownames(metabolome) <- metabolome[,1]
 metabolome <- metabolome[,-1]
+dim(metabolome)
 
 #load study description
 desc <- read.delim("Subject data T2DM iHMP 5.txt", as.is=TRUE)
+dim(desc)
 
 #check order of description and normalised data columns
-colnames(prot) == desc$SubjectID
+colnames(metabolome) == desc$SubjectID
 # OK
 
 #groups
@@ -49,7 +51,9 @@ fitM<- lmFit(metabolome,designM)
 
 #Calculate the t-statistics 
 fitM<- eBayes(fitM)
+fitM
 
 #Summarize results
 resultsM <- topTable(fitM, number=20009, coef="InsgroupMIR")
 write.table(resultsM, file="c:/Users/sabde/Documents/metabolome_limma_analysis.txt", sep="\t", row.names = TRUE, col.names = NA)
+
