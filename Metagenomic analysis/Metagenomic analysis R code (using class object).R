@@ -24,13 +24,42 @@ library(plyr)
 library(gridExtra)
 library(dplyr)
 
-T2D <- T2D16S()
+sessionInfo()
+
+T2D <- T2D16S
+subject_info<-Subject.data.T2DM.iHMP.1
+subject_info
 T2D
 
 #phyloseq-class experiment-level object
 #otu_table()   OTU Table:         [ 12062 taxa and 2208 samples ]
 #sample_data() Sample Data:       [ 2208 samples by 13 sample variables ]
 #tax_table()   Taxonomy Table:    [ 12062 taxa by 7 taxonomic ranks ]
+
+
+#subsetting subject info for IR and IS
+IR<-subset.data.frame(subject_info, IR_IS_classification=="IR")
+IS<-subset.data.frame(subject_info, IR_IS_classification=="IS")
+
+IR #35 individuals
+IS #31 individuals
+
+#Changing file name variable in T2D16S_samp to subject_ID
+as_subject_ID <- substr(T2D@sam_data[["file_name"]],29,36)
+as_subject_ID
+class(as_subject_ID)
+
+
+#Remove subjects that are not in the gut 16s and metabolome data from the IR and IS data.
+#subjects not in gut 16s = 
+#subjects not in metabolome = 
+
+
+#Remove subjects that are not classified, notin gut 16s and not in metabolome data from the T2D data.
+#subjects not classified = 
+#subjects not in gut 16s = 
+#subjects not in metabolome =
+
 
 #Create a contingency table of the number of taxa in each phylum
 table(tax_table(T2D)[, "Phylum"]) #4 phylum showed count of only 1
