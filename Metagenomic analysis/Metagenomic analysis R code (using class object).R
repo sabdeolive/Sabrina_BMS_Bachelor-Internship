@@ -50,18 +50,52 @@ as_subject_ID
 class(as_subject_ID)
 
 
-#Remove subjects that are not in the gut 16s and metabolome data from the IR and IS data.
-#IR subjects not in gut 16s = ZPJT5MY, ZQEFRDE
-#IR subjects not in metabolome = ZSOZWGV
+####Remove subjects that are not in the gut 16s and metabolome data from the IR, IS and T2D data.
 
-IR_all_data <- IR[-c(ZPJT5MY, ZQEFRDE, ZSOZWGV)]
+###IR
+##IR subjects not in gut 16s = ZPJT5MY, ZQEFRDE
+##IR subjects not in metabolome = ZSOZWGV
 
-#IS subjects not in gut 16s = ZP0DXQ0, ZRGK7U8, ZS2DMX7
-#IS subjects not in metabolome = none
-IS_all_data <- IS[-c(ZP0DXQ0, ZRGK7U8, ZS2DMX7)]
+##Finding rows of subjects not in gut 16s
+which(grepl("ZPJT5MY", IR$SubjectID)) #row 13
+which(grepl("ZQEFRDE", IR$SubjectID)) #row 14
 
-#Remove subjects that are not classified, notin gut 16s and not in metabolome data from the T2D data.
-#subjects not classified = 
+##Finding rows of subjects not in metabolome
+which(grepl("ZSOZWGV", IR$SubjectID)) #row 18
+
+#Removing row 13,14 and 18 from IR data
+IR_excl <- IR[-c(13,14,18),]
+View(IR_excl) #35 - 3 = 32 subjects
+which(grepl("ZPJT5MY", IR_excl$SubjectID))
+which(grepl("ZQEFRDE", IR_excl$SubjectID))
+which(grepl("ZSOZWGV", IR_excl$SubjectID))
+
+IR_to_exclude <- row.names(IR)
+IR_all_data <- IR[-c(ZPJT5MY, ZQEFRDE, ZSOZWGV),]
+IR_all_data <- IR[-c(1,2,3),]
+class(IR)
+
+###IS
+##IS subjects not in gut 16s = ZP0DXQ0, ZRGK7U8, ZS2DMX7
+##IS subjects not in metabolome = none
+
+##Finding rows of subjects not in gut 16s
+which(grepl("ZP0DXQ0", IS$SubjectID)) #row 15
+which(grepl("ZRGK7U8", IS$SubjectID)) #row 20
+which(grepl("ZS2DMX7", IS$SubjectID)) #row 22
+
+#Removing row 13,14 and 18 from IS data
+IS_excl <- IS[-c(15,20,22),] #31 - 3 = 28 subjects
+dim(IS_excl)
+View(IS_excl)
+which(grepl("ZP0DXQ0", IS_excl$SubjectID))
+which(grepl("ZRGK7U8", IS_excl$SubjectID))
+which(grepl("ZS2DMX7", IS_excl$SubjectID))
+
+###T2D
+##Remove subjects that are not classified(= unknown)
+
+#, not in gut 16s and not in metabolome data from the T2D data.
 #subjects not in gut 16s = ZP0DXQ0, ZPJT5MY, ZQEFRDE, ZRGK7U8, ZS2DMX7
 #subjects not in metabolome = ZSOZWGV
 T2D_all_data <- 
