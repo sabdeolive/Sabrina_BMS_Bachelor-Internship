@@ -51,15 +51,20 @@ class(as_subject_ID)
 
 
 #Remove subjects that are not in the gut 16s and metabolome data from the IR and IS data.
-#subjects not in gut 16s = 
-#subjects not in metabolome = 
+#IR subjects not in gut 16s = ZPJT5MY, ZQEFRDE
+#IR subjects not in metabolome = ZSOZWGV
 
+IR_all_data <- IR[-c(ZPJT5MY, ZQEFRDE, ZSOZWGV)]
+
+#IS subjects not in gut 16s = ZP0DXQ0, ZRGK7U8, ZS2DMX7
+#IS subjects not in metabolome = none
+IS_all_data <- IS[-c(ZP0DXQ0, ZRGK7U8, ZS2DMX7)]
 
 #Remove subjects that are not classified, notin gut 16s and not in metabolome data from the T2D data.
 #subjects not classified = 
-#subjects not in gut 16s = 
-#subjects not in metabolome =
-
+#subjects not in gut 16s = ZP0DXQ0, ZPJT5MY, ZQEFRDE, ZRGK7U8, ZS2DMX7
+#subjects not in metabolome = ZSOZWGV
+T2D_all_data <- 
 
 #Create a contingency table of the number of taxa in each phylum
 table(tax_table(T2D)[, "Phylum"]) #4 phylum showed count of only 1
