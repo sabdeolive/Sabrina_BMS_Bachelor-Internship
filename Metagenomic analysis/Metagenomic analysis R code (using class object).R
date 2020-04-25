@@ -116,9 +116,9 @@ IS_ps
   
   
 ###Changing file name variable in T2D16S_samp to subject_ID
-as_subject_ID <- substr(T2D@sam_data[["file_name"]],29,35)
-as_subject_ID
-class(as_subject_ID)
+#as_subject_ID <- substr(T2D@sam_data[["file_name"]],29,35)
+#as_subject_ID
+#class(as_subject_ID)
 ##add as_subject_ID to T2D16S_samp data
 #first change as_subject_ID to sample data
 #SD_subject_ID <- sample_data(as_subject_ID, errorIfNULL = T)
@@ -141,18 +141,18 @@ class(as_subject_ID)
 ##IR subjects not in metabolome = ZSOZWGV
 
 ##Finding rows of subjects not in gut 16s
-which(grepl("ZPJT5MY", IR$SubjectID)) #row 13
-which(grepl("ZQEFRDE", IR$SubjectID)) #row 14
+#which(grepl("ZPJT5MY", IR$SubjectID)) #row 13
+#which(grepl("ZQEFRDE", IR$SubjectID)) #row 14
 
 ##Finding rows of subjects not in metabolome
-which(grepl("ZSOZWGV", IR$SubjectID)) #row 18
+#which(grepl("ZSOZWGV", IR$SubjectID)) #row 18
 
 #Removing row 13,14 and 18 from IR data
-IR_excl <- IR[-c(13,14,18),]
-View(IR_excl) #35 - 3 = 32 subjects
-which(grepl("ZPJT5MY", IR_excl$SubjectID))
-which(grepl("ZQEFRDE", IR_excl$SubjectID))
-which(grepl("ZSOZWGV", IR_excl$SubjectID))
+#IR_excl <- IR[-c(13,14,18),]
+#View(IR_excl) #35 - 3 = 32 subjects
+#which(grepl("ZPJT5MY", IR_excl$SubjectID))
+#which(grepl("ZQEFRDE", IR_excl$SubjectID))
+#which(grepl("ZSOZWGV", IR_excl$SubjectID))
 
 #IR_to_exclude <- row.names(IR)
 #IR_all_data <- IR[-c(ZPJT5MY, ZQEFRDE, ZSOZWGV),]
@@ -166,17 +166,17 @@ which(grepl("ZSOZWGV", IR_excl$SubjectID))
 ##IS subjects not in metabolome = none
 
 ##Finding rows of subjects not in gut 16s
-which(grepl("ZP0DXQ0", IS$SubjectID)) #row 15
-which(grepl("ZRGK7U8", IS$SubjectID)) #row 20
-which(grepl("ZS2DMX7", IS$SubjectID)) #row 22
+#which(grepl("ZP0DXQ0", IS$SubjectID)) #row 15
+#which(grepl("ZRGK7U8", IS$SubjectID)) #row 20
+#which(grepl("ZS2DMX7", IS$SubjectID)) #row 22
 
 #Removing row 13,14 and 18 from IS data
-IS_excl <- IS[-c(15,20,22),] #31 - 3 = 28 subjects
-dim(IS_excl)
-View(IS_excl)
-which(grepl("ZP0DXQ0", IS_excl$SubjectID))
-which(grepl("ZRGK7U8", IS_excl$SubjectID))
-which(grepl("ZS2DMX7", IS_excl$SubjectID))
+#IS_excl <- IS[-c(15,20,22),] #31 - 3 = 28 subjects
+#dim(IS_excl)
+#View(IS_excl)
+#which(grepl("ZP0DXQ0", IS_excl$SubjectID))
+#which(grepl("ZRGK7U8", IS_excl$SubjectID))
+#which(grepl("ZS2DMX7", IS_excl$SubjectID))
 
 ###T2D
 ##Remove subjects that are not classified(= unknown)
@@ -185,9 +185,10 @@ which(grepl("ZS2DMX7", IS_excl$SubjectID))
 #, not in gut 16s and not in metabolome data from the T2D data.
 #subjects not in gut 16s = ZP0DXQ0, ZPJT5MY, ZQEFRDE, ZRGK7U8, ZS2DMX7
 #subjects not in metabolome = ZSOZWGV
-T2D_all_data
+#T2D_all_data
   
-  
+#########################################################################################
+ 
 ###Create a contingency table of the number of taxa in each phylum
 table(tax_table(T2D)[, "Phylum"]) #4 phylum showed count of only 1
 
