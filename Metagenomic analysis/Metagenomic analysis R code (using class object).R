@@ -26,7 +26,7 @@ library(dplyr)
 
 sessionInfo()
 
-T2D <- T2D16S
+T2D <- T2D16S()
 subject_info<-Subject.data.T2DM.iHMP.1
 subject_info
 T2D
@@ -36,21 +36,21 @@ T2D
 #sample_data() Sample Data:       [ 2208 samples by 13 sample variables ]
 #tax_table()   Taxonomy Table:    [ 12062 taxa by 7 taxonomic ranks ]
 
+#### Changing file name variable in T2D16S_samp to subject_ID
+as_subject_ID <- substr(T2D@sam_data[["file_name"]],29,35)
+as_subject_ID
+class(as_subject_ID)
 
-#subsetting subject info for IR and IS
+
+#### Subsetting subject info for IR and IS
 IR<-subset.data.frame(subject_info, IR_IS_classification=="IR")
 IS<-subset.data.frame(subject_info, IR_IS_classification=="IS")
 
 IR #35 individuals
 IS #31 individuals
 
-#Changing file name variable in T2D16S_samp to subject_ID
-as_subject_ID <- substr(T2D@sam_data[["file_name"]],29,36)
-as_subject_ID
-class(as_subject_ID)
 
-
-####Remove subjects that are not in the gut 16s and metabolome data from the IR, IS and T2D data.
+####Remove subjects that are not in the gut 16s and metabolome data from the IR and IS subsets
 
 ###IR
 ##IR subjects not in gut 16s = ZPJT5MY, ZQEFRDE
@@ -70,10 +70,96 @@ which(grepl("ZPJT5MY", IR_excl$SubjectID))
 which(grepl("ZQEFRDE", IR_excl$SubjectID))
 which(grepl("ZSOZWGV", IR_excl$SubjectID))
 
-IR_to_exclude <- row.names(IR)
-IR_all_data <- IR[-c(ZPJT5MY, ZQEFRDE, ZSOZWGV),]
-IR_all_data <- IR[-c(1,2,3),]
-class(IR)
+#IR_to_exclude <- row.names(IR)
+#IR_all_data <- IR[-c(ZPJT5MY, ZQEFRDE, ZSOZWGV),]
+#IR_all_data <- IR[-c(1,2,3),]
+#class(IR)
+
+###IS
+##IS subjects not in gut 16s = ZP0DXQ0, ZRGK7U8, ZS2DMX7
+##IS subjects not in metabolome = none
+
+##Finding rows of subjects not in gut 16s
+which(grepl("ZP0DXQ0", IS$SubjectID)) #row 15
+which(grepl("ZRGK7U8", IS$SubjectID)) #row 20
+which(grepl("ZS2DMX7", IS$SubjectID)) #row 22
+
+#Removing row 13,14 and 18 from IS data
+IS_excl <- IS[-c(15,20,22),] #31 - 3 = 28 subjects
+dim(IS_excl)
+View(IS_excl)
+which(grepl("ZP0DXQ0", IS_excl$SubjectID))
+which(grepl("ZRGK7U8", IS_excl$SubjectID))
+which(grepl("ZS2DMX7", IS_excl$SubjectID))
+
+
+#### Make subject IDs from each classification into a vector
+class(IR_excl)#data frame
+class(IS_excl)#data frame
+
+IR_v <- as.vector(IR_excl[,1])
+class(IR_v)#character
+IS_v <- as.vector(IS_excl[,1])
+class(IS_v)#character
+
+
+#### Subset the phyloseq class object into classification using IR_v and IS_v
+IR_ps <- subset_samples(T2D, as_subject_ID == IR_v)
+IR_ps
+
+IS_ps <- subset_samples(T2D, as_subject_ID == IS_v)
+IS_ps
+
+
+
+#######################################################################################
+  
+  
+###Changing file name variable in T2D16S_samp to subject_ID
+as_subject_ID <- substr(T2D@sam_data[["file_name"]],29,35)
+as_subject_ID
+class(as_subject_ID)
+##add as_subject_ID to T2D16S_samp data
+#first change as_subject_ID to sample data
+#SD_subject_ID <- sample_data(as_subject_ID, errorIfNULL = T)
+
+
+#T2D16S_samp <- merge_phyloseq(T2D@sam_data,as_subject_ID)
+#T2D16S_samp
+#order the subject
+
+
+
+#match_subject_ID <- sample_data(as_subject_ID, 
+#ample_data(T2D16S_samp$match_sample_ID <-sample_sums()
+
+
+####Remove subjects that are not in the gut 16s and metabolome data from the IR and IS subsets
+
+###IR
+##IR subjects not in gut 16s = ZPJT5MY, ZQEFRDE
+##IR subjects not in metabolome = ZSOZWGV
+
+##Finding rows of subjects not in gut 16s
+which(grepl("ZPJT5MY", IR$SubjectID)) #row 13
+which(grepl("ZQEFRDE", IR$SubjectID)) #row 14
+
+##Finding rows of subjects not in metabolome
+which(grepl("ZSOZWGV", IR$SubjectID)) #row 18
+
+#Removing row 13,14 and 18 from IR data
+IR_excl <- IR[-c(13,14,18),]
+View(IR_excl) #35 - 3 = 32 subjects
+which(grepl("ZPJT5MY", IR_excl$SubjectID))
+which(grepl("ZQEFRDE", IR_excl$SubjectID))
+which(grepl("ZSOZWGV", IR_excl$SubjectID))
+
+#IR_to_exclude <- row.names(IR)
+#IR_all_data <- IR[-c(ZPJT5MY, ZQEFRDE, ZSOZWGV),]
+#IR_all_data <- IR[-c(1,2,3),]
+#class(IR)
+
+
 
 ###IS
 ##IS subjects not in gut 16s = ZP0DXQ0, ZRGK7U8, ZS2DMX7
@@ -95,12 +181,14 @@ which(grepl("ZS2DMX7", IS_excl$SubjectID))
 ###T2D
 ##Remove subjects that are not classified(= unknown)
 
+
 #, not in gut 16s and not in metabolome data from the T2D data.
 #subjects not in gut 16s = ZP0DXQ0, ZPJT5MY, ZQEFRDE, ZRGK7U8, ZS2DMX7
 #subjects not in metabolome = ZSOZWGV
-T2D_all_data <- 
-
-#Create a contingency table of the number of taxa in each phylum
+T2D_all_data
+  
+  
+###Create a contingency table of the number of taxa in each phylum
 table(tax_table(T2D)[, "Phylum"]) #4 phylum showed count of only 1
 
 # Compute prevalence of every feature
