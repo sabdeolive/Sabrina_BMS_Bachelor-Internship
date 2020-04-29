@@ -77,6 +77,21 @@ filterPhyla = c("Acidobacteria", "Cyanobacteria", "Fusobacteria")
 T2D.fil = subset_taxa(T2D, !Phylum %in% filterPhyla) # 1285 taxa
 T2D.fil #1281 taxa
 
+##############################################################################
+### Potential way to add classifications to T2D phyloseq (if this works then can filter the participants so that only have classified patients with metabolome data from feces sample)
+# rownames(T2D.fil@sam_data) <- as_subject_ID #DOESN'T WORK: cannot have duplicates, is there a way to get around this?
+# classification.df <- subject_info[c(1,8)] 
+# classification.df
+# rownames(classification.df) <- classification.df[,1] # (might not be necessary to create sample data)
+# #classification.df <- classification.df[,-1] # (does not seem to work?)
+# classification.sd <- sample_data(classification.df)
+# T2D.fil #13 sample variables
+# T2D.fil.sd <- merge_phyloseq(T2D.fil@sam_data, classification.sd)
+# T2D.fil.sd
+# T2D.fil.clas <- merge_phyloseq(T2D.fil.sd,T2D.fil)
+# T2D.fil.clas
+###############################################################################
+
 
 #### Subsetting subject info for IR and IS
 IR<-subset.data.frame(subject_info, IR_IS_classification=="IR")
@@ -84,7 +99,6 @@ IS<-subset.data.frame(subject_info, IR_IS_classification=="IS")
 
 IR #35 individuals
 IS #31 individuals
-
 
 #### Remove subjects that are not in the gut 16s and metabolome data from the IR and IS subsets
 
@@ -281,12 +295,14 @@ T2D.fil #1070 taxa
 ### Merging of IR and IS phyloseqs 
 ## Adding classification column to sample variables of IR_ps.fil and IS_ps.fil phyloseqs
 # IR
-IR_classification.df <- IR[c(1,8)] 
+IR_classification.df <- IR_excl[c(1,8)] 
 #rownames(IR_classification.df) <- IR_classification.df[,1] (might not be necessary to create sample data)
 #IR_classification.df <- IR_classification.df[,-1] (does not seem to work?)
 IR_classification.sd <- sample_data(IR_classification.df)
 IR_ps.fil #13 sample variables
 IR_sd.fil <- merge_phyloseq(IR_ps.fil@sam_data, IR_classification.sd)
+IR_sd.fil
+class(IR_sd.fil)
 IR_ps.fil.clas <- merge_phyloseq(IR_ps.fil,IR_sd.fil)
 IR_ps.fil.clas #correct no. of sample variables (15) but DID NOT WORK: NA values for IR classification and subjects variables 
 
