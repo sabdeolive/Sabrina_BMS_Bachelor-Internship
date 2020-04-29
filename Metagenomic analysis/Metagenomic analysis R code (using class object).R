@@ -69,7 +69,7 @@ prevalence.df = apply(X = otu_table(T2D),
 prevalence.df = data.frame(Prevalence = prevalence.df,
                            TotalAbundance = taxa_sums(T2D),
                            tax_table(T2D))
-plyr::ddply(prevalence.df, "Phylum", function(df1){cbind(mean(df1$Prevalence),sum(df1$Prevalence))})
+plyr::ddply(prevalence.df, "Phylum", function(df1){cbind(mean(df1$Prevalence),sum(df1$Prevalence))}) #column 1 = mean prevalence, column 2 = prevalence sum
 
 ## Acidobacteria, cyanobacteria and fusobacteria are taxa that are only present in 1 or 2 samples (CHECK)
 # Filter the Phylum that only appear in 1 or 2 samples with low read count (might not be necessary as use prevalence threshold later on CHECK)
@@ -267,15 +267,56 @@ prevalenceThreshold.IS # 1.8 (is this the cut-off point for the prevalence in th
 keepTaxa.IS <- rownames(prevalence.df.IS)[(prevalence.df.IS$Prevalence >= prevalenceThreshold.IS)]
 IS_ps.fil #490 taxa
 IS_ps.fil <- prune_taxa(keepTaxa.IS,IS_ps.fil) 
-IS_ps.fil #489 taxa -> 413 taxa
+IS_ps.fil #490 taxa -> 489 taxa
 
 
-### Filter taxa of the whole T2D.fil phyloseq-class object using IR and IS prevalence filtration
-keepTaxa.T2D.fil <- c(keepTaxa.IR, keepTaxa.IS)
+### Filter taxa of the whole T2D.fil phyloseq-class object using IR and IS prevalence filtration (necessary? might not be if can manage to merge IR and IS phyloseqs)
+keepTaxa.T2D.fil <- c(keepTaxa.IR, keepTaxa.IS) 
 T2D.fil #1281 taxa 
 T2D.fil <- prune_taxa(keepTaxa.T2D.fil, T2D.fil)
 T2D.fil #1070 taxa
+# don't really know what I would use this phyloseq for because it has not been filtered for the classified participants.
 
+#### PCoA comparing IR and IS
+### Merging of IR and IS phyloseqs 
+## Adding classification column to sample variables of IR_ps.fil and IS_ps.fil phyloseqs
+# IR
+IR_classification.df <- IR[c(1,8)] 
+#rownames(IR_classification.df) <- IR_classification.df[,1] (might not be necessary to create sample data)
+#IR_classification.df <- IR_classification.df[,-1] (does not seem to work?)
+IR_classification.sd <- sample_data(IR_classification.df)
+IR_ps.fil #13 sample variables
+IR_sd.fil <- merge_phyloseq(IR_ps.fil@sam_data, IR_classification.sd)
+IR_ps.fil.clas <- merge_phyloseq(IR_ps.fil,IR_sd.fil)
+IR_ps.fil.clas #correct no. of sample variables (15) but DID NOT WORK: NA values for IR classification and subjects variables 
+
+
+# IS
+
+
+IR_ps.fil
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 413 taxa and 21 samples ]
+# sample_data() Sample Data:       [ 21 samples by 13 sample variables ]
+# tax_table()   Taxonomy Table:    [ 413 taxa by 7 taxonomic ranks ]
+
+IS_ps.fil
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 489 taxa and 36 samples ]
+# sample_data() Sample Data:       [ 36 samples by 13 sample variables ]
+# tax_table()   Taxonomy Table:    [ 489 taxa by 7 taxonomic ranks ]
+
+merge_phyloseq(IR_ps.fil,IS_ps.fil) # still have the problem with the low number of samples but merging seems to have worked (21 + 36 = 57 samples)
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 591 taxa and 57 samples ]
+# sample_data() Sample Data:       [ 57 samples by 13 sample variables ]
+# tax_table()   Taxonomy Table:    [ 591 taxa by 7 taxonomic ranks ]
+
+
+#### PCoA of IR for each race 
+
+
+#### PCoA of IS for each race
 
 
 ### prevalence filter by classification (NOTE: The taxonomic filter is included in this)
