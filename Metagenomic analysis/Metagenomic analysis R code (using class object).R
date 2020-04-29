@@ -294,6 +294,7 @@ IR_ps.fil.clas #correct no. of sample variables (15) but DID NOT WORK: NA values
 # IS
 
 
+## Merging IR_ps.fil and IS_ps.fil with IR/IS classification variable
 IR_ps.fil
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 413 taxa and 21 samples ]
