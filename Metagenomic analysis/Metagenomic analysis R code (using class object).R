@@ -41,6 +41,8 @@ as_subject_ID <- substr(T2D@sam_data[["file_name"]],29,44)
 as_subject_ID
 class(as_subject_ID)
 
+write.table(as_subject_ID, file="c:/Users/sabde/Documents/as_subject_ID.txt", sep="\t", row.names = TRUE, col.names = NA)
+
 
 #### Filter NA values
 table(tax_table(T2D)[,"Family"],exclude = NULL) #1650 NA
@@ -91,7 +93,7 @@ rownames(T2D.fil@sam_data) <- as_subject_ID #DOESN'T WORK: cannot have duplicate
 # T2D.fil.clas <- merge_phyloseq(T2D.fil.sd,T2D.fil)
 # T2D.fil.clas
 ###############################################################################
-
+write.table(T2D@sam_data, file="c:/Users/sabde/Documents/T2D_phyloseq_sample data.txt", sep="\t", row.names = TRUE, col.names = NA)
 
 #### Subsetting subject info for IR and IS
 IR<-subset.data.frame(subject_info, IR_IS_classification=="IR")
