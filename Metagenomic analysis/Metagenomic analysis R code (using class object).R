@@ -37,7 +37,7 @@ T2D
 #tax_table()   Taxonomy Table:    [ 12062 taxa by 7 taxonomic ranks ]
 
 #### Changing file name variable in T2D16S_samp to subject_ID
-as_subject_ID <- substr(T2D@sam_data[["file_name"]],29,35)
+as_subject_ID <- substr(T2D@sam_data[["file_name"]],29,44)
 as_subject_ID
 class(as_subject_ID)
 
@@ -51,10 +51,10 @@ table(tax_table(T2D)[,"Genus"], exclude = NULL) #4303 NA
 T2D <- subset_taxa(T2D, !is.na(Genus)) 
 T2D #10412 taxa -> 6109 taxa
 
-
-table(tax_table(T2D) [,"Species"], exclude = NULL) #4824 NA
-T2D <- subset_taxa(T2D, !is.na(Species))
-T2D #6109 taxa -> 1285 taxa
+##Filtering by species = not necessary 
+# table(tax_table(T2D) [,"Species"], exclude = NULL) #4824 NA
+# T2D <- subset_taxa(T2D, !is.na(Species))
+# T2D #6109 taxa -> 1285 taxa
 
 #### Filter phylum that do not appear in a lot of samples 
 ##Create a contingency table of the number of taxa in each phylum
@@ -79,7 +79,7 @@ T2D.fil #1281 taxa
 
 ##############################################################################
 ### Potential way to add classifications to T2D phyloseq (if this works then can filter the participants so that only have classified patients with metabolome data from feces sample)
-# rownames(T2D.fil@sam_data) <- as_subject_ID #DOESN'T WORK: cannot have duplicates, is there a way to get around this?
+rownames(T2D.fil@sam_data) <- as_subject_ID #DOESN'T WORK: cannot have duplicates, is there a way to get around this?
 # classification.df <- subject_info[c(1,8)] 
 # classification.df
 # rownames(classification.df) <- classification.df[,1] # (might not be necessary to create sample data)
@@ -159,10 +159,18 @@ IS_v
 #### Subset the phyloseq class object into classification using IR_v and IS_v
 IR_ps.fil <- subset_samples(T2D.fil, as_subject_ID == IR_v)
 IR_ps.fil # T2D = 2208 samples, IR_ps.fil = 21 samples (CHECK).
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 1281 taxa and 21 samples ]
+# sample_data() Sample Data:       [ 21 samples by 13 sample variables ]
+# tax_table()   Taxonomy Table:    [ 1281 taxa by 7 taxonomic ranks ]
+
 
 IS_ps.fil <- subset_samples(T2D.fil, as_subject_ID == IS_v)
 IS_ps.fil # T2D = 2208 samples, IS_ps.fil = 36 samples (CHECK).
-
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 1281 taxa and 36 samples ]
+# sample_data() Sample Data:       [ 36 samples by 13 sample variables ]
+# tax_table()   Taxonomy Table:    [ 1281 taxa by 7 taxonomic ranks ]
 
 #######################################################################################
   
