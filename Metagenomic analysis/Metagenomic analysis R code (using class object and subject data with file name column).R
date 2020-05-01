@@ -42,17 +42,13 @@ T2D.sd
 View(T2D.sd)
 T2D.rm@sam_data <- T2D.sd
 T2D.rm
-View(T2D.rm)
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 12062 taxa and 2207 samples ]
 # sample_data() Sample Data:       [ 2207 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 12062 taxa by 7 taxonomic ranks ]
+View(T2D.rm)
+View(T2D.rm@sam_data)
 
 #T2D.clas <- merge_phyloseq(T2D.sd,T2D.rm@otu_table, T2D.rm@tax_table) 
 #T2D.clas 
 #View(T2D.clas@sam_data)#didn't work, have NA values for all IR/IS classifications. 
-
-# phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 12062 taxa and 2207 samples ]
-# sample_data() Sample Data:       [ 2207 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 12062 taxa by 7 taxonomic ranks ]
