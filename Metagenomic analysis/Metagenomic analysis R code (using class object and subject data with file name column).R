@@ -81,4 +81,6 @@ T2D.rm.gut
 # otu_table()   OTU Table:         [ 12062 taxa and 869 samples ]
 # sample_data() Sample Data:       [ 869 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 12062 taxa by 7 taxonomic ranks ]
-View(T2D.rm.gut@sam_data)
+View(T2D.rm.gut)
+View(T2D.rm.gut@sam_data) # 50 samples = correct. 
+
