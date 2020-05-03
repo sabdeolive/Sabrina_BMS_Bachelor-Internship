@@ -242,15 +242,61 @@ T2D.fil #2888 taxa
 ########################################################################################################
 
 #### PCoA comparing IR and IS
+pslog <- transform_sample_counts(T2D.fil, function(x) log(1 + x))
+out.pcoa.log <- ordinate(pslog, method = "PCoA", distance = "bray") # Anna used "PCoA" and "bray"?
+evals <- out.pcoa.log$values$Eigenvalues
+plot_ordination(pslog, out.pcoa.log, type = "samples", color = "IR_IS_classification") +
+  labs(col = "classification") +
+  coord_fixed(sqrt(evals[2] / evals[1])) # what does type = "samples" do? Anna added it to the general workflow.
 
+# Including race as another variable
+# plot_ordination(pslog, out.pcoa.log, color = "IR_IS_classification", shape = "Race") +
+# labs(col = "classification") +
+#   coord_fixed(sqrt(evals[2] / evals[1]))
 
-#### PCoA of IR for each race 
+###########################################################################################################################
 
+#### Alpha diversity
+BiocManager::install("microbiome")
+library(microbiome)
 
-#### PCoA of IS for each race
+alpha.div <- head(alpha(T2D.fil, index = "all"))
+View(alpha.div)
+
+###########################################################################################################################
+
+#### Venn diagrams (DOESN'T WORK)
+install.packages("VennDiagram")
+library(VennDiagram)
+
+names.OTU <- taxa_names(T2D.fil)
+names.OTU.IR <- taxa_names(IR_ps.fil)
+names.OTU.IS <- taxa_names(IS_ps.fil)
+library("grid")
+grid.newpage()
+venn.diagram(names.OTU.IR,names.OTU.IS, "IR", "IS", colors= c("#e87396","#2a96a0","#9bc6ff", euler=T)) # to attempt to scale the relative volumes of the sets
+
+###########################################################################################################################
+
 
 
 ###########################################################################################################################
 
 #### Multitable analysis 
+### Quick check
+dim(metabolomics)
+# 555 330
+T2D.fil
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 2888 taxa and 555 samples ]
+# sample_data() Sample Data:       [ 555 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 2888 taxa by 7 taxonomic ranks ]
+
+# same number of samples
+
+### Removing metabolites that are zero across many samples
+keep_ix <- rowSums(metabolomics == 0) <=3
+metabolomics.fil <- metabolomics[keep_ix]
+
+### Removing microbes that are zero across many samples
 
