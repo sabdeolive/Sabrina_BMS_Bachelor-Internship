@@ -143,37 +143,57 @@ T2D.fil #10412 taxa -> 6109 taxa
 # T2D.fil #6109 taxa -> 1285 taxa
 
 #### Subset the phyloseq class object into classification
-IR_ps.fil <- subset_samples(T2D.fil, as_subject_ID == IR_v)
-IR_ps.fil # T2D = 2208 samples, IR_ps.fil = 21 samples (CHECK).
+IR_ps.fil <- subset_samples(T2D.fil, IR_IS_classification == "IR")
+IR_ps.fil # T2D.fil = 555 samples, IR_ps.fil = 226 samples.
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 1281 taxa and 21 samples ]
-# sample_data() Sample Data:       [ 21 samples by 13 sample variables ]
-# tax_table()   Taxonomy Table:    [ 1281 taxa by 7 taxonomic ranks ]
+# otu_table()   OTU Table:         [ 6109 taxa and 226 samples ]
+# sample_data() Sample Data:       [ 226 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 6109 taxa by 7 taxonomic ranks ]
 
-
-IS_ps.fil <- subset_samples(T2D.fil, as_subject_ID == IS_v)
-IS_ps.fil # T2D = 2208 samples, IS_ps.fil = 36 samples (CHECK).
+IS_ps.fil <- subset_samples(T2D.fil, IR_IS_classification == "IS")
+IS_ps.fil # T2D = 555 samples, IS_ps.fil = 329 samples (CHECK).
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 1281 taxa and 36 samples ]
-# sample_data() Sample Data:       [ 36 samples by 13 sample variables ]
-# tax_table()   Taxonomy Table:    [ 1281 taxa by 7 taxonomic ranks ]
+# otu_table()   OTU Table:         [ 6109 taxa and 329 samples ]
+# sample_data() Sample Data:       [ 329 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 6109 taxa by 7 taxonomic ranks ]
 
+# 226 + 329 = 555 samples (correct as T2D.fil only included classified subjects)
 
-#### Prevalence filter and plotting prevalence for each classification (FINSH)
-### Subset taxa (done before, see 'Subset the phyloseq class object into classification using IR_v and IS_v')
+#################################################################################
+
+####Create a contingency table of the number of taxa in each phylum
+table(tax_table(T2D.fil)[, "Phylum"]) #1 phylum (Thermotogae) showed count of only 1
+
+### Compute prevalence of every feature(/taxa?)
+prevalence.df = apply(X = otu_table(T2D.fil),
+                      MARGIN = ifelse(taxa_are_rows(T2D.fil), yes = 1, no = 2),
+                      FUN = function(x){sum(x > 0)})
+
+### add taxonomy and total read counts
+prevalence.df = data.frame(Prevalence = prevalence.df,
+                           TotalAbundance = taxa_sums(T2D.fil),
+                           tax_table(T2D.fil))
+plyr::ddply(prevalence.df, "Phylum", function(df1){cbind(mean(df1$Prevalence),sum(df1$Prevalence))}) #column 1 = mean prevalence, column 2 = prevalence sum
+
+## [Thermi],  Acidobacteria, Armatimonadetes,Chloroflexi, Cyanobacteria, Gemmatimonadetes, Nitrospirae, Planctomycetes, Tenericutes and Thermotogae are taxa that are only present in 0 or 1 sample.
+
+#################################################################################
+
+#### Prevalence filter and plotting prevalence for each classification
+### Subset taxa
 names.OTU <- taxa_names(T2D.fil)
 
 ## IR
 keep.IR.taxa <- names.OTU[rowSums(IR_ps.fil@otu_table)>0] #makes a character vector of all the taxa to keep (i.e. all those present in at least 1 sample) in the phyloseq for IR
-IR_ps.fil #1281 taxa 
+IR_ps.fil #6109 taxa 
 IR_ps.fil <- prune_taxa(keep.IR.taxa, IR_ps.fil)
-IR_ps.fil #415 taxa
+IR_ps.fil #2313 taxa
 
 ## IS
 keep.IS.taxa <- names.OTU[rowSums(IS_ps.fil@otu_table)>0]
-IS_ps.fil #1281 taxa
+IS_ps.fil #2522 taxa
 IS_ps.fil <- prune_taxa(keep.IS.taxa, IS_ps.fil)
-IS_ps.fil #490 taxa
+IS_ps.fil #2522 taxa (CHECK!!!)
 
 ### Prevalence filter IR (filtering of taxa)
 ##Subset the remaining phyla 
@@ -183,15 +203,15 @@ ggplot(prevalence.df.IR, aes(TotalAbundance, Prevalence / nsamples(IR_ps.fil),co
   geom_hline(yintercept = 0.05, alpha = 0.5, linetype = 2) + geom_point(size = 2, alpha = 0.7) + 
   scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") + facet_wrap(~Phylum) + 
   theme(legend.position="none")
-## Define prevalence threshold as 5% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
-prevalenceThreshold.IR <- 0.05*nsamples(IR_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
-prevalenceThreshold.IR # 1.05 (is this the cut-off point for the prevalence in the graphs?)
+## Define prevalence threshold as 0.25% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
+prevalenceThreshold.IR <- 0.0025*nsamples(IR_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
+prevalenceThreshold.IR # 0.565 (i.e. the taxa would have to be prevalent in 0.565 samples in order to be considered)
 
 ### Execute this prevalence filter using prune_taxa() function (i.e. keeps rows/taxa where prevalence >= 0.05 in IR group)
 keepTaxa.IR <- rownames(prevalence.df.IR)[(prevalence.df.IR$Prevalence >= prevalenceThreshold.IR)]
-IR_ps.fil #415 taxa
+IR_ps.fil #2313 taxa
 IR_ps.fil <- prune_taxa(keepTaxa.IR,IR_ps.fil) 
-IR_ps.fil #415 taxa -> 413 taxa
+IR_ps.fil #2313 taxa -> 2313 taxa (CHECK!!!)
 
 
 ### Prevalence filter IS
@@ -202,44 +222,24 @@ ggplot(prevalence.df.IS, aes(TotalAbundance, Prevalence / nsamples(IS_ps.fil),co
   geom_hline(yintercept = 0.05, alpha = 0.5, linetype = 2) + geom_point(size = 2, alpha = 0.7) + 
   scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") + facet_wrap(~Phylum) + 
   theme(legend.position="none")
-## Define prevalence threshold as 5% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
-prevalenceThreshold.IS <- 0.05*nsamples(IS_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
-prevalenceThreshold.IS # 1.8 (is this the cut-off point for the prevalence in the graphs?)
+## Define prevalence threshold as 0.25% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
+prevalenceThreshold.IS <- 0.0025*nsamples(IS_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
+prevalenceThreshold.IS # 0.8225 (i.e. the taxa would have to be prevalent in 0.8225 samples in order to be considered)
 
 ### Execute this prevalence filter using prune_taxa() function (i.e. keeps rows/taxa where prevalence >= 0.05 in IR group)
 keepTaxa.IS <- rownames(prevalence.df.IS)[(prevalence.df.IS$Prevalence >= prevalenceThreshold.IS)]
-IS_ps.fil #490 taxa
+IS_ps.fil #2522 taxa
 IS_ps.fil <- prune_taxa(keepTaxa.IS,IS_ps.fil) 
-IS_ps.fil #490 taxa -> 489 taxa
+IS_ps.fil #2522 taxa -> 2522 taxa (CHECK!!!)
 
 
 ### Filter taxa of the whole T2D.rm.gut phyloseq-class object using IR and IS prevalence filtration
 keepTaxa.T2D.fil <- c(keepTaxa.IR, keepTaxa.IS) 
-T2D.fil #1281 taxa 
+T2D.fil #6109 taxa 
 T2D.fil <- prune_taxa(keepTaxa.T2D.fil, T2D.fil)
-T2D.fil #1070 taxa
+T2D.fil #2888 taxa
 
-
-#### Create a contingency table of the number of taxa in each phylum for the IR, IS and general T2D 
-### IR
-table(tax_table(T2D)[, "Phylum"]) #3 phylum (Acidobacteria, Fusobacteria and Synergistetes) showed count of only 1
-
-## Compute prevalence of every feature(/taxa?)
-prevalence.df = apply(X = otu_table(T2D),
-                      MARGIN = ifelse(taxa_are_rows(T2D), yes = 1, no = 2),
-                      FUN = function(x){sum(x > 0)})
-
-## add taxonomy and total read counts
-prevalence.df = data.frame(Prevalence = prevalence.df,
-                           TotalAbundance = taxa_sums(T2D),
-                           tax_table(T2D))
-plyr::ddply(prevalence.df, "Phylum", function(df1){cbind(mean(df1$Prevalence),sum(df1$Prevalence))}) #column 1 = mean prevalence, column 2 = prevalence sum
-
-### IS
-
-
-### T2D
-
+########################################################################################################
 
 #### PCoA comparing IR and IS
 
@@ -251,10 +251,6 @@ plyr::ddply(prevalence.df, "Phylum", function(df1){cbind(mean(df1$Prevalence),su
 
 
 ###########################################################################################################################
-#### Removal of all samples that are not shared between the T2D.rm.gut and the metabolome data
-# NOTE: T2D.rm.gut has 869 samples and the metabolome data has 726 (BEFORE REMOVING ANY SUBJECTS NOT IN THE PHYLOSEQ OBJECT)
-### Load metabolome data
-
 
 #### Multitable analysis 
 
