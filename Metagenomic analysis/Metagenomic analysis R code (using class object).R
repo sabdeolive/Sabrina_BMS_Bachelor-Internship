@@ -81,7 +81,7 @@ T2D.fil #1281 taxa
 
 ##############################################################################
 ### Potential way to add classifications to T2D phyloseq (if this works then can filter the participants so that only have classified patients with metabolome data from feces sample)
-rownames(T2D.fil@sam_data) <- as_subject_ID #DOESN'T WORK: cannot have duplicates, is there a way to get around this?
+# rownames(T2D.fil@sam_data) <- as_subject_ID #DOESN'T WORK: cannot have duplicates, is there a way to get around this?
 # classification.df <- subject_info[c(1,8)] 
 # classification.df
 # rownames(classification.df) <- classification.df[,1] # (might not be necessary to create sample data)
