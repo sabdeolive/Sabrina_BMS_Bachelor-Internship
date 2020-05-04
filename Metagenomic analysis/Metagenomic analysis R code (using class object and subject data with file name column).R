@@ -299,12 +299,13 @@ T2D.fil
 ## Making sample ID the row names and removing the sample ID column
 rownames(metabolomics) <- metabolomics[,1] 
 metabolomics <- metabolomics[,-1]
+metabolomics <- t(metabolomics)
+dim(metabolomics) #323 555
 
 ## Removing and transforming
-dim(metabolomics) #555 323
 keep_ix <- rowSums(metabolomics == 0) <=3
 metabolomics.fil <- metabolomics[keep_ix,]
-dim(metabolomics.fil) #555 323
+dim(metabolomics.fil) #323 555
 metabolomics.fil.log <- log(1 + metabolomics.fil,base = 10)
 
 ### Removing microbes that are zero across many samples
