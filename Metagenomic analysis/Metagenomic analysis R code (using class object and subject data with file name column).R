@@ -348,6 +348,9 @@ cca_res
 # Penalty for x: L1 bound is  0.15 
 # Penalty for z: L1 bound is  0.15 
 # Cor(Xu,Zv):  0.5751526
+# Therefore, 43 microbes and 13 metabolites have been selected based on their ability to explain covariation between the tables. 
+# These 56 features result in a correlation of 0.575 between the 2 tables (not very good correlation value)
 
 ### Performing a PCA
-
+combined <- cbind(t(X[cca_res$u != 0, ]), t(metabolomics.fil.log[cca_res$v != 0, ]))
+pca_res <- dudi.pca(combined, scannf = F, nf = 3)
