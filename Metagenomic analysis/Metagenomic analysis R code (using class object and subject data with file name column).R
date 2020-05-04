@@ -108,6 +108,7 @@ write.table(T2D.rm.gut@otu_table@.Data, file="c:/Users/sabde/Documents/T2D ps w 
 # NOTE: T2D.rm.gut has 869 samples and the metabolome data has 555 (after removing samples from the metabolome data that did not match the sample IDs in the phyloseq)
 ### Load metabolome data
 metabolomics <- `metabolome_abundance.(excl..all.samples.not.in.phyloseq).7.2`
+dim(metabolomics) #555 324
 
 ### Make a vector of the sample IDs in the metabolomics data file 
 sampleIDs.met.vec <- as.vector(metabolomics[,1])
@@ -191,7 +192,7 @@ IR_ps.fil #2313 taxa
 
 ## IS
 keep.IS.taxa <- names.OTU[rowSums(IS_ps.fil@otu_table)>0]
-IS_ps.fil #2522 taxa
+IS_ps.fil #6109 taxa
 IS_ps.fil <- prune_taxa(keep.IS.taxa, IS_ps.fil)
 IS_ps.fil #2522 taxa (CHECK!!!)
 
@@ -294,9 +295,40 @@ T2D.fil
 
 # same number of samples
 
-### Removing metabolites that are zero across many samples
+### Removing metabolites that are zero across many samples and transforming them to weaken the heavy tails
+## Making sample ID the row names and removing the sample ID column
+rownames(metabolomics) <- metabolomics[,1] 
+metabolomics <- metabolomics[,-1]
+
+## Removing and transforming
+dim(metabolomics) #555 323
 keep_ix <- rowSums(metabolomics == 0) <=3
-metabolomics.fil <- metabolomics[keep_ix]
+metabolomics.fil <- metabolomics[keep_ix,]
+dim(metabolomics.fil) #555 323
+metabolomics.fil.log <- log(1 + metabolomics.fil,base = 10)
 
 ### Removing microbes that are zero across many samples
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("genefilter")
+
+library("genefilter")
+
+microbe <- prune_taxa(taxa_sums(T2D.fil) > 4, T2D.fil)
+microbe
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 1984 taxa and 555 samples ]
+# sample_data() Sample Data:       [ 555 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 1984 taxa by 7 taxonomic ranks ]
+microbe <- filter_taxa(microbe, filterfun(kOverA(3,2)),TRUE)
+microbe
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 1192 taxa and 555 samples ]
+# sample_data() Sample Data:       [ 555 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 1192 taxa by 7 taxonomic ranks ]
+X <- otu_table(microbe)
+X[X>50] <- 50 
+dim(X) # 1192 555 (no change in taxa)
+  
 
