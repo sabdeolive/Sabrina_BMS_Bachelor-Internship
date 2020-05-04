@@ -307,6 +307,7 @@ keep_ix <- rowSums(metabolomics == 0) <=3
 metabolomics.fil <- metabolomics[keep_ix,]
 dim(metabolomics.fil) #323 555
 metabolomics.fil.log <- log(1 + metabolomics.fil,base = 10)
+dim(metabolomics.fil.log) #323 555
 
 ### Removing microbes that are zero across many samples
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -331,5 +332,22 @@ microbe
 X <- otu_table(microbe)
 X[X>50] <- 50 
 dim(X) # 1192 555 (no change in taxa)
-  
+
+
+### Applying CCA as a screening procedure
+install.packages("PMA")
+library(PMA)
+
+cca_res <- CCA(t(X), t(metabolomics.fil.log), penaltyx = .15, penaltyz = .15)
+# 1234567891011
+cca_res
+# Num non-zeros u's:  43 
+# Num non-zeros v's:  13 
+# Type of x:  standard 
+# Type of z:  standard 
+# Penalty for x: L1 bound is  0.15 
+# Penalty for z: L1 bound is  0.15 
+# Cor(Xu,Zv):  0.5751526
+
+### Performing a PCA
 
