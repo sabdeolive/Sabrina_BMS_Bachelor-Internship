@@ -287,12 +287,12 @@ venn.diagram(names.OTU.IR,names.OTU.IS, "IR", "IS", colors= c("#e87396","#2a96a0
 #### Multitable analysis 
 ### Quick check
 dim(metabolomics)
-# 555 330
+# 441 324
 T2D.fil
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 2888 taxa and 555 samples ]
-# sample_data() Sample Data:       [ 555 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 2888 taxa by 7 taxonomic ranks ]
+# otu_table()   OTU Table:         [ 2795 taxa and 441 samples ]
+# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 2795 taxa by 7 taxonomic ranks ]
 
 # same number of samples
 
@@ -301,14 +301,14 @@ T2D.fil
 rownames(metabolomics) <- metabolomics[,1] 
 metabolomics <- metabolomics[,-1]
 metabolomics <- t(metabolomics)
-dim(metabolomics) #323 555
+dim(metabolomics) #323 441
 
 ## Removing and transforming
 keep_ix <- rowSums(metabolomics == 0) <=3
 metabolomics.fil <- metabolomics[keep_ix,]
-dim(metabolomics.fil) #323 555
+dim(metabolomics.fil) #323 441
 metabolomics.fil.log <- log(1 + metabolomics.fil,base = 10)
-dim(metabolomics.fil.log) #323 555
+dim(metabolomics.fil.log) #323 441
 
 ### Removing microbes that are zero across many samples
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -321,18 +321,18 @@ library("genefilter")
 microbe <- prune_taxa(taxa_sums(T2D.fil) > 4, T2D.fil)
 microbe
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 1984 taxa and 555 samples ]
-# sample_data() Sample Data:       [ 555 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 1984 taxa by 7 taxonomic ranks ]
+# otu_table()   OTU Table:         [ 1892 taxa and 441 samples ]
+# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 1892 taxa by 7 taxonomic ranks ]
 microbe <- filter_taxa(microbe, filterfun(kOverA(3,2)),TRUE)
 microbe
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 1192 taxa and 555 samples ]
-# sample_data() Sample Data:       [ 555 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 1192 taxa by 7 taxonomic ranks ]
+# otu_table()   OTU Table:         [ 1153 taxa and 441 samples ]
+# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 1153 taxa by 7 taxonomic ranks ]
 X <- otu_table(microbe)
 X[X>50] <- 50 
-dim(X) # 1192 555 (no change in taxa)
+dim(X) # 1153 441 (no change in taxa)
 
 
 ### Applying CCA as a screening procedure
@@ -342,16 +342,46 @@ library(PMA)
 cca_res <- CCA(t(X), t(metabolomics.fil.log), penaltyx = .15, penaltyz = .15)
 # 1234567891011
 cca_res
-# Num non-zeros u's:  43 
-# Num non-zeros v's:  13 
+# Num non-zeros u's:  44 
+# Num non-zeros v's:  11 
 # Type of x:  standard 
 # Type of z:  standard 
 # Penalty for x: L1 bound is  0.15 
 # Penalty for z: L1 bound is  0.15 
-# Cor(Xu,Zv):  0.5751526
-# Therefore, 43 microbes and 13 metabolites have been selected based on their ability to explain covariation between the tables. 
-# These 56 features result in a correlation of 0.575 between the 2 tables (not very good correlation value)
+# Cor(Xu,Zv):  0.5212299
+# Therefore, 44 microbes and 11 metabolites have been selected based on their ability to explain covariation between the tables. 
+# These 55 features result in a correlation of 0.521 between the 2 tables (not very good correlation value)
 
 ### Performing a PCA
+install.packages("magrittr")  # for piping %>%
+install.packages("ade4")      # PCA computation
+install.packages("factoextra")# PCA visualization
+
+library(ade4)
+library(factoextra)
+library(magrittr)
+library(genefilter)
+library(ggrepel)
+
 combined <- cbind(t(X[cca_res$u != 0, ]), t(metabolomics.fil.log[cca_res$v != 0, ]))
+View(combined)
 pca_res <- dudi.pca(combined, scannf = F, nf = 3)
+View(pca_res)
+
+sample_type <- as.vector(microbe@sam_data[["IR_IS_classification"]])
+View(sample_type)
+feature_type <- grepl("\\.", colnames(combined))
+feature_type <- ifelse(feature_type, "Metabolite", "OTU")
+View(feature_type)
+sample_info <- data.frame(pca_res$li, sample_type) 
+View(sample_info)
+feature_info <- data.frame(pca_res$c1, feature = substr(colnames(combined), 1, 6))
+View(feature_info)
+ggplot() +  geom_point(data = sample_info, aes(x = Axis1, y = Axis2, col = sample_type), size = 3) + geom_label_repel(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, label = feature, fill = feature_type), size = 2, segment.size = 0.3,label.padding = unit(0.1, "lines"), label.size = 0) +
+  geom_point(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, fill = feature_type), size = 1, shape = 23, col = "#383838") + scale_color_brewer(palette = "Set2") +  scale_fill_manual(values = c("#a6d854", "#e78ac3")) +
+  guides(fill = guide_legend(override.aes = list(shape = 32, size = 0))) + coord_fixed(sqrt(pca_res$eig[2] / pca_res$eig[2])) + labs(x = sprintf("Axis1 [%s%% Variance]",
+                                                                                                                                                 100 * round(pca_res$eig[1] / sum(pca_res$eig), 2)),
+                                                                                                                                     y = sprintf("Axis2 [%s%% Variance]", 100 * round(pca_res$eig[2] / sum(pca_res$eig), 2)),
+                                                                                                                                     fill = "Feature Type", col = "Sample Type")
+
+
