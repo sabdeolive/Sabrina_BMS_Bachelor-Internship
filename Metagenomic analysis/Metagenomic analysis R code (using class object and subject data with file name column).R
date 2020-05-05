@@ -107,13 +107,13 @@ write.table(T2D.rm.gut@otu_table@.Data, file="c:/Users/sabde/Documents/T2D ps w 
 #### Removal of all samples from the T2D.rm.gut that are not shared between the T2D.rm.gut and the metabolome data
 # NOTE: T2D.rm.gut has 869 samples and the metabolome data has 555 (after removing samples from the metabolome data that did not match the sample IDs in the phyloseq)
 ### Load metabolome data
-metabolomics <- `metabolome_abundance.(excl..all.samples.not.in.phyloseq).7.2`
-dim(metabolomics) #555 324
+metabolomics <- `metabolome_abundance.(excl..all.sample.IDs.that.have.duplicates).7.4`
+dim(metabolomics) #441 324
 
 ### Make a vector of the sample IDs in the metabolomics data file 
 sampleIDs.met.vec <- as.vector(metabolomics[,1])
 sampleIDs.met.vec
-length(sampleIDs.met.vec) # 555 samples = correct
+length(sampleIDs.met.vec) # 441 samples = correct
 
 ### Remove all the samples that are not in this vector from T2D.rm.gut using prune_samples function (only keeps those that have been defined by e.g. vector) 
 T2D.rm.gut
@@ -124,8 +124,8 @@ T2D.rm.gut
 T2D.F.sub_sam <- prune_samples(sampleIDs.met.vec, T2D.rm.gut)
 T2D.F.sub_sam
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 12062 taxa and 555 samples ]
-# sample_data() Sample Data:       [ 555 samples by 22 sample variables ]
+# otu_table()   OTU Table:         [ 12062 taxa and 441 samples ]
+# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 12062 taxa by 7 taxonomic ranks ]
 
 
@@ -147,18 +147,18 @@ T2D.fil #10412 taxa -> 6109 taxa
 IR_ps.fil <- subset_samples(T2D.fil, IR_IS_classification == "IR")
 IR_ps.fil # T2D.fil = 555 samples, IR_ps.fil = 226 samples.
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 6109 taxa and 226 samples ]
-# sample_data() Sample Data:       [ 226 samples by 22 sample variables ]
+# otu_table()   OTU Table:         [ 6109 taxa and 210 samples ]
+# sample_data() Sample Data:       [ 210 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 6109 taxa by 7 taxonomic ranks ]
 
 IS_ps.fil <- subset_samples(T2D.fil, IR_IS_classification == "IS")
 IS_ps.fil # T2D = 555 samples, IS_ps.fil = 329 samples (CHECK).
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 6109 taxa and 329 samples ]
-# sample_data() Sample Data:       [ 329 samples by 22 sample variables ]
+# otu_table()   OTU Table:         [ 6109 taxa and 231 samples ]
+# sample_data() Sample Data:       [ 231 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 6109 taxa by 7 taxonomic ranks ]
 
-# 226 + 329 = 555 samples (correct as T2D.fil only included classified subjects)
+# 210 + 231 = 441 samples (correct as T2D.fil only included classified subjects)
 
 #################################################################################
 
@@ -176,7 +176,8 @@ prevalence.df = data.frame(Prevalence = prevalence.df,
                            tax_table(T2D.fil))
 plyr::ddply(prevalence.df, "Phylum", function(df1){cbind(mean(df1$Prevalence),sum(df1$Prevalence))}) #column 1 = mean prevalence, column 2 = prevalence sum
 
-## [Thermi],  Acidobacteria, Armatimonadetes,Chloroflexi, Cyanobacteria, Gemmatimonadetes, Nitrospirae, Planctomycetes, Tenericutes and Thermotogae are taxa that are only present in 0 or 1 sample.
+## [Thermi],  Acidobacteria, Armatimonadetes, Chloroflexi, Cyanobacteria, Gemmatimonadetes, Nitrospirae, Planctomycetes, Tenericutes and Thermotogae are taxa that are only present in 0 or 1 sample.
+# SHOULD I EXCLUDE THESE TAXA OR JUST PERFORM PREVALENCE THRESHOLD FILTER?
 
 #################################################################################
 
@@ -188,13 +189,13 @@ names.OTU <- taxa_names(T2D.fil)
 keep.IR.taxa <- names.OTU[rowSums(IR_ps.fil@otu_table)>0] #makes a character vector of all the taxa to keep (i.e. all those present in at least 1 sample) in the phyloseq for IR
 IR_ps.fil #6109 taxa 
 IR_ps.fil <- prune_taxa(keep.IR.taxa, IR_ps.fil)
-IR_ps.fil #2313 taxa
+IR_ps.fil #2296 taxa
 
 ## IS
 keep.IS.taxa <- names.OTU[rowSums(IS_ps.fil@otu_table)>0]
 IS_ps.fil #6109 taxa
 IS_ps.fil <- prune_taxa(keep.IS.taxa, IS_ps.fil)
-IS_ps.fil #2522 taxa (CHECK!!!)
+IS_ps.fil #2370 taxa (CHECK!!!)
 
 ### Prevalence filter IR (filtering of taxa)
 ##Subset the remaining phyla 
@@ -206,13 +207,13 @@ ggplot(prevalence.df.IR, aes(TotalAbundance, Prevalence / nsamples(IR_ps.fil),co
   theme(legend.position="none")
 ## Define prevalence threshold as 0.25% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
 prevalenceThreshold.IR <- 0.0025*nsamples(IR_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
-prevalenceThreshold.IR # 0.565 (i.e. the taxa would have to be prevalent in 0.565 samples in order to be considered)
+prevalenceThreshold.IR # 0.525 (i.e. the taxa would have to be prevalent in 0.525 samples in order to be considered)
 
 ### Execute this prevalence filter using prune_taxa() function (i.e. keeps rows/taxa where prevalence >= 0.05 in IR group)
 keepTaxa.IR <- rownames(prevalence.df.IR)[(prevalence.df.IR$Prevalence >= prevalenceThreshold.IR)]
-IR_ps.fil #2313 taxa
+IR_ps.fil #2296 taxa
 IR_ps.fil <- prune_taxa(keepTaxa.IR,IR_ps.fil) 
-IR_ps.fil #2313 taxa -> 2313 taxa (CHECK!!!)
+IR_ps.fil #2296 taxa -> 2296 taxa (CHECK!!!)
 
 
 ### Prevalence filter IS
@@ -225,20 +226,20 @@ ggplot(prevalence.df.IS, aes(TotalAbundance, Prevalence / nsamples(IS_ps.fil),co
   theme(legend.position="none")
 ## Define prevalence threshold as 0.25% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
 prevalenceThreshold.IS <- 0.0025*nsamples(IS_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
-prevalenceThreshold.IS # 0.8225 (i.e. the taxa would have to be prevalent in 0.8225 samples in order to be considered)
+prevalenceThreshold.IS # 0.5775 (i.e. the taxa would have to be prevalent in 0.5775 samples in order to be considered)
 
 ### Execute this prevalence filter using prune_taxa() function (i.e. keeps rows/taxa where prevalence >= 0.05 in IR group)
 keepTaxa.IS <- rownames(prevalence.df.IS)[(prevalence.df.IS$Prevalence >= prevalenceThreshold.IS)]
-IS_ps.fil #2522 taxa
+IS_ps.fil #2370 taxa
 IS_ps.fil <- prune_taxa(keepTaxa.IS,IS_ps.fil) 
-IS_ps.fil #2522 taxa -> 2522 taxa (CHECK!!!)
+IS_ps.fil #2370 taxa -> 2370 taxa (CHECK!!!)
 
 
 ### Filter taxa of the whole T2D.rm.gut phyloseq-class object using IR and IS prevalence filtration
 keepTaxa.T2D.fil <- c(keepTaxa.IR, keepTaxa.IS) 
-T2D.fil #6109 taxa 
+T2D.fil #2795 taxa 
 T2D.fil <- prune_taxa(keepTaxa.T2D.fil, T2D.fil)
-T2D.fil #2888 taxa
+T2D.fil #2795 taxa
 
 ########################################################################################################
 
@@ -251,9 +252,9 @@ plot_ordination(pslog, out.pcoa.log, type = "samples", color = "IR_IS_classifica
   coord_fixed(sqrt(evals[2] / evals[1])) # what does type = "samples" do? Anna added it to the general workflow.
 
 # Including race as another variable
-# plot_ordination(pslog, out.pcoa.log, color = "IR_IS_classification", shape = "Race") +
-# labs(col = "classification") +
-#   coord_fixed(sqrt(evals[2] / evals[1]))
+plot_ordination(pslog, out.pcoa.log, color = "IR_IS_classification", shape = "Race") +
+labs(col = "classification") +
+  coord_fixed(sqrt(evals[2] / evals[1]))
 
 ###########################################################################################################################
 
@@ -278,7 +279,7 @@ grid.newpage()
 venn.diagram(names.OTU.IR,names.OTU.IS, "IR", "IS", colors= c("#e87396","#2a96a0","#9bc6ff", euler=T)) # to attempt to scale the relative volumes of the sets
 
 ###########################################################################################################################
-
+#### Histograms
 
 
 ###########################################################################################################################
