@@ -333,7 +333,7 @@ microbe
 X <- otu_table(microbe)
 X[X>50] <- 50 
 dim(X) # 1153 441 (no change in taxa)
-
+View(X)
 
 ### Applying CCA as a screening procedure
 install.packages("PMA")
@@ -383,5 +383,37 @@ ggplot() +  geom_point(data = sample_info, aes(x = Axis1, y = Axis2, col = sampl
                                                                                                                                                  100 * round(pca_res$eig[1] / sum(pca_res$eig), 2)),
                                                                                                                                      y = sprintf("Axis2 [%s%% Variance]", 100 * round(pca_res$eig[2] / sum(pca_res$eig), 2)),
                                                                                                                                      fill = "Feature Type", col = "Sample Type")
+#############################################################################
+# https://ucdavis-bioinformatics-training.github.io/2017-September-Microbial-Community-Analysis-Workshop/friday/MCA_Workshop_R/phyloseq.html
+#### PCoA  for the microbiome of IR and IS
+T2D.fil
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 2795 taxa and 441 samples ]
+# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 2795 taxa by 7 taxonomic ranks ]
 
+### Agglomerate taxa at the Genus level (combine all with the same name) and remove all taxa without genus level assignment
+length(get_taxa_unique(T2D.fil, taxonomic.rank = "Genus")) # is this necessary?
+# 166
 
+T2D.fil.genus <- tax_glom(T2D.fil, "Genus", NArm = TRUE)
+T2D.fil.genus
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 166 taxa and 441 samples ]
+# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 166 taxa by 7 taxonomic ranks ]
+
+# how many reads does this leave us at?
+sum(colSums(otu_table(T2D.fil.genus)))
+# 7608919
+
+### Variance stabilize the data with a log transform
+T2D.logt  = transform_sample_counts(T2D.fil.genus, function(x) log(1 + x) )
+T2D.pcoa.logt <- ordinate(T2D.logt, method = "PCoA", distance = "bray")
+
+### PCoA using bray's distances 
+evals2 <- T2D.pcoa.logt$values$Eigenvalues
+plot_ordination(T2D.logt, T2D.pcoa.logt, type = "samples", 
+                color = "IR_IS_classification") + labs(col = "Classification") +
+  coord_fixed(sqrt(evals2[2] / evals2[1]))
+# LOOKS WORSE: USE FIRST PCoA
