@@ -262,9 +262,15 @@ labs(col = "classification") +
 BiocManager::install("microbiome")
 library(microbiome)
 
-alpha.div <- head(alpha(T2D.fil, index = "all"))
+#### Calculating alpha diversity values
+alpha.div <- head(microbiome::alpha(T2D.fil, index = "all"))
 View(alpha.div)
 
+#### Plotting
+plot_richness(T2D.fil, color="IR_IS_classification", measures=c("Chao1", "Shannon")) #necessary? looks a bit overwhelming: maybe I should average together the alpha div values for the IR and IS individuals and plot those rather?
+
+
+#x = "HMP2_J00825_1_ST_T0_B0_0120_ZN9YTFN-01_AA31J" "HMP2_J00826_1_ST_T0_B0_0120_ZN9YTFN-1011_AA31J" "HMP2_J00827_1_ST_T0_B0_0120_ZN9YTFN-1012_AA31J" "HMP2_J00828_1_ST_T0_B0_0120_ZN9YTFN-1013_AA31J" "HMP2_J00829_1_ST_T0_B0_0120_ZN9YTFN-1014_AA31J" "HMP2_J00835_1_ST_T0_B0_0122_ZLZQMEV-01_AA31J"
 ###########################################################################################################################
 
 #### Venn diagrams (DOESN'T WORK)
@@ -283,6 +289,9 @@ venn.diagram(names.OTU.IR,names.OTU.IS, "IR", "IS", colors= c("#e87396","#2a96a0
 
 
 ###########################################################################################################################
+#### how many read counts are we working with?
+sum(colSums(otu_table(T2D.fil)))
+# 7608919
 
 #### Multitable analysis 
 ### Quick check
@@ -417,3 +426,8 @@ plot_ordination(T2D.logt, T2D.pcoa.logt, type = "samples",
                 color = "IR_IS_classification") + labs(col = "Classification") +
   coord_fixed(sqrt(evals2[2] / evals2[1]))
 # LOOKS WORSE: USE FIRST PCoA
+
+###############################################################################################
+
+
+
