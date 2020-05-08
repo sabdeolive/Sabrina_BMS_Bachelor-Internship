@@ -161,6 +161,21 @@ IS_ps.fil # T2D = 555 samples, IS_ps.fil = 329 samples (CHECK).
 # 210 + 231 = 441 samples (correct as T2D.fil only included classified subjects)
 
 #################################################################################
+#### Show taxa proportions in IR and IS classification (necessary???)
+# grid.arrange(nrow = 2,
+#              qplot(as(otu_table(logt),"matrix")[, "Slashpile18"], geom = "histogram", bins=30) +
+#                xlab("Relative abundance"),
+#              
+#              qplot(as(otu_table(logt),"matrix")[, "Slashpile10"], geom = "histogram", bins=30) +
+#                xlab("Relative abundance")
+# )
+
+#### Look for low perfroming samples
+qplot(colSums(otu_table(T2D.fil)),bins=30) +
+  xlab("Logged counts-per-sample")
+# does not seem to be any low performing samples (CHECK!!!), therefore, no need to filter?
+
+#################################################################################
 
 ####Create a contingency table of the number of taxa in each phylum
 table(tax_table(T2D.fil)[, "Phylum"]) #1 phylum (Thermotogae) showed count of only 1
@@ -267,10 +282,32 @@ alpha.div <- head(microbiome::alpha(T2D.fil, index = "all"))
 View(alpha.div)
 
 #### Plotting
-plot_richness(T2D.fil, color="IR_IS_classification", measures=c("Chao1", "Shannon")) #necessary? looks a bit overwhelming: maybe I should average together the alpha div values for the IR and IS individuals and plot those rather?
+plot_richness(T2D.fil, x="IR_IS_classification", color="IR_IS_classification", measures=c("Chao1", "Shannon")) #necessary? looks a bit overwhelming: maybe I should average together the alpha div values for the IR and IS individuals and plot those rather?
 
+###########################################################################################################################
 
-#x = "HMP2_J00825_1_ST_T0_B0_0120_ZN9YTFN-01_AA31J" "HMP2_J00826_1_ST_T0_B0_0120_ZN9YTFN-1011_AA31J" "HMP2_J00827_1_ST_T0_B0_0120_ZN9YTFN-1012_AA31J" "HMP2_J00828_1_ST_T0_B0_0120_ZN9YTFN-1013_AA31J" "HMP2_J00829_1_ST_T0_B0_0120_ZN9YTFN-1014_AA31J" "HMP2_J00835_1_ST_T0_B0_0122_ZLZQMEV-01_AA31J"
+#### Core abundance
+
+AbunCore <- microbiome::core_abundance(T2D.fil, detection = .1/100, prevalence = 50/100)
+length(AbunCore)
+View(AbunCore)
+
+plot(T2D.fil@sam_data[["IR_IS_classification"]], AbunCore, xlab = "classification", ylab = "Core abundance")
+
+###########################################################################################################################
+#### Heat map
+library(vegan)
+
+prop  = transform_sample_counts(T2D.fil, function(x) x / sum(x) )
+keepTaxa.prop <- ((apply(otu_table(prop) >= 0.005,1,sum,na.rm=TRUE) > 2) | (apply(otu_table(prop) >= 0.05, 1, sum,na.rm=TRUE) > 0)) # There was no explanation of this step: do I have to do this? I am struggling to understand what they are doing
+table(keepTaxa.prop)
+
+T2D.filhell <- T2D.fil
+otu_table(T2D.filhell) <-otu_table(decostand(otu_table(T2D.filhell), method = "hellinger"), taxa_are_rows=TRUE)
+T2D.filhell_trim <- prune_taxa(keepTaxa.prop,T2D.filhell)
+plot_heatmap(T2D.filhell_trim, "PCoA", distance="bray", sample.label="IR_IS_classification", taxa.label="Genus", low="#FFFFCC", high="#000033", na.value="white")
+# didn't work, not nice graph
+
 ###########################################################################################################################
 
 #### Venn diagrams (DOESN'T WORK)
@@ -413,8 +450,10 @@ T2D.fil.genus
 # tax_table()   Taxonomy Table:    [ 166 taxa by 7 taxonomic ranks ]
 
 # how many reads does this leave us at?
-sum(colSums(otu_table(T2D.fil.genus)))
+sum(colSums(otu_table(T2D.fil)))
 # 7608919
+sum(colSums(otu_table(T2D.fil.genus))) 
+# 7608919 (no change)
 
 ### Variance stabilize the data with a log transform
 T2D.logt  = transform_sample_counts(T2D.fil.genus, function(x) log(1 + x) )
