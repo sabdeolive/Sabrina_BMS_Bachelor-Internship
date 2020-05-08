@@ -101,7 +101,7 @@ View(T2D.rm.gut)
 View(T2D.rm.gut@sam_data) # 50 samples = correct. 
 # NOTE: Final phyloseq to work with (prior to taxa filtering) = T2D.rm.gut
 
-write.table(T2D.rm.gut@otu_table@.Data, file="c:/Users/sabde/Documents/T2D ps w filtered subjects otu_table.txt", sep="\t", row.names = TRUE, col.names = NA)
+# write.table(T2D.rm.gut@otu_table@.Data, file="c:/Users/sabde/Documents/T2D ps w filtered subjects otu_table.txt", sep="\t", row.names = TRUE, col.names = NA)
 # This file was used to compare the sample IDs to those in the metabolome data file Sample IDs in the metabolome data that did not match those in the phyloseq object were removed from the metabolome data file.
 
 #### Removal of all samples from the T2D.rm.gut that are not shared between the T2D.rm.gut and the metabolome data
@@ -293,6 +293,7 @@ length(AbunCore)
 View(AbunCore)
 
 plot(T2D.fil@sam_data[["IR_IS_classification"]], AbunCore, xlab = "classification", ylab = "Core abundance")
+# how can I determine the core taxa present in the IR and IS groups?
 
 ###########################################################################################################################
 #### Heat map
@@ -305,7 +306,8 @@ table(keepTaxa.prop)
 T2D.filhell <- T2D.fil
 otu_table(T2D.filhell) <-otu_table(decostand(otu_table(T2D.filhell), method = "hellinger"), taxa_are_rows=TRUE)
 T2D.filhell_trim <- prune_taxa(keepTaxa.prop,T2D.filhell)
-plot_heatmap(T2D.filhell_trim, "PCoA", distance="bray", sample.label="IR_IS_classification", taxa.label="Genus", low="#FFFFCC", high="#000033", na.value="white")
+View(T2D.filhell_trim)
+phyloseq::plot_heatmap(T2D.filhell_trim, method = "PCoA", distance="bray", sample.label="IR_IS_classification", taxa.label="Genus", low="#FFFFCC", high="#000033", na.value="white")
 # didn't work, not nice graph
 
 ###########################################################################################################################
@@ -468,5 +470,7 @@ plot_ordination(T2D.logt, T2D.pcoa.logt, type = "samples",
 
 ###############################################################################################
 
-
+# write.table(T2D.fil@otu_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps out.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
+# write.table(T2D.fil@tax_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps tax.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
+# write.table(T2D.fil@sam_data, file="c:/Users/sabde/Documents/T2D.fil ps sam.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
 
