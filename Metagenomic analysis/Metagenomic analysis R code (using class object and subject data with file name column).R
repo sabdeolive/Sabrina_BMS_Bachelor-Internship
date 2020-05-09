@@ -221,7 +221,7 @@ ggplot(prevalence.df.IR, aes(TotalAbundance, Prevalence / nsamples(IR_ps.fil),co
   scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") + facet_wrap(~Phylum) + 
   theme(legend.position="none")
 ## Define prevalence threshold as 0.25% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
-prevalenceThreshold.IR <- 0.0025*nsamples(IR_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
+prevalenceThreshold.IR <- 0.025*nsamples(IR_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
 prevalenceThreshold.IR # 0.525 (i.e. the taxa would have to be prevalent in 0.525 samples in order to be considered)
 
 ### Execute this prevalence filter using prune_taxa() function (i.e. keeps rows/taxa where prevalence >= 0.05 in IR group)
@@ -240,7 +240,7 @@ ggplot(prevalence.df.IS, aes(TotalAbundance, Prevalence / nsamples(IS_ps.fil),co
   scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") + facet_wrap(~Phylum) + 
   theme(legend.position="none")
 ## Define prevalence threshold as 0.25% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
-prevalenceThreshold.IS <- 0.0025*nsamples(IS_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
+prevalenceThreshold.IS <- 0.025*nsamples(IS_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
 prevalenceThreshold.IS # 0.5775 (i.e. the taxa would have to be prevalent in 0.5775 samples in order to be considered)
 
 ### Execute this prevalence filter using prune_taxa() function (i.e. keeps rows/taxa where prevalence >= 0.05 in IR group)
@@ -278,11 +278,31 @@ BiocManager::install("microbiome")
 library(microbiome)
 
 #### Calculating alpha diversity values
-alpha.div <- head(microbiome::alpha(T2D.fil, index = "all"))
+alpha.div <- microbiome::alpha(T2D.fil, index = "all")
 View(alpha.div)
 
-#### Plotting
-plot_richness(T2D.fil, x="IR_IS_classification", color="IR_IS_classification", measures=c("Chao1", "Shannon")) #necessary? looks a bit overwhelming: maybe I should average together the alpha div values for the IR and IS individuals and plot those rather?
+#### Plotting violin plot
+### extract the meta data from T2D.fil
+T2D.fil.meta <- microbiome::meta(T2D.fil)
+View(T2D.fil.meta)
+
+### Add diversity table to metadata
+T2D.fil.meta$Shannon <- alpha.div$diversity_shannon
+View(T2D.fil.meta)
+
+### Create a list of pairwise comparisons 
+sensitivity <- levels(T2D.fil.meta$IR_IS_classification)
+sens.pairs <- combn(seq_along(sensitivity),2, simplify = FALSE, FUN = function(i)sensitivity[i])
+
+### Violit plot + adding mean comparison p-values 
+Shannon.plot <- ggviolin(T2D.fil.meta, x = "IR_IS_classification", y = "Shannon", add = "boxplot", fill = "IR_IS_classification", palette = c("#a6cee3", "#b2df8a", "#fdbf6f"))
+print(Shannon.plot)
+
+library(ggpubr)
+Shannon.plot <- Shannon.plot + stat_compare_means(comparisons = sens.pairs)
+print(Shannon.plot)
+
+#plot_richness(T2D.fil, x="IR_IS_classification", color="IR_IS_classification", measures=c("Chao1", "Shannon")) #necessary? looks a bit overwhelming: maybe I should average together the alpha div values for the IR and IS individuals and plot those rather?
 
 ###########################################################################################################################
 
