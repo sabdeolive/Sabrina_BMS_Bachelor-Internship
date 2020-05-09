@@ -145,14 +145,14 @@ T2D.fil #10412 taxa -> 6109 taxa
 
 #### Subset the phyloseq class object into classification
 IR_ps.fil <- subset_samples(T2D.fil, IR_IS_classification == "IR")
-IR_ps.fil # T2D.fil = 555 samples, IR_ps.fil = 226 samples.
+IR_ps.fil # T2D.fil = 441 samples, IR_ps.fil = 210 samples.
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 6109 taxa and 210 samples ]
 # sample_data() Sample Data:       [ 210 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 6109 taxa by 7 taxonomic ranks ]
 
 IS_ps.fil <- subset_samples(T2D.fil, IR_IS_classification == "IS")
-IS_ps.fil # T2D = 555 samples, IS_ps.fil = 329 samples (CHECK).
+IS_ps.fil # T2D = 441 samples, IS_ps.fil = 231 samples (CHECK).
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 6109 taxa and 231 samples ]
 # sample_data() Sample Data:       [ 231 samples by 22 sample variables ]
@@ -220,15 +220,15 @@ ggplot(prevalence.df.IR, aes(TotalAbundance, Prevalence / nsamples(IR_ps.fil),co
   geom_hline(yintercept = 0.05, alpha = 0.5, linetype = 2) + geom_point(size = 2, alpha = 0.7) + 
   scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") + facet_wrap(~Phylum) + 
   theme(legend.position="none")
-## Define prevalence threshold as 0.25% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
-prevalenceThreshold.IR <- 0.025*nsamples(IR_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
-prevalenceThreshold.IR # 0.525 (i.e. the taxa would have to be prevalent in 0.525 samples in order to be considered)
+## Define prevalence threshold as 10% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
+prevalenceThreshold.IR <- 0.10*nsamples(IR_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
+prevalenceThreshold.IR # 21 (i.e. the taxa would have to be prevalent in 0.525 samples in order to be considered)
 
 ### Execute this prevalence filter using prune_taxa() function (i.e. keeps rows/taxa where prevalence >= 0.05 in IR group)
 keepTaxa.IR <- rownames(prevalence.df.IR)[(prevalence.df.IR$Prevalence >= prevalenceThreshold.IR)]
 IR_ps.fil #2296 taxa
 IR_ps.fil <- prune_taxa(keepTaxa.IR,IR_ps.fil) 
-IR_ps.fil #2296 taxa -> 2296 taxa (CHECK!!!)
+IR_ps.fil #2296 taxa -> 1021 taxa (CHECK!!!)
 
 
 ### Prevalence filter IS
@@ -239,22 +239,22 @@ ggplot(prevalence.df.IS, aes(TotalAbundance, Prevalence / nsamples(IS_ps.fil),co
   geom_hline(yintercept = 0.05, alpha = 0.5, linetype = 2) + geom_point(size = 2, alpha = 0.7) + 
   scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") + facet_wrap(~Phylum) + 
   theme(legend.position="none")
-## Define prevalence threshold as 0.25% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
-prevalenceThreshold.IS <- 0.025*nsamples(IS_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
-prevalenceThreshold.IS # 0.5775 (i.e. the taxa would have to be prevalent in 0.5775 samples in order to be considered)
+## Define prevalence threshold as 10% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
+prevalenceThreshold.IS <- 0.10*nsamples(IS_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
+prevalenceThreshold.IS # 23.1 (i.e. the taxa would have to be prevalent in 0.5775 samples in order to be considered)
 
 ### Execute this prevalence filter using prune_taxa() function (i.e. keeps rows/taxa where prevalence >= 0.05 in IR group)
 keepTaxa.IS <- rownames(prevalence.df.IS)[(prevalence.df.IS$Prevalence >= prevalenceThreshold.IS)]
 IS_ps.fil #2370 taxa
 IS_ps.fil <- prune_taxa(keepTaxa.IS,IS_ps.fil) 
-IS_ps.fil #2370 taxa -> 2370 taxa (CHECK!!!)
+IS_ps.fil #2370 taxa -> 960 taxa (CHECK!!!)
 
 
 ### Filter taxa of the whole T2D.rm.gut phyloseq-class object using IR and IS prevalence filtration
 keepTaxa.T2D.fil <- c(keepTaxa.IR, keepTaxa.IS) 
 T2D.fil #2795 taxa 
 T2D.fil <- prune_taxa(keepTaxa.T2D.fil, T2D.fil)
-T2D.fil #2795 taxa
+T2D.fil #1021 taxa
 
 ########################################################################################################
 
@@ -350,7 +350,7 @@ venn.diagram(names.OTU.IR,names.OTU.IS, "IR", "IS", colors= c("#e87396","#2a96a0
 ###########################################################################################################################
 #### how many read counts are we working with?
 sum(colSums(otu_table(T2D.fil)))
-# 7608919
+# 7452159
 
 #### Multitable analysis 
 ### Quick check
@@ -358,9 +358,9 @@ dim(metabolomics)
 # 441 324
 T2D.fil
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 2795 taxa and 441 samples ]
+# otu_table()   OTU Table:         [ 1021 taxa and 441 samples ]
 # sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 2795 taxa by 7 taxonomic ranks ]
+# tax_table()   Taxonomy Table:    [ 1021 taxa by 7 taxonomic ranks ]
 
 # same number of samples
 
@@ -389,18 +389,18 @@ library("genefilter")
 microbe <- prune_taxa(taxa_sums(T2D.fil) > 4, T2D.fil)
 microbe
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 1892 taxa and 441 samples ]
+# otu_table()   OTU Table:         [ 1021 taxa and 441 samples ]
 # sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 1892 taxa by 7 taxonomic ranks ]
+# tax_table()   Taxonomy Table:    [ 1021 taxa by 7 taxonomic ranks ]
 microbe <- filter_taxa(microbe, filterfun(kOverA(3,2)),TRUE)
 microbe
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 1153 taxa and 441 samples ]
+# otu_table()   OTU Table:         [ 932 taxa and 441 samples ]
 # sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 1153 taxa by 7 taxonomic ranks ]
+# tax_table()   Taxonomy Table:    [ 932 taxa by 7 taxonomic ranks ]
 X <- otu_table(microbe)
 X[X>50] <- 50 
-dim(X) # 1153 441 (no change in taxa)
+dim(X) # 932 441 (no change in taxa)
 View(X)
 
 ### Applying CCA as a screening procedure
@@ -410,15 +410,15 @@ library(PMA)
 cca_res <- CCA(t(X), t(metabolomics.fil.log), penaltyx = .15, penaltyz = .15)
 # 1234567891011
 cca_res
-# Num non-zeros u's:  44 
-# Num non-zeros v's:  11 
+# Num non-zeros u's:  35 
+# Num non-zeros v's:  12 
 # Type of x:  standard 
 # Type of z:  standard 
 # Penalty for x: L1 bound is  0.15 
 # Penalty for z: L1 bound is  0.15 
-# Cor(Xu,Zv):  0.5212299
-# Therefore, 44 microbes and 11 metabolites have been selected based on their ability to explain covariation between the tables. 
-# These 55 features result in a correlation of 0.521 between the 2 tables (not very good correlation value)
+# Cor(Xu,Zv):  0.5091925
+# Therefore, 35 microbes and 12 metabolites have been selected based on their ability to explain covariation between the tables. 
+# These 47 features result in a correlation of 0.509 between the 2 tables (not very good correlation value)
 
 ### Performing a PCA
 install.packages("magrittr")  # for piping %>%
@@ -442,15 +442,26 @@ feature_type <- grepl("\\.", colnames(combined))
 feature_type <- ifelse(feature_type, "Metabolite", "OTU")
 View(feature_type)
 sample_info <- data.frame(pca_res$li, sample_type) 
+sample_info1 <- data.frame(pca_res$li, sample_type, subject = substr(rownames(combined),29,39)) 
+subject <- sample_info1["subject"]
+View(subject)
 View(sample_info)
+View(sample_info1)
 feature_info <- data.frame(pca_res$c1, feature = substr(colnames(combined), 1, 6))
 View(feature_info)
-ggplot() +  geom_point(data = sample_info, aes(x = Axis1, y = Axis2, col = sample_type), size = 3) + geom_label_repel(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, label = feature, fill = feature_type), size = 2, segment.size = 0.3,label.padding = unit(0.1, "lines"), label.size = 0) +
+ggplot() +  geom_point(data = sample_info1, aes(x = Axis1, y = Axis2, col = sample_type), size = 3) + geom_label_repel(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, label = feature,  fill = feature_type), size = 2, segment.size = 0.3,label.padding = unit(0.1, "lines"), label.size = 0) +
   geom_point(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, fill = feature_type), size = 1, shape = 23, col = "#383838") + scale_color_brewer(palette = "Set2") +  scale_fill_manual(values = c("#a6d854", "#e78ac3")) +
   guides(fill = guide_legend(override.aes = list(shape = 32, size = 0))) + coord_fixed(sqrt(pca_res$eig[2] / pca_res$eig[2])) + labs(x = sprintf("Axis1 [%s%% Variance]",
                                                                                                                                                  100 * round(pca_res$eig[1] / sum(pca_res$eig), 2)),
                                                                                                                                      y = sprintf("Axis2 [%s%% Variance]", 100 * round(pca_res$eig[2] / sum(pca_res$eig), 2)),
                                                                                                                                      fill = "Feature Type", col = "Sample Type")
+
+ggplot() +  geom_point(data = sample_info1, aes(x = Axis1, y = Axis2, col = sample_type), size = 3) + geom_text(data = sample_info1, aes(x = 5.5 * Axis1, y = 5.5 * Axis2, label = subject),hjust=0, vjust=0, size = 2) + geom_label_repel(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, label = feature, fill = feature_type), size = 2, segment.size = 0.3,label.padding = unit(0.1, "lines"), label.size = 0) +
+  geom_point(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, fill = feature_type), size = 1, shape = 23, col = "#383838") + scale_color_brewer(palette = "Set2") +  scale_fill_manual(values = c("#a6d854", "#e78ac3")) + guides(fill = guide_legend(override.aes = list(shape = 32, size = 0))) + coord_fixed(sqrt(pca_res$eig[2] / pca_res$eig[2])) + labs(x = sprintf("Axis1 [%s%% Variance]",
+                                                                                                                                  100 * round(pca_res$eig[1] / sum(pca_res$eig), 2)),
+                                                                                                                                     y = sprintf("Axis2 [%s%% Variance]", 100 * round(pca_res$eig[2] / sum(pca_res$eig), 2)),
+                                                                                                                                  fill = "Feature Type", col = "Sample Type")    
+rlang::last_error()
 #############################################################################
 # https://ucdavis-bioinformatics-training.github.io/2017-September-Microbial-Community-Analysis-Workshop/friday/MCA_Workshop_R/phyloseq.html
 #### PCoA  for the microbiome of IR and IS
