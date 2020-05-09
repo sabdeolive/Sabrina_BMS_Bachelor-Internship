@@ -294,7 +294,7 @@ View(T2D.fil.meta)
 sensitivity <- levels(T2D.fil.meta$IR_IS_classification)
 sens.pairs <- combn(seq_along(sensitivity),2, simplify = FALSE, FUN = function(i)sensitivity[i])
 
-### Violit plot + adding mean comparison p-values 
+### Violin plot + adding mean comparison p-values 
 Shannon.plot <- ggviolin(T2D.fil.meta, x = "IR_IS_classification", y = "Shannon", add = "boxplot", fill = "IR_IS_classification", palette = c("#a6cee3", "#b2df8a", "#fdbf6f"))
 print(Shannon.plot)
 
@@ -461,7 +461,7 @@ ggplot() +  geom_point(data = sample_info1, aes(x = Axis1, y = Axis2, col = samp
                                                                                                                                   100 * round(pca_res$eig[1] / sum(pca_res$eig), 2)),
                                                                                                                                      y = sprintf("Axis2 [%s%% Variance]", 100 * round(pca_res$eig[2] / sum(pca_res$eig), 2)),
                                                                                                                                   fill = "Feature Type", col = "Sample Type")    
-rlang::last_error()
+
 #############################################################################
 # https://ucdavis-bioinformatics-training.github.io/2017-September-Microbial-Community-Analysis-Workshop/friday/MCA_Workshop_R/phyloseq.html
 #### PCoA  for the microbiome of IR and IS
