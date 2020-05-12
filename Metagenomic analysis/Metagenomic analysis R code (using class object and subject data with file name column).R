@@ -299,7 +299,7 @@ Shannon.plot <- ggviolin(T2D.fil.meta, x = "IR_IS_classification", y = "Shannon"
 print(Shannon.plot)
 
 library(ggpubr)
-Shannon.plot <- Shannon.plot + stat_compare_means(comparisons = sens.pairs)
+Shannon.plot <- Shannon.plot + stat_compare_means(comparisons = sens.pairs) # Wilcoxon test (CHECK)
 print(Shannon.plot)
 
 #plot_richness(T2D.fil, x="IR_IS_classification", color="IR_IS_classification", measures=c("Chao1", "Shannon")) #necessary? looks a bit overwhelming: maybe I should average together the alpha div values for the IR and IS individuals and plot those rather?
@@ -403,6 +403,7 @@ X[X>50] <- 50
 dim(X) # 932 441 (no change in taxa)
 View(X)
 
+
 ### Applying CCA as a screening procedure
 install.packages("PMA")
 library(PMA)
@@ -449,20 +450,60 @@ View(sample_info)
 View(sample_info1)
 feature_info <- data.frame(pca_res$c1, feature = substr(colnames(combined), 1, 6))
 View(feature_info)
-ggplot() +  geom_point(data = sample_info1, aes(x = Axis1, y = Axis2, col = sample_type), size = 3) + geom_label_repel(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, label = feature,  fill = feature_type), size = 2, segment.size = 0.3,label.padding = unit(0.1, "lines"), label.size = 0) +
+ggplot() +  geom_point(data = sample_info, aes(x = Axis1, y = Axis2, col = sample_type), size = 3) + geom_label_repel(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, label = feature,  fill = feature_type), size = 2, segment.size = 0.3,label.padding = unit(0.1, "lines"), label.size = 0) +
   geom_point(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, fill = feature_type), size = 1, shape = 23, col = "#383838") + scale_color_brewer(palette = "Set2") +  scale_fill_manual(values = c("#a6d854", "#e78ac3")) +
   guides(fill = guide_legend(override.aes = list(shape = 32, size = 0))) + coord_fixed(sqrt(pca_res$eig[2] / pca_res$eig[2])) + labs(x = sprintf("Axis1 [%s%% Variance]",
                                                                                                                                                  100 * round(pca_res$eig[1] / sum(pca_res$eig), 2)),
                                                                                                                                      y = sprintf("Axis2 [%s%% Variance]", 100 * round(pca_res$eig[2] / sum(pca_res$eig), 2)),
                                                                                                                                      fill = "Feature Type", col = "Sample Type")
-
-ggplot() +  geom_point(data = sample_info1, aes(x = Axis1, y = Axis2, col = sample_type), size = 3) + geom_text(data = sample_info1, aes(x = 5.5 * Axis1, y = 5.5 * Axis2, label = subject),hjust=0, vjust=0, size = 2) + geom_label_repel(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, label = feature, fill = feature_type), size = 2, segment.size = 0.3,label.padding = unit(0.1, "lines"), label.size = 0) +
+#plot with subject IDs
+ggplot() +  geom_point(data = sample_info1, aes(x = Axis1, y = Axis2, col = sample_type), size = 3) + geom_text(data = sample_info1, aes(x = Axis1, y = Axis2, label = subject),hjust=0, vjust=0, size = 2) + geom_label_repel(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, label = feature, fill = feature_type), size = 2, segment.size = 0.3,label.padding = unit(0.1, "lines"), label.size = 0) +
   geom_point(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, fill = feature_type), size = 1, shape = 23, col = "#383838") + scale_color_brewer(palette = "Set2") +  scale_fill_manual(values = c("#a6d854", "#e78ac3")) + guides(fill = guide_legend(override.aes = list(shape = 32, size = 0))) + coord_fixed(sqrt(pca_res$eig[2] / pca_res$eig[2])) + labs(x = sprintf("Axis1 [%s%% Variance]",
                                                                                                                                   100 * round(pca_res$eig[1] / sum(pca_res$eig), 2)),
                                                                                                                                      y = sprintf("Axis2 [%s%% Variance]", 100 * round(pca_res$eig[2] / sum(pca_res$eig), 2)),
                                                                                                                                   fill = "Feature Type", col = "Sample Type")    
+#############################################################################
+#### PERMANOVA significance test
+library(microbiome)
+library(ggplot2)
+library(dplyr)
+### Pick relative abundance (compositional) and sample metadata
+microbe.rel <- microbiome::transform(microbe, "compositional")
+microbe.rel
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 932 taxa and 441 samples ]
+# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 932 taxa by 7 taxonomic ranks ]
+# T2D.fil.rel@otu_table@.Data[T2D.fil.rel@otu_table@.Data>50] <- 50 #no need to do this because no OTU value is >50. (CHECK!!!)
+microbe.otu <- abundances(microbe.rel)
+microbe.meta <- meta(microbe.rel)
+
+### Perform PERMANOVA
+library(vegan)
+permanova <- adonis(t(microbe.otu)~IR_IS_classification, 
+                    data = microbe.meta, permutations=99, method = "bray")
+
+## Get p-value
+print(as.data.frame(permanova$aov.tab)["IR_IS_classification", "Pr(>F)"])
+# 0.01
+
+#### Check homogeneity condition to see if can do PERMANOVA
+dist <- vegdist(t(microbe.otu))
+anova(betadisper(dist, microbe.meta$IR_IS_classification))
+# Analysis of Variance Table
+# 
+# Response: Distances
+# Df Sum Sq   Mean Sq F value
+# Groups      1 0.0017 0.0016642  0.1728
+# Residuals 439 4.2285 0.0096321        
+# Pr(>F)
+# Groups    0.6779
+# Residuals  
+
+# the IR and IS group have significantly different spreads (p-value > 0.05 CHECK!!!), therefore, PERMANOVA result may be potentially explained by that.
 
 #############################################################################
+#### USE FIRST PCoA, THIS ENDS UP LOOKING WORSE
 # https://ucdavis-bioinformatics-training.github.io/2017-September-Microbial-Community-Analysis-Workshop/friday/MCA_Workshop_R/phyloseq.html
 #### PCoA  for the microbiome of IR and IS
 T2D.fil
@@ -497,6 +538,7 @@ evals2 <- T2D.pcoa.logt$values$Eigenvalues
 plot_ordination(T2D.logt, T2D.pcoa.logt, type = "samples", 
                 color = "IR_IS_classification") + labs(col = "Classification") +
   coord_fixed(sqrt(evals2[2] / evals2[1]))
+
 # LOOKS WORSE: USE FIRST PCoA
 
 ###############################################################################################
