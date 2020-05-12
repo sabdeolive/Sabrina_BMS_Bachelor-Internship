@@ -1,0 +1,23 @@
+,Total,Expected,Hits,Raw p,minus log(p),Holm adjust,FDR,Impact
+"Alanine, aspartate and glutamate metabolism",28,0.32516,3,0.0035956,5.628,0.30203,0.30203,0.1875
+Aminoacyl-tRNA biosynthesis,48,0.55742,3,0.016405,4.1102,1,0.68901,0.10344
+D-Arginine and D-ornithine metabolism,4,0.046452,1,0.045692,3.0858,1,0.94909,0.5
+Glyoxylate and dicarboxylate metabolism,32,0.37161,2,0.051436,2.9674,1,0.94909,0.07692
+D-Glutamine and D-glutamate metabolism,6,0.069677,1,0.067792,2.6913,1,0.94909,0.25
+Nitrogen metabolism,6,0.069677,1,0.067792,2.6913,1,0.94909,0.25
+Phenylalanine metabolism,10,0.11613,1,0.11055,2.2023,1,1,0
+Biotin metabolism,10,0.11613,1,0.11055,2.2023,1,1,0
+Arginine biosynthesis,14,0.16258,1,0.15145,1.8875,1,1,0.125
+Butanoate metabolism,15,0.17419,1,0.16139,1.8239,1,1,0.06667
+Histidine metabolism,16,0.18581,1,0.17123,1.7648,1,1,0.06667
+Selenocompound metabolism,20,0.23226,1,0.20948,1.5631,1,1,0
+Citrate cycle (TCA cycle),20,0.23226,1,0.20948,1.5631,1,1,0.03448
+Lysine degradation,25,0.29032,1,0.25496,1.3666,1,1,0.05
+Glutathione metabolism,28,0.32516,1,0.28105,1.2692,1,1,0.02703
+Porphyrin and chlorophyll metabolism,30,0.34839,1,0.29796,1.2108,1,1,0.03846
+Biosynthesis of unsaturated fatty acids,36,0.41806,1,0.34647,1.06,1,1,0
+Arginine and proline metabolism,38,0.44129,1,0.36192,1.0163,1,1,0.025
+Fatty acid degradation,39,0.4529,1,0.36951,0.99556,1,1,0.02041
+Tyrosine metabolism,42,0.48774,1,0.39179,0.93702,1,1,0
+Primary bile acid biosynthesis,46,0.53419,1,0.42035,0.86668,1,1,0.02041
+Purine metabolism,65,0.75484,1,0.53952,0.61708,1,1,0
