@@ -482,7 +482,7 @@ microbe.meta <- meta(microbe.rel)
 library(vegan)
 permanova <- adonis(t(microbe.otu)~IR_IS_classification, 
                     data = microbe.meta, permutations=99, method = "bray")
-
+print(permanova)
 ## Get p-value
 print(as.data.frame(permanova$aov.tab)["IR_IS_classification", "Pr(>F)"])
 # 0.01
@@ -501,6 +501,13 @@ anova(betadisper(dist, microbe.meta$IR_IS_classification))
 # Residuals  
 
 # the IR and IS group have significantly different spreads (p-value > 0.05 CHECK!!!), therefore, PERMANOVA result may be potentially explained by that.
+
+#############################################################################
+#### Ivestigation of top taxa separating the groups
+coef <- coefficients(permanova)["IR_IS_classification1",]
+top.coef <- coef[rev(order(abs(coef)))[1:20]]
+par(mar=c(3, 14, 2, 1)) # changing margins: c(bottom, left, top, right) -> ives the number of lines of margin to be specified on the four sides of the plot.
+barplot(sort(top.coef), horiz = T, las = 1, main = "Top taxa")
 
 #############################################################################
 #### USE FIRST PCoA, THIS ENDS UP LOOKING WORSE
