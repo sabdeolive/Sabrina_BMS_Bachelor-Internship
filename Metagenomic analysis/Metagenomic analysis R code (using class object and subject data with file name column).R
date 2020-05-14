@@ -252,7 +252,7 @@ IS_ps.fil #2370 taxa -> 960 taxa (CHECK!!!)
 
 ### Filter taxa of the whole T2D.rm.gut phyloseq-class object using IR and IS prevalence filtration
 keepTaxa.T2D.fil <- c(keepTaxa.IR, keepTaxa.IS) 
-T2D.fil #2795 taxa 
+T2D.fil #6109 taxa 
 T2D.fil <- prune_taxa(keepTaxa.T2D.fil, T2D.fil)
 T2D.fil #1021 taxa
 
