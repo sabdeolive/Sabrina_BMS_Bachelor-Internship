@@ -486,6 +486,8 @@ print(permanova)
 ## Get p-value
 print(as.data.frame(permanova$aov.tab)["IR_IS_classification", "Pr(>F)"])
 # 0.01
+print(as.data.frame(permanova$aov.tab)["IR_IS_classification", "R2"])
+# 0.01855466
 
 #### Check homogeneity condition to see if can do PERMANOVA
 dist <- vegdist(t(microbe.otu))
