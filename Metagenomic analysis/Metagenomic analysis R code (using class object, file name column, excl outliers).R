@@ -128,14 +128,37 @@ T2D.F.sub_sam
 # sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 12062 taxa by 7 taxonomic ranks ]
 
+#### Remove samples that have an Axis1 value of less than -2.8 (i.e. outliers from PCA)
+### Load file with samples to include
+excl.out <- `List.of.samples.to.include.from.PCA.(to.use.as.vector)`
+dim(excl.out) #402 6
+
+### Make a vector of the sample IDs in the excl.out data file 
+excl.out.vec <- as.vector(excl.out[,1])
+View(excl.out.vec)
+length(excl.out.vec) # 402 samples = correct
+
+### Remove all the samples that are not in this vector from T2D.F.sub_sam using prune_samples function (only keeps those that have been defined by e.g. vector) 
+T2D.F.sub_sam
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 12062 taxa and 441 samples ]
+# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 12062 taxa by 7 taxonomic ranks ]
+T2D.excl.out <- prune_samples(excl.out.vec, T2D.F.sub_sam)
+T2D.excl.out
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 12062 taxa and 402 samples ]
+# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 12062 taxa by 7 taxonomic ranks ]
+
 
 #### Filter NA values
-table(tax_table(T2D.F.sub_sam)[,"Family"],exclude = NULL) #1650 NA
-T2D.fil <- subset_taxa(T2D.F.sub_sam, !is.na(Family)) 
+table(tax_table(T2D.excl.out)[,"Family"],exclude = NULL) #1650 NA
+T2D.fil <- subset_taxa(T2D.excl.out, !is.na(Family)) 
 T2D.fil #12062 taxa - 1650 = 10412 taxa
 
-table(tax_table(T2D.F.sub_sam)[,"Genus"], exclude = NULL) #5953 NA (went up from 4303 to 5953 after merging and filtering of samples+subjects?)
-T2D.fil <- subset_taxa(T2D.F.sub_sam, !is.na(Genus)) 
+table(tax_table(T2D.excl.out)[,"Genus"], exclude = NULL) #5953 NA 
+T2D.fil <- subset_taxa(T2D.excl.out, !is.na(Genus)) 
 T2D.fil #10412 taxa -> 6109 taxa
 
 ##Filtering by species = not necessary 
@@ -145,20 +168,20 @@ T2D.fil #10412 taxa -> 6109 taxa
 
 #### Subset the phyloseq class object into classification
 IR_ps.fil <- subset_samples(T2D.fil, IR_IS_classification == "IR")
-IR_ps.fil # T2D.fil = 441 samples, IR_ps.fil = 210 samples.
+IR_ps.fil # T2D.fil = 402 samples, IR_ps.fil = 200 samples.
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 6109 taxa and 210 samples ]
-# sample_data() Sample Data:       [ 210 samples by 22 sample variables ]
+# otu_table()   OTU Table:         [ 6109 taxa and 200 samples ]
+# sample_data() Sample Data:       [ 200 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 6109 taxa by 7 taxonomic ranks ]
 
 IS_ps.fil <- subset_samples(T2D.fil, IR_IS_classification == "IS")
-IS_ps.fil # T2D = 441 samples, IS_ps.fil = 231 samples (CHECK).
+IS_ps.fil # T2D = 402 samples, IS_ps.fil = 202 samples (CHECK).
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 6109 taxa and 231 samples ]
-# sample_data() Sample Data:       [ 231 samples by 22 sample variables ]
+# otu_table()   OTU Table:         [ 6109 taxa and 202 samples ]
+# sample_data() Sample Data:       [ 202 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 6109 taxa by 7 taxonomic ranks ]
 
-# 210 + 231 = 441 samples (correct as T2D.fil only included classified subjects)
+# 200 + 202 = 402 samples (correct as T2D.fil only included classified subjects)
 
 #################################################################################
 #### Show taxa proportions in IR and IS classification (necessary???)
@@ -204,13 +227,13 @@ names.OTU <- taxa_names(T2D.fil)
 keep.IR.taxa <- names.OTU[rowSums(IR_ps.fil@otu_table)>0] #makes a character vector of all the taxa to keep (i.e. all those present in at least 1 sample) in the phyloseq for IR
 IR_ps.fil #6109 taxa 
 IR_ps.fil <- prune_taxa(keep.IR.taxa, IR_ps.fil)
-IR_ps.fil #2296 taxa
+IR_ps.fil #2252 taxa
 
 ## IS
 keep.IS.taxa <- names.OTU[rowSums(IS_ps.fil@otu_table)>0]
 IS_ps.fil #6109 taxa
 IS_ps.fil <- prune_taxa(keep.IS.taxa, IS_ps.fil)
-IS_ps.fil #2370 taxa (CHECK!!!)
+IS_ps.fil #2226 taxa (CHECK!!!)
 
 ### Prevalence filter IR (filtering of taxa)
 ##Subset the remaining phyla 
@@ -222,13 +245,13 @@ ggplot(prevalence.df.IR, aes(TotalAbundance, Prevalence / nsamples(IR_ps.fil),co
   theme(legend.position="none")
 ## Define prevalence threshold as 10% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
 prevalenceThreshold.IR <- 0.10*nsamples(IR_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
-prevalenceThreshold.IR # 21 (i.e. the taxa would have to be prevalent in 0.525 samples in order to be considered)
+prevalenceThreshold.IR # 20 (i.e. the taxa would have to be prevalent in 0.525 samples in order to be considered)
 
 ### Execute this prevalence filter using prune_taxa() function (i.e. keeps rows/taxa where prevalence >= 0.05 in IR group)
 keepTaxa.IR <- rownames(prevalence.df.IR)[(prevalence.df.IR$Prevalence >= prevalenceThreshold.IR)]
-IR_ps.fil #2296 taxa
+IR_ps.fil #2252 taxa
 IR_ps.fil <- prune_taxa(keepTaxa.IR,IR_ps.fil) 
-IR_ps.fil #2296 taxa -> 1021 taxa (CHECK!!!)
+IR_ps.fil #2252 taxa -> 981 taxa (CHECK!!!)
 
 
 ### Prevalence filter IS
@@ -241,20 +264,20 @@ ggplot(prevalence.df.IS, aes(TotalAbundance, Prevalence / nsamples(IS_ps.fil),co
   theme(legend.position="none")
 ## Define prevalence threshold as 10% of total samples (CHECK: chose 0.05 as it seems there is a slight natural separation at around this prevalence in the actinobacteria and proteobacteria taxa)
 prevalenceThreshold.IS <- 0.10*nsamples(IS_ps.fil) #i.e. taxa have to appear in a minimum of 0.5% of samples or they will be removed
-prevalenceThreshold.IS # 23.1 (i.e. the taxa would have to be prevalent in 0.5775 samples in order to be considered)
+prevalenceThreshold.IS # 20.2 (i.e. the taxa would have to be prevalent in 0.5775 samples in order to be considered)
 
 ### Execute this prevalence filter using prune_taxa() function (i.e. keeps rows/taxa where prevalence >= 0.05 in IR group)
 keepTaxa.IS <- rownames(prevalence.df.IS)[(prevalence.df.IS$Prevalence >= prevalenceThreshold.IS)]
-IS_ps.fil #2370 taxa
+IS_ps.fil #2226 taxa
 IS_ps.fil <- prune_taxa(keepTaxa.IS,IS_ps.fil) 
-IS_ps.fil #2370 taxa -> 960 taxa (CHECK!!!)
+IS_ps.fil #2226 taxa -> 950 taxa (CHECK!!!)
 
 
 ### Filter taxa of the whole T2D.rm.gut phyloseq-class object using IR and IS prevalence filtration
 keepTaxa.T2D.fil <- c(keepTaxa.IR, keepTaxa.IS) 
 T2D.fil #6109 taxa 
 T2D.fil <- prune_taxa(keepTaxa.T2D.fil, T2D.fil)
-T2D.fil #1021 taxa
+T2D.fil #981 taxa
 
 ########################################################################################################
 
@@ -295,10 +318,10 @@ sensitivity <- levels(T2D.fil.meta$IR_IS_classification)
 sens.pairs <- combn(seq_along(sensitivity),2, simplify = FALSE, FUN = function(i)sensitivity[i])
 
 ### Violin plot + adding mean comparison p-values 
+library(ggpubr)
 Shannon.plot <- ggviolin(T2D.fil.meta, x = "IR_IS_classification", y = "Shannon", add = "boxplot", fill = "IR_IS_classification", palette = c("#a6cee3", "#b2df8a", "#fdbf6f"))
 print(Shannon.plot)
 
-library(ggpubr)
 Shannon.plot <- Shannon.plot + stat_compare_means(comparisons = sens.pairs) # Wilcoxon test (CHECK)
 print(Shannon.plot)
 
@@ -350,33 +373,43 @@ venn.diagram(names.OTU.IR,names.OTU.IS, "IR", "IS", colors= c("#e87396","#2a96a0
 ###########################################################################################################################
 #### how many read counts are we working with?
 sum(colSums(otu_table(T2D.fil)))
-# 7452159
+# 6482399
 
 #### Multitable analysis 
 ### Quick check
 dim(metabolomics)
 # 441 324
+##########################################################################################
+#### need to exclude outlier samples from metabolomic data
+### 
+metabolomics.exclout <- metabolomics[metabolomics$SampleID %in% excl.out.vec,]
+dim(metabolomics.exclout)
+# 402 324
+metabolomics.EO <- metabolomics.exclout 
+
+##########################################################################################
+
 T2D.fil
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 1021 taxa and 441 samples ]
-# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 1021 taxa by 7 taxonomic ranks ]
+# otu_table()   OTU Table:         [ 981 taxa and 402 samples ]
+# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 981 taxa by 7 taxonomic ranks ]
 
 # same number of samples
 
 ### Removing metabolites that are zero across many samples and transforming them to weaken the heavy tails
 ## Making sample ID the row names and removing the sample ID column
-rownames(metabolomics) <- metabolomics[,1] 
-metabolomics <- metabolomics[,-1]
-metabolomics <- t(metabolomics)
-dim(metabolomics) #323 441
+rownames(metabolomics.EO) <- metabolomics.EO[,1] 
+metabolomics.EO <- metabolomics.EO[,-1]
+metabolomics.EO <- t(metabolomics.EO)
+dim(metabolomics.EO) #323 402
 
 ## Removing and transforming
-keep_ix <- rowSums(metabolomics == 0) <=3
-metabolomics.fil <- metabolomics[keep_ix,]
-dim(metabolomics.fil) #323 441
-metabolomics.fil.log <- log(1 + metabolomics.fil,base = 10)
-dim(metabolomics.fil.log) #323 441
+keep_ix <- rowSums(metabolomics.EO == 0) <=3
+metabolomics.EO.fil <- metabolomics.EO[keep_ix,]
+dim(metabolomics.EO.fil) #323 402
+metabolomics.EO.fil.log <- log(1 + metabolomics.EO.fil,base = 10)
+dim(metabolomics.EO.fil.log) #323 402
 
 ### Removing microbes that are zero across many samples
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -389,18 +422,18 @@ library("genefilter")
 microbe <- prune_taxa(taxa_sums(T2D.fil) > 4, T2D.fil)
 microbe
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 1021 taxa and 441 samples ]
-# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 1021 taxa by 7 taxonomic ranks ]
+# otu_table()   OTU Table:         [ 981 taxa and 402 samples ]
+# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 981 taxa by 7 taxonomic ranks ]
 microbe <- filter_taxa(microbe, filterfun(kOverA(3,2)),TRUE)
 microbe
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 932 taxa and 441 samples ]
-# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 932 taxa by 7 taxonomic ranks ]
+# otu_table()   OTU Table:         [ 888 taxa and 402 samples ]
+# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 888 taxa by 7 taxonomic ranks ]
 X <- otu_table(microbe)
 X[X>50] <- 50 
-dim(X) # 932 441 (no change in taxa)
+dim(X) # 888 402 (no change in taxa)
 View(X)
 
 
@@ -408,18 +441,18 @@ View(X)
 install.packages("PMA")
 library(PMA)
 
-cca_res <- CCA(t(X), t(metabolomics.fil.log), penaltyx = .15, penaltyz = .15)
-# 1234567891011
-cca_res
-# Num non-zeros u's:  35 
-# Num non-zeros v's:  12 
+cca_res <- CCA(t(X), t(metabolomics.EO.fil.log), penaltyx = .15, penaltyz = .15)
+# 12345678910111213
+# cca_res
+# Num non-zeros u's:  27 
+# Num non-zeros v's:  10 
 # Type of x:  standard 
 # Type of z:  standard 
 # Penalty for x: L1 bound is  0.15 
 # Penalty for z: L1 bound is  0.15 
-# Cor(Xu,Zv):  0.5091925
-# Therefore, 35 microbes and 12 metabolites have been selected based on their ability to explain covariation between the tables. 
-# These 47 features result in a correlation of 0.509 between the 2 tables (not very good correlation value)
+# Cor(Xu,Zv):  0.4820405
+# Therefore, 27 microbes and 10 metabolites have been selected based on their ability to explain covariation between the tables. 
+# These 37 features result in a correlation of 0.482 between the 2 tables (not very good correlation value)
 
 ### Performing a PCA
 install.packages("magrittr")  # for piping %>%
@@ -432,7 +465,7 @@ library(magrittr)
 library(genefilter)
 library(ggrepel)
 
-combined <- cbind(t(X[cca_res$u != 0, ]), t(metabolomics.fil.log[cca_res$v != 0, ]))
+combined <- cbind(t(X[cca_res$u != 0, ]), t(metabolomics.EO.fil.log[cca_res$v != 0, ]))
 View(combined)
 pca_res <- dudi.pca(combined, scannf = F, nf = 3)
 View(pca_res)
@@ -471,9 +504,9 @@ library(dplyr)
 microbe.rel <- microbiome::transform(microbe, "compositional")
 microbe.rel
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 932 taxa and 441 samples ]
-# sample_data() Sample Data:       [ 441 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 932 taxa by 7 taxonomic ranks ]
+# otu_table()   OTU Table:         [ 888 taxa and 402 samples ]
+# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 888 taxa by 7 taxonomic ranks ]
 # T2D.fil.rel@otu_table@.Data[T2D.fil.rel@otu_table@.Data>50] <- 50 #no need to do this because no OTU value is >50. (CHECK!!!)
 microbe.otu <- abundances(microbe.rel)
 microbe.meta <- meta(microbe.rel)
@@ -487,18 +520,18 @@ print(permanova)
 print(as.data.frame(permanova$aov.tab)["IR_IS_classification", "Pr(>F)"])
 # 0.01
 
+print(as.data.frame(permanova$aov.tab)["IR_IS_classification", "R2"])
+# 0.02076143
+
 #### Check homogeneity condition to see if can do PERMANOVA
 dist <- vegdist(t(microbe.otu))
 anova(betadisper(dist, microbe.meta$IR_IS_classification))
 # Analysis of Variance Table
 # 
 # Response: Distances
-# Df Sum Sq   Mean Sq F value
-# Groups      1 0.0017 0.0016642  0.1728
-# Residuals 439 4.2285 0.0096321        
-# Pr(>F)
-# Groups    0.6779
-# Residuals  
+# Df Sum Sq   Mean Sq F value Pr(>F)
+# Groups      1 0.0037 0.0037403  0.3732 0.5416
+# Residuals 400 4.0094 0.0100235 
 
 # the IR and IS group have significantly different spreads (p-value > 0.05 CHECK!!!), therefore, PERMANOVA result may be potentially explained by that.
 
