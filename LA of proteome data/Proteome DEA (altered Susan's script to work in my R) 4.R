@@ -12,7 +12,7 @@ library(Biobase)
 library(limma)
 
 #change working directory to one incl. necessary files
-DATA.DIR <- "C:/Users/sabde/OneDrive/Documents/UM documents/BMS Year 3/Internship + Thesis/Sabrina_BMS_Bachelor-Internship/R analysis of proteome data/"
+DATA.DIR <- "C:/Users/sabde/OneDrive/Documents/UM documents/BMS Year 3/Internship + Thesis/Sabrina_BMS_Bachelor-Internship/LA of proteome data/1st proteome LA input files/"
 setwd(DATA.DIR)
 getwd()
 
