@@ -193,7 +193,7 @@ IS_ps.fil # T2D = 402 samples, IS_ps.fil = 202 samples (CHECK).
 #                xlab("Relative abundance")
 # )
 
-#### Look for low perfroming samples
+#### Look for low perfroming samples (https://ucdavis-bioinformatics-training.github.io/2017-September-Microbial-Community-Analysis-Workshop/friday/MCA_Workshop_R/phyloseq.html)
 qplot(colSums(otu_table(T2D.fil)),bins=30) +
   xlab("Logged counts-per-sample")
 # does not seem to be any low performing samples (CHECK!!!), therefore, no need to filter?
