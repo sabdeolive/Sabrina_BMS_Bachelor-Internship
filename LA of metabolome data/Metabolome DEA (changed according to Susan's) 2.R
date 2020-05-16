@@ -17,15 +17,15 @@ setwd(DATA.DIR)
 getwd()
 
 # Read the metabolome data
-metabolome <- read.delim("metabolome_abundance 11.txt", as.is=TRUE)
+metabolome <- metabolome_abundance.11
 rownames(metabolome) <- metabolome[,1]
 metabolome <- metabolome[,-1]
 
 #load study description
-desc <- read.delim("Subject data T2DM iHMP 5.txt", as.is=TRUE)
+desc <- Subject.data.T2DM.iHMP.5
 
 #check order of description and normalised data columns
-colnames(prot) == desc$SubjectID
+colnames(metabolome) == desc$SubjectID
 # OK
 
 #groups
@@ -53,3 +53,38 @@ fitM<- eBayes(fitM)
 #Export results
 resultsM <- topTable(fitM, number=20009, coef="InsgroupMIR")
 write.table(resultsM, file="c:/Users/sabde/Documents/metabolome_limma_analysis.txt", sep="\t", row.names = TRUE, col.names = NA)
+
+
+##############################################################################
+#### With log transformation
+metabolome.log <- log10(metabolome + 1)
+
+#check order of description and normalised data columns
+colnames(metabolome.log) == desc$SubjectID
+# OK
+
+#groups
+# Two groups: IS and IR
+#################################################################################################################
+
+
+## VitD
+InsgroupM <- factor(desc$IR_IS_classification, levels=c("IS","IR"))
+class(InsgroupM)
+
+
+#Translate statistical model to R code (creation of design matrix)
+designM<- model.matrix(~ InsgroupM)
+head(designM,2)
+colSums(designM)
+
+
+#Fit the model with lmFit 
+fitM.log<- lmFit(metabolome.log,designM)
+
+#Calculate the t-statistics 
+fitM.log<- eBayes(fitM.log)
+
+#Export results
+resultsM.log <- topTable(fitM.log, number=20009, coef="InsgroupMIR")
+write.table(resultsM.log, file="c:/Users/sabde/Documents/metabolome_limma_analysis.log.txt", sep="\t", row.names = TRUE, col.names = NA)
