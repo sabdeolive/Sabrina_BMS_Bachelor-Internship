@@ -1,0 +1,16 @@
+,Total,Expected,Hits,Raw p,minus log(p),Holm adjust,FDR,Impact
+Biotin metabolism,21,0.12049,2,0.0060338,5.1104,0.50684,0.50684,0.2
+Primary bile acid biosynthesis,92,0.52787,3,0.013962,4.2714,1,0.58639,0.054945
+D-Arginine and D-ornithine metabolism,6,0.034426,1,0.03397,3.3823,1,0.95117,0.2
+"Alanine, aspartate and glutamate metabolism",61,0.35,2,0.046131,3.0763,1,0.96874,0.066667
+Aminoacyl-tRNA biosynthesis,74,0.42459,2,0.065262,2.7293,1,1,0.027397
+Caffeine metabolism,19,0.10902,1,0.10393,2.264,1,1,0.055556
+Phenylalanine metabolism,21,0.12049,1,0.11427,2.1692,1,1,0.05
+Selenocompound metabolism,35,0.20082,1,0.18357,1.6951,1,1,0.029412
+Citrate cycle (TCA cycle),42,0.24098,1,0.21631,1.5311,1,1,0.14634
+Biosynthesis of unsaturated fatty acids,47,0.26967,1,0.23894,1.4316,1,1,0.021739
+Lysine degradation,49,0.28115,1,0.24782,1.3951,1,1,0.020833
+Glyoxylate and dicarboxylate metabolism,56,0.32131,1,0.27815,1.2796,1,1,0.072727
+Tyrosine metabolism,88,0.50492,1,0.40289,0.9091,1,1,0.011494
+Fatty acid degradation,102,0.58525,1,0.45089,0.79652,1,1,0.029703
+Purine metabolism,166,0.95246,1,0.6281,0.46505,1,1,0.012121
