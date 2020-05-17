@@ -1,0 +1,599 @@
+Statistics results for Sun Apr 19 11:46:37 CEST 2020
+Dataset: E:\Internship + Thesis\PathVisio Tutorial\proteome_limma_analysis 3.pgex
+Pathway directory: E:\Internship + Thesis\PathVisio Tutorial\WikiPathways human pathways collection
+Gene database: C:\Users\sabde\OneDrive\Documents\UM documents\BMS Year 3\Internship + Thesis\Sabrina_BMS_Bachelor-Internship\Identifier Mapping Databases\Metabolite database\metabolites_20191025.bridge, E:\Internship + Thesis\PathVisio Tutorial\Hs_Derby_Ensembl_91.bridge
+Criterion: ( [logFC] < -1 OR  [logFC]  > 1) AND  [P.Value]  < 0.05 
+Calculation method: pathway-centric. Calculations are performed after mapping data to pathways.
+Total data points (N): 267
+Data points meeting criterion (R): 0
+
+Pathway	positive (r)	measured (n)	total	%	Z Score	p-value (permuted)
+22q11.2 Deletion Syndrome	0	4	134	0.00%	NaN	0.000
+4-hydroxytamoxifen, Dexamethasone, and Retinoic Acids Regulation of p27 Expression	0	0	31	NaN%	NaN	0.000
+Acetylcholine Synthesis	0	0	18	NaN%	NaN	0.000
+ACE Inhibitor Pathway	0	2	29	0.00%	NaN	0.000
+Acrylamide Biotransformation and Exposure Biomarkers	0	0	10	NaN%	NaN	0.000
+Activation of NLRP3 Inflammasome by SARS-CoV-2	0	0	10	NaN%	NaN	0.000
+Adipogenesis	0	3	132	0.00%	NaN	0.000
+Aflatoxin B1 metabolism	0	0	16	NaN%	NaN	0.000
+AGE/RAGE pathway	0	1	67	0.00%	NaN	0.000
+Alanine and aspartate metabolism	0	1	66	0.00%	NaN	0.000
+Allograft Rejection	0	13	113	0.00%	NaN	0.000
+Alpha 6 Beta 4 signaling pathway	0	0	34	NaN%	NaN	0.000
+Alzheimers Disease	0	2	166	0.00%	NaN	0.000
+Amino acid conjugation of benzoic acid	0	0	14	NaN%	NaN	0.000
+Amino acid conjugation	0	0	7	NaN%	NaN	0.000
+Amino Acid Metabolism Pathway Excerpt (Histidine catabolism extension)	0	0	23	NaN%	NaN	0.000
+Amino Acid metabolism	0	2	205	0.00%	NaN	0.000
+AMP-activated Protein Kinase (AMPK) Signaling	0	1	78	0.00%	NaN	0.000
+Amplification and Expansion of Oncogenic Pathways as Metastatic Traits	0	0	18	NaN%	NaN	0.000
+Amyotrophic lateral sclerosis (ALS)	0	1	56	0.00%	NaN	0.000
+Androgen receptor signaling pathway	0	1	90	0.00%	NaN	0.000
+Angiogenesis	0	0	25	NaN%	NaN	0.000
+Angiopoietin Like Protein 8 Regulatory Pathway	0	0	156	NaN%	NaN	0.000
+ApoE and miR-146 in inflammation and atherosclerosis	0	1	13	0.00%	NaN	0.000
+Apoptosis-related network due to altered Notch3 in ovarian cancer	0	2	54	0.00%	NaN	0.000
+Apoptosis Modulation and Signaling	0	0	97	NaN%	NaN	0.000
+Apoptosis Modulation by HSP70	0	0	22	NaN%	NaN	0.000
+Apoptosis	0	1	88	0.00%	NaN	0.000
+Arachidonate Epoxygenase / Epoxide Hydrolase	0	0	18	NaN%	NaN	0.000
+Aripiprazole Metabolic Pathway	0	0	7	NaN%	NaN	0.000
+Arrhythmogenic Right Ventricular Cardiomyopathy	0	2	81	0.00%	NaN	0.000
+Arylamine metabolism	0	0	13	NaN%	NaN	0.000
+Aryl Hydrocarbon Receptor Netpath	0	0	57	NaN%	NaN	0.000
+Aryl Hydrocarbon Receptor Pathway	0	0	49	NaN%	NaN	0.000
+Association Between Physico-Chemical Features and Toxicity Associated Pathways	0	3	78	0.00%	NaN	0.000
+ATM Signaling Network in Development and Disease 	0	0	49	NaN%	NaN	0.000
+ATM Signaling Pathway	0	0	50	NaN%	NaN	0.000
+ATR Signaling	0	0	10	NaN%	NaN	0.000
+Autosomal recessive Osteopetrosis pathways	0	0	14	NaN%	NaN	0.000
+Base Excision Repair	0	0	32	NaN%	NaN	0.000
+BDNF-TrkB Signaling	0	0	38	NaN%	NaN	0.000
+Benzene metabolism	0	0	17	NaN%	NaN	0.000
+Benzo(a)pyrene metabolism	0	0	17	NaN%	NaN	0.000
+Bile Acids synthesis and enterohepatic circulation 	0	0	18	NaN%	NaN	0.000
+Biochemical Pathways Part I	0	0	471	NaN%	NaN	0.000
+Biogenic Amine Synthesis	0	1	33	0.00%	NaN	0.000
+Biomarkers for pyrimidine metabolism disorders	0	1	88	0.00%	NaN	0.000
+Biomarkers for urea cycle disorders	0	3	51	0.00%	NaN	0.000
+Biosynthesis and regeneration of tetrahydrobiopterin (BH4) and catabolism of phenylalanine, including diseases	0	0	38	NaN%	NaN	0.000
+Bladder Cancer	0	2	47	0.00%	NaN	0.000
+Blood clotting and drug effects	0	0	13	NaN%	NaN	0.000
+Blood Clotting Cascade	0	15	27	0.00%	NaN	0.000
+BMP2-WNT4-FOXO1 Pathway in Human Primary Endometrial Stromal Cell Differentiation	0	0	16	NaN%	NaN	0.000
+BMP Signaling Pathway in Eyelid Development	0	0	23	NaN%	NaN	0.000
+Bone Morphogenic Protein (BMP) Signalling and Regulation	0	0	13	NaN%	NaN	0.000
+Brain-Derived Neurotrophic Factor (BDNF) signaling pathway	0	1	150	0.00%	NaN	0.000
+Breast cancer pathway	0	0	167	NaN%	NaN	0.000
+Butyrate-induced histone acetylation	0	0	11	NaN%	NaN	0.000
+B Cell Receptor Signaling Pathway	0	1	99	0.00%	NaN	0.000
+Caffeine and Theobromine metabolism	0	0	18	NaN%	NaN	0.000
+Calcium Regulation in the Cardiac Cell	0	1	167	0.00%	NaN	0.000
+Caloric restriction and aging	0	0	13	NaN%	NaN	0.000
+Cancer immunotherapy by CTLA4 blockade	0	0	21	NaN%	NaN	0.000
+Cancer immunotherapy by PD-1 blockade	0	0	35	NaN%	NaN	0.000
+Cannabinoid receptor signaling	0	0	54	NaN%	NaN	0.000
+Canonical  and Non-canonical Notch signaling	0	0	31	NaN%	NaN	0.000
+Canonical and Non-Canonical TGF-B signaling	0	0	18	NaN%	NaN	0.000
+Canonical NF-KB pathway	0	0	9	NaN%	NaN	0.000
+Cardiac Hypertrophic Response	0	0	61	NaN%	NaN	0.000
+Cardiac Progenitor Differentiation	0	2	56	0.00%	NaN	0.000
+Carnosine's role in muscle contraction	0	0	14	NaN%	NaN	0.000
+Catalytic cycle of mammalian Flavin-containing MonoOxygenases (FMOs)	0	0	14	NaN%	NaN	0.000
+Cell-type Dependent Selectivity of CCK2R Signaling	0	1	26	0.00%	NaN	0.000
+Cells and Molecules involved in local acute inflammatory response 	0	5	19	0.00%	NaN	0.000
+Cell Cycle	0	0	124	NaN%	NaN	0.000
+Cell Differentiation - Index expanded	0	0	69	NaN%	NaN	0.000
+Cell Differentiation - Index	0	0	61	NaN%	NaN	0.000
+Cell migration and invasion through p75NTR	0	0	31	NaN%	NaN	0.000
+Cerebral Organic Acidurias, including diseases	0	0	46	NaN%	NaN	0.000
+Chemokine signaling pathway	0	2	172	0.00%	NaN	0.000
+Cholesterol Biosynthesis Pathway	0	0	32	NaN%	NaN	0.000
+Cholesterol Biosynthesis with Skeletal Dysplasias	0	0	23	NaN%	NaN	0.000
+Cholesterol metabolism (includes both Bloch and Kandutsch-Russell pathways)	0	0	96	NaN%	NaN	0.000
+Chromosomal and microsatellite instability in colorectal cancer 	0	0	81	NaN%	NaN	0.000
+Ciliary landscape	0	3	215	0.00%	NaN	0.000
+Circadian rhythm related genes	0	3	209	0.00%	NaN	0.000
+Classical pathway of steroidogenesis, including diseases	0	0	49	NaN%	NaN	0.000
+Codeine and Morphine Metabolism	0	0	26	NaN%	NaN	0.000
+Colchicine Metabolic Pathway	0	0	5	NaN%	NaN	0.000
+Common Pathways Underlying Drug Addiction	0	0	50	NaN%	NaN	0.000
+Complement Activation	0	21	24	0.00%	NaN	0.000
+Complement and Coagulation Cascades	0	40	63	0.00%	NaN	0.000
+Composition of Lipid Particles	0	8	21	0.00%	NaN	0.000
+Computational Model of Aerobic Glycolysis	0	2	35	0.00%	NaN	0.000
+Constitutive Androstane Receptor Pathway	0	0	34	NaN%	NaN	0.000
+Control of immune tolerance by vasoactive intestinal peptide	0	0	16	NaN%	NaN	0.000
+Conversion of Angiotensinogen to Angiotensin II 	0	0	9	NaN%	NaN	0.000
+Copper homeostasis	0	0	58	NaN%	NaN	0.000
+Cori Cycle	0	1	53	0.00%	NaN	0.000
+Corticotropin-releasing hormone signaling pathway	0	0	98	NaN%	NaN	0.000
+Cysteine and methionine catabolism	0	0	74	NaN%	NaN	0.000
+Cytokines and Inflammatory Response	0	0	32	NaN%	NaN	0.000
+Cytoplasmic Ribosomal Proteins	0	0	89	NaN%	NaN	0.000
+Cytosolic DNA-sensing pathway	0	0	77	NaN%	NaN	0.000
+DDX1 as a regulatory component of the Drosha microprocessor	0	0	8	NaN%	NaN	0.000
+Degradation pathway of sphingolipids, including diseases	0	0	41	NaN%	NaN	0.000
+Deregulation of Rab and Rab Effector Genes in Bladder Cancer	0	0	17	NaN%	NaN	0.000
+Development and heterogeneity of the ILC family	0	0	33	NaN%	NaN	0.000
+Development of pulmonary dendritic cells and macrophage subsets	0	0	14	NaN%	NaN	0.000
+Diclofenac Metabolic Pathway	0	0	12	NaN%	NaN	0.000
+Differentiation of white and brown adipocyte   	0	1	26	0.00%	NaN	0.000
+Differentiation Pathway	0	1	64	0.00%	NaN	0.000
+Disorders of Folate Metabolism and Transport	0	1	46	0.00%	NaN	0.000
+Disorders of the Krebs cycle	0	0	34	NaN%	NaN	0.000
+DNA Damage Response (only ATM dependent)	0	1	118	0.00%	NaN	0.000
+DNA Damage Response	0	0	77	NaN%	NaN	0.000
+DNA IR-damage and cellular response via ATR	0	0	90	NaN%	NaN	0.000
+DNA IR-Double Strand Breaks (DSBs) and cellular response via ATM	0	0	65	NaN%	NaN	0.000
+DNA Mismatch Repair	0	0	23	NaN%	NaN	0.000
+DNA Replication	0	0	50	NaN%	NaN	0.000
+Dopaminergic Neurogenesis	0	0	32	NaN%	NaN	0.000
+Dopamine metabolism	0	0	48	NaN%	NaN	0.000
+Downregulation of ACE2 expression by SARS-CoV infection and SARS-CoV Spike protein.	0	0	7	NaN%	NaN	0.000
+Drug Induction of Bile Acid Pathway	0	0	45	NaN%	NaN	0.000
+Dual hijack model of Vif in HIV infection	0	0	10	NaN%	NaN	0.000
+Ebola Virus Pathway on Host	0	5	141	0.00%	NaN	0.000
+EBV LMP1 signaling	0	0	25	NaN%	NaN	0.000
+Ectoderm Differentiation	0	0	145	NaN%	NaN	0.000
+EDA Signalling in Hair Follicle Development	0	0	15	NaN%	NaN	0.000
+Effects of Nitric Oxide	0	1	16	0.00%	NaN	0.000
+EGF/EGFR Signaling Pathway	0	1	163	0.00%	NaN	0.000
+Eicosanoid metabolism via Cyclo Oxygenases (COX)	0	0	70	NaN%	NaN	0.000
+Eicosanoid metabolism via Cytochrome P450 Mono-Oxygenases (CYP) pathway	0	0	23	NaN%	NaN	0.000
+Eicosanoid metabolism via Lipo Oxygenases (LOX)	0	0	70	NaN%	NaN	0.000
+Eicosanoid Synthesis	0	0	57	NaN%	NaN	0.000
+eIF5A regulation in response to inhibition of the nuclear export system	0	0	6	NaN%	NaN	0.000
+Electron Transport Chain (OXPHOS system in mitochondria)	0	1	119	0.00%	NaN	0.000
+Endochondral Ossification with Skeletal Dysplasias	0	2	69	0.00%	NaN	0.000
+Endochondral Ossification	0	2	69	0.00%	NaN	0.000
+Endoderm Differentiation	0	0	147	NaN%	NaN	0.000
+Endometrial cancer	0	1	77	0.00%	NaN	0.000
+Endothelin Pathways	0	0	48	NaN%	NaN	0.000
+Energy Metabolism	0	0	49	NaN%	NaN	0.000
+Envelope proteins and their potential roles in EDMD physiopathology	0	0	47	NaN%	NaN	0.000
+Epithelial to mesenchymal transition in colorectal cancer	0	3	161	0.00%	NaN	0.000
+EPO Receptor Signaling	0	1	27	0.00%	NaN	0.000
+ErbB Signaling Pathway	0	0	101	NaN%	NaN	0.000
+ERK Pathway in Huntington's Disease	0	0	17	NaN%	NaN	0.000
+ESC Pluripotency Pathways	0	1	123	0.00%	NaN	0.000
+Estrogen metabolism	0	0	45	NaN%	NaN	0.000
+Estrogen Receptor Pathway	0	0	16	NaN%	NaN	0.000
+Estrogen signaling pathway	0	0	26	NaN%	NaN	0.000
+Ethanol effects on histone modifications	0	0	53	NaN%	NaN	0.000
+Ethanol metabolism resulting in production of ROS by CYP2E1	0	0	28	NaN%	NaN	0.000
+Eukaryotic Transcription Initiation	0	1	42	0.00%	NaN	0.000
+Evolocumab Mechanism	0	0	5	NaN%	NaN	0.000
+EV release from cardiac cells and their functional effects	0	0	17	NaN%	NaN	0.000
+Exercise-induced Circadian Regulation	0	0	49	NaN%	NaN	0.000
+exRNA mechanism of action and biogenesis	0	0	8	NaN%	NaN	0.000
+Extracellular vesicle-mediated signaling in recipient cells	0	0	31	NaN%	NaN	0.000
+Extracellular vesicles in the crosstalk of cardiac cells	0	0	30	NaN%	NaN	0.000
+FABP4 in ovarian cancer	0	0	3	NaN%	NaN	0.000
+Factors and pathways affecting insulin-like growth factor (IGF1)-Akt signaling	0	1	34	0.00%	NaN	0.000
+Farnesoid X Receptor  Pathway	0	0	21	NaN%	NaN	0.000
+Fas Ligand (FasL) pathway and Stress induction of Heat Shock Proteins (HSP) regulation	0	1	48	0.00%	NaN	0.000
+Fatty Acid Beta Oxidation	0	0	71	NaN%	NaN	0.000
+Fatty Acid Biosynthesis	0	1	37	0.00%	NaN	0.000
+Fatty Acid Omega Oxidation	0	0	20	NaN%	NaN	0.000
+FBXL10 enhancement of MAP/ERK signaling in diffuse large B-cell lymphoma	0	0	36	NaN%	NaN	0.000
+Felbamate Metabolism	0	0	12	NaN%	NaN	0.000
+Ferroptosis	0	3	70	0.00%	NaN	0.000
+FGF23 signalling in Hypophosphatemic rickets	0	0	28	NaN%	NaN	0.000
+FGFR3 signalling in chondrocyte proliferation and terminal differentiation	0	0	29	NaN%	NaN	0.000
+Fibrin Complement Receptor 3 Signaling Pathway	0	6	46	0.00%	NaN	0.000
+Fluoropyrimidine Activity	0	1	58	0.00%	NaN	0.000
+Focal Adhesion-PI3K-Akt-mTOR-signaling pathway	0	5	305	0.00%	NaN	0.000
+Focal Adhesion	0	9	201	0.00%	NaN	0.000
+Folate-Alcohol and Cancer Pathway Hypotheses	0	0	24	NaN%	NaN	0.000
+Folate Metabolism	0	17	142	0.00%	NaN	0.000
+Follicle Stimulating Hormone (FSH) signaling pathway	0	0	28	NaN%	NaN	0.000
+Fragile X Syndrome 	0	1	133	0.00%	NaN	0.000
+FTO Obesity Variant Mechanism	0	0	11	NaN%	NaN	0.000
+G13 Signaling Pathway	0	1	39	0.00%	NaN	0.000
+G1 to S cell cycle control	0	0	68	NaN%	NaN	0.000
+GABA receptor Signaling	0	0	57	NaN%	NaN	0.000
+Gamma-Glutamyl Cycle for the biosynthesis and degradation of glutathione, including diseases	0	0	24	NaN%	NaN	0.000
+Ganglio Sphingolipid Metabolism	0	0	56	NaN%	NaN	0.000
+Gastric acid production	0	0	22	NaN%	NaN	0.000
+Gastric Cancer Network 1	0	0	30	NaN%	NaN	0.000
+Gastric Cancer Network 2	0	0	33	NaN%	NaN	0.000
+Gastrin Signaling Pathway	0	0	115	NaN%	NaN	0.000
+GDNF/RET signalling axis	0	0	24	NaN%	NaN	0.000
+Genes controlling renal nephrogenesis	0	0	38	NaN%	NaN	0.000
+Genes involved in male infertility	0	5	150	0.00%	NaN	0.000
+Genes related to primary cilium development (based on CRISPR)	0	2	104	0.00%	NaN	0.000
+Genes targeted by miRNAs in adipocytes	0	0	19	NaN%	NaN	0.000
+Gene regulatory network modelling somitogenesis 	0	0	13	NaN%	NaN	0.000
+Genotoxicity pathway	0	0	65	NaN%	NaN	0.000
+GHB metabolic pathway	0	0	25	NaN%	NaN	0.000
+Glial Cell Differentiation	0	1	9	0.00%	NaN	0.000
+Globo Sphingolipid Metabolism	0	0	28	NaN%	NaN	0.000
+Glucocorticoid and Mineralcorticoid Metabolism	0	0	26	NaN%	NaN	0.000
+Glucose Homeostasis	0	0	24	NaN%	NaN	0.000
+Glucuronidation	0	0	41	NaN%	NaN	0.000
+Glutathione metabolism	0	1	57	0.00%	NaN	0.000
+Glycerolipids and Glycerophospholipids	0	0	52	NaN%	NaN	0.000
+Glycerophospholipid Biosynthetic Pathway	0	0	104	NaN%	NaN	0.000
+Glycine Metabolism	0	0	19	NaN%	NaN	0.000
+Glycogen Synthesis and Degradation	0	0	54	NaN%	NaN	0.000
+Glycolysis and Gluconeogenesis	0	3	69	0.00%	NaN	0.000
+Glycosaminoglycan degradation	0	0	45	NaN%	NaN	0.000
+Glycosylation and related congenital defects	0	0	73	NaN%	NaN	0.000
+GPCRs, Class A Rhodopsin-like	0	0	272	NaN%	NaN	0.000
+GPCRs, Class B Secretin-like	0	0	24	NaN%	NaN	0.000
+GPCRs, Class C Metabotropic glutamate, pheromone	0	0	15	NaN%	NaN	0.000
+GPCRs, Other	0	1	114	0.00%	NaN	0.000
+GPR40 Pathway	0	0	20	NaN%	NaN	0.000
+G Protein Signaling Pathways	0	0	97	NaN%	NaN	0.000
+H19 action Rb-E2F1 signaling and CDK-Beta-catenin activity	0	0	17	NaN%	NaN	0.000
+Hair Follicle Development: Cytodifferentiation (Part 3 of 3)	0	0	92	NaN%	NaN	0.000
+Heart Development	0	0	48	NaN%	NaN	0.000
+Hedgehog Signaling Pathway Netpath	0	0	17	NaN%	NaN	0.000
+Hedgehog Signaling Pathway	0	0	44	NaN%	NaN	0.000
+Hematopoietic Stem Cell Gene Regulation by GABP alpha/beta Complex	0	0	26	NaN%	NaN	0.000
+Heme Biosynthesis	0	0	28	NaN%	NaN	0.000
+Hepatitis B infection	0	0	155	NaN%	NaN	0.000
+Hepatitis C and Hepatocellular Carcinoma	0	0	63	NaN%	NaN	0.000
+Heroin metabolism	0	1	8	0.00%	NaN	0.000
+Hfe effect on hepcidin production	0	0	8	NaN%	NaN	0.000
+HIF1A and PPARG regulation of glycolysis	0	1	19	0.00%	NaN	0.000
+Hijack of Ubiquitination by SARS-CoV-2	0	0	12	NaN%	NaN	0.000
+HIPK2 in kidney fibrosis	0	0	8	NaN%	NaN	0.000
+Hippo-Merlin Signaling Dysregulation	0	1	121	0.00%	NaN	0.000
+Hippo-Yap signaling pathway	0	1	24	0.00%	NaN	0.000
+Histone Modifications	0	0	68	NaN%	NaN	0.000
+Homologous recombination	0	0	14	NaN%	NaN	0.000
+Hormonal control of Pubertal Growth Spurt	0	0	8	NaN%	NaN	0.000
+Host-pathogen interaction of human corona viruses - apoptosis	0	0	31	NaN%	NaN	0.000
+Host-pathogen interaction of human corona viruses - autophagy	0	0	17	NaN%	NaN	0.000
+Host-pathogen interaction of human corona viruses - ER stress	0	0	54	NaN%	NaN	0.000
+Host-pathogen interaction of human corona viruses - Interferon induction	0	0	44	NaN%	NaN	0.000
+Host-pathogen interaction of human corona viruses - MAPK signaling	0	0	35	NaN%	NaN	0.000
+Human Complement System	0	48	143	0.00%	NaN	0.000
+Human metabolism overview	0	0	116	NaN%	NaN	0.000
+Human Thyroid Stimulating Hormone (TSH) signaling pathway	0	0	67	NaN%	NaN	0.000
+Hypertrophy Model	0	0	21	NaN%	NaN	0.000
+Hypothesized Pathways in Pathogenesis of Cardiovascular Disease	0	1	27	0.00%	NaN	0.000
+Hypothetical Craniofacial Development Pathway	0	0	11	NaN%	NaN	0.000
+Hypoxia-mediated EMT and Stemness	0	0	6	NaN%	NaN	0.000
+ID signaling pathway	0	0	17	NaN%	NaN	0.000
+IL-10 Anti-inflammatory Signaling Pathway 	0	0	19	NaN%	NaN	0.000
+IL-18 signaling pathway	0	9	288	0.00%	NaN	0.000
+IL-1 signaling pathway	0	1	57	0.00%	NaN	0.000
+IL-2 Signaling Pathway	0	0	43	NaN%	NaN	0.000
+IL-3 Signaling Pathway	0	0	50	NaN%	NaN	0.000
+IL-4 Signaling Pathway	0	1	55	0.00%	NaN	0.000
+IL-5 Signaling Pathway	0	0	41	NaN%	NaN	0.000
+IL-6 signaling pathway	0	1	45	0.00%	NaN	0.000
+IL-7 Signaling Pathway	0	0	26	NaN%	NaN	0.000
+IL-9 Signaling Pathway	0	0	18	NaN%	NaN	0.000
+IL17 signaling pathway	0	0	33	NaN%	NaN	0.000
+IL1 and megakaryocytes in obesity	0	1	26	0.00%	NaN	0.000
+Imatinib and Chronic Myeloid Leukemia	0	0	25	NaN%	NaN	0.000
+Inflammatory Response Pathway	0	5	34	0.00%	NaN	0.000
+Influenza A virus infection	0	0	16	NaN%	NaN	0.000
+Inhibition of exosome biogenesis and secretion by Manumycin A in CRPC cells	0	0	19	NaN%	NaN	0.000
+Initiation of transcription and translation elongation at the HIV-1 LTR	0	0	35	NaN%	NaN	0.000
+Insulin Signaling	0	0	162	NaN%	NaN	0.000
+Insulin signalling in human adipocytes (diabetic condition)	0	0	12	NaN%	NaN	0.000
+Insulin signalling in human adipocytes (normal condition)	0	0	15	NaN%	NaN	0.000
+Integrated Breast Cancer Pathway	0	1	200	0.00%	NaN	0.000
+Integrated Cancer Pathway	0	0	50	NaN%	NaN	0.000
+Integrin-mediated Cell Adhesion	0	4	102	0.00%	NaN	0.000
+Interactions between immune cells and microRNAs in tumor microenvironment	0	0	52	NaN%	NaN	0.000
+Interactome of polycomb repressive complex 2 (PRC2) 	0	0	17	NaN%	NaN	0.000
+Interferon type I signaling pathways	0	1	57	0.00%	NaN	0.000
+Interleukin-11 Signaling Pathway	0	0	45	NaN%	NaN	0.000
+Interleukin-1 Induced Activation of NF-kappa-B	0	0	13	NaN%	NaN	0.000
+Intracellular trafficking proteins involved in CMT neuropathy	0	0	28	NaN%	NaN	0.000
+Intraflagellar transport proteins binding to dynein	0	1	28	0.00%	NaN	0.000
+Irinotecan Pathway	0	1	18	0.00%	NaN	0.000
+Iron metabolism in placenta	0	2	15	0.00%	NaN	0.000
+Joubert Syndrome	0	4	87	0.00%	NaN	0.000
+Kennedy pathway from Sphingolipids	0	0	35	NaN%	NaN	0.000
+Ketogenesis and Ketolysis	0	0	27	NaN%	NaN	0.000
+Kisspeptin/Kisspeptin Receptor System in the Ovary	0	0	49	NaN%	NaN	0.000
+Kit receptor signaling pathway	0	0	60	NaN%	NaN	0.000
+Lamin A-processing pathway	0	0	8	NaN%	NaN	0.000
+Leptin and adiponectin	0	1	14	0.00%	NaN	0.000
+Leptin Insulin Overlap	0	0	20	NaN%	NaN	0.000
+Leptin signaling pathway	0	0	77	NaN%	NaN	0.000
+let-7 inhibition of ES cell reprogramming	0	0	17	NaN%	NaN	0.000
+Lidocaine metabolism	0	0	11	NaN%	NaN	0.000
+Lipid Metabolism Pathway	0	0	43	NaN%	NaN	0.000
+Liver X Receptor Pathway	0	0	12	NaN%	NaN	0.000
+LncRNA-mediated mechanisms of therapeutic resistance	0	0	14	NaN%	NaN	0.000
+LncRNA involvement in canonical Wnt signaling and colorectal cancer	0	1	102	0.00%	NaN	0.000
+Lung fibrosis	0	2	85	0.00%	NaN	0.000
+Macrophage markers	0	2	10	0.00%	NaN	0.000
+Major receptors targeted by epinephrine and norepinephrine	0	0	34	NaN%	NaN	0.000
+Mammalian Sexual Development	0	0	29	NaN%	NaN	0.000
+Mammary gland development pathway - Embryonic development (Stage 1 of 4)	0	0	21	NaN%	NaN	0.000
+Mammary gland development pathway - Involution (Stage 4 of 4)	0	0	13	NaN%	NaN	0.000
+Mammary gland development pathway - Pregnancy and lactation (Stage 3 of 4)	0	0	42	NaN%	NaN	0.000
+Mammary gland development pathway - Puberty (Stage 2 of 4)	0	1	15	0.00%	NaN	0.000
+MAPK  and NFkB Signalling Pathways Inhibited by Yersinia YopJ	0	0	13	NaN%	NaN	0.000
+MAPK Cascade	0	0	37	NaN%	NaN	0.000
+MAPK Signaling Pathway	0	2	258	0.00%	NaN	0.000
+Matrix Metalloproteinases	0	0	31	NaN%	NaN	0.000
+mBDNF and proBDNF regulation of GABA neurotransmission	0	0	40	NaN%	NaN	0.000
+Mechanoregulation and pathology of YAP/TAZ via Hippo and non-Hippo mechanisms	0	2	47	0.00%	NaN	0.000
+MECP2 and Associated Rett Syndrome	0	2	112	0.00%	NaN	0.000
+MED and Pseudoachondroplasia genes	0	1	7	0.00%	NaN	0.000
+Melanoma	0	1	78	0.00%	NaN	0.000
+Melatonin metabolism and effects	0	1	64	0.00%	NaN	0.000
+Mesodermal Commitment Pathway	0	0	154	NaN%	NaN	0.000
+Metabolic pathway of LDL, HDL and TG, including diseases	0	8	34	0.00%	NaN	0.000
+Metabolic reprogramming in colon cancer	0	2	81	0.00%	NaN	0.000
+Metabolism of alpha-linolenic acid	0	0	27	NaN%	NaN	0.000
+Metabolism of Dichloroethylene by CYP450	0	0	13	NaN%	NaN	0.000
+Metabolism of Spingolipids in ER and Golgi apparatus	0	0	72	NaN%	NaN	0.000
+Metabolism of Tetrahydrocannabinol (THC)	0	0	11	NaN%	NaN	0.000
+Metapathway biotransformation Phase I and II	0	1	191	0.00%	NaN	0.000
+Metastatic brain tumor	0	0	28	NaN%	NaN	0.000
+Methionine De Novo and Salvage Pathway	0	0	74	NaN%	NaN	0.000
+Methionine metabolism leading to Sulphur Amino Acids and related disorders	0	0	41	NaN%	NaN	0.000
+Methylation Pathways	0	0	15	NaN%	NaN	0.000
+Mevalonate arm of cholesterol biosynthesis pathway with inhibitors	0	0	64	NaN%	NaN	0.000
+Mevalonate arm of cholesterol biosynthesis pathway	0	0	29	NaN%	NaN	0.000
+MFAP5-mediated ovarian cancer cell motility and invasiveness	0	0	18	NaN%	NaN	0.000
+MFAP5 effect on permeability and motility of endothelial cells via cytoskeleton rearrangement	0	1	20	0.00%	NaN	0.000
+Microglia Pathogen Phagocytosis Pathway	0	3	44	0.00%	NaN	0.000
+MicroRNAs in cardiomyocyte hypertrophy	0	1	109	0.00%	NaN	0.000
+MicroRNA for Targeting Cancer Growth and Vascularization in Glioblastoma	0	0	10	NaN%	NaN	0.000
+MicroRNA network associated with chronic lymphocytic leukemia	0	0	10	NaN%	NaN	0.000
+mir-124 predicted interactions with cell cycle and differentiation 	0	0	8	NaN%	NaN	0.000
+miR-222 in Exercise-Induced Cardiac Growth	0	0	5	NaN%	NaN	0.000
+miR-509-3p alteration of YAP1/ECM axis	0	1	19	0.00%	NaN	0.000
+miR-517 relationship with ARCN1 and USP1	0	0	7	NaN%	NaN	0.000
+miRNAs involved in DNA damage response	0	0	70	NaN%	NaN	0.000
+miRNAs involvement in the immune response in sepsis	0	0	69	NaN%	NaN	0.000
+miRNA Biogenesis	0	0	7	NaN%	NaN	0.000
+miRNA Regulation of DNA Damage Response	0	0	106	NaN%	NaN	0.000
+miRNA regulation of p53 pathway in prostate cancer	0	0	37	NaN%	NaN	0.000
+miRNA targets in ECM and membrane receptors	0	3	46	0.00%	NaN	0.000
+Mitochondrial complex I assembly model OXPHOS system	0	0	61	NaN%	NaN	0.000
+Mitochondrial Gene Expression	0	0	23	NaN%	NaN	0.000
+Mitochondrial LC-Fatty Acid Beta-Oxidation	0	1	24	0.00%	NaN	0.000
+Model for regulation of MSMP expression in cancer cells and its proangiogenic role in ovarian tumors	0	0	6	NaN%	NaN	0.000
+Modified nucleosides derived from t-RNA as urinary cancer markers	0	0	21	NaN%	NaN	0.000
+Molybdenum cofactor (Moco) biosynthesis	0	0	21	NaN%	NaN	0.000
+Monoamine GPCRs	0	0	43	NaN%	NaN	0.000
+Monoamine Transport	0	2	47	0.00%	NaN	0.000
+mRNA Processing	0	1	130	0.00%	NaN	0.000
+MTHFR deficiency	0	0	60	NaN%	NaN	0.000
+Myometrial Relaxation and Contraction Pathways	0	3	161	0.00%	NaN	0.000
+NAD+ biosynthetic pathways	0	0	37	NaN%	NaN	0.000
+NAD+ metabolism	0	0	34	NaN%	NaN	0.000
+NAD Biosynthesis II (from tryptophan)	0	0	34	NaN%	NaN	0.000
+NAD metabolism, sirtuins and aging	0	0	16	NaN%	NaN	0.000
+Nanomaterial-induced Inflammasome Activation	0	0	13	NaN%	NaN	0.000
+Nanomaterial induced apoptosis	0	0	30	NaN%	NaN	0.000
+Nanoparticle-mediated activation of receptor signaling	0	2	36	0.00%	NaN	0.000
+Nanoparticle triggered autophagic cell death	0	0	30	NaN%	NaN	0.000
+Nanoparticle triggered regulated necrosis	0	0	25	NaN%	NaN	0.000
+ncRNAs involved in STAT3 signaling in hepatocellular carcinoma	0	0	19	NaN%	NaN	0.000
+ncRNAs involved in Wnt signaling in hepatocellular carcinoma	0	1	96	0.00%	NaN	0.000
+Neovascularisation processes	0	0	42	NaN%	NaN	0.000
+Nephrotic syndrome	0	2	49	0.00%	NaN	0.000
+Netrin-UNC5B signaling Pathway	0	0	53	NaN%	NaN	0.000
+Neural Crest Cell Migration during Development	0	0	40	NaN%	NaN	0.000
+Neural Crest Cell Migration in Cancer	0	0	43	NaN%	NaN	0.000
+Neural Crest Differentiation	0	0	102	NaN%	NaN	0.000
+Neurodegeneration with brain iron accumulation (NBIA) subtypes pathway	0	2	77	0.00%	NaN	0.000
+Neurotransmitter Disorders	0	1	27	0.00%	NaN	0.000
+Nicotine Activity on Chromaffin Cells	0	0	10	NaN%	NaN	0.000
+Nicotine Activity on Dopaminergic Neurons	0	0	31	NaN%	NaN	0.000
+Nicotine Metabolism	0	0	18	NaN%	NaN	0.000
+NLR Proteins	0	0	11	NaN%	NaN	0.000
+NO/cGMP/PKG mediated Neuroprotection	0	0	64	NaN%	NaN	0.000
+Non-genomic actions of 1,25 dihydroxyvitamin D3	0	1	97	0.00%	NaN	0.000
+Non-homologous end joining	0	0	11	NaN%	NaN	0.000
+Non-small cell lung cancer	0	0	88	NaN%	NaN	0.000
+Nonalcoholic fatty liver disease	0	1	170	0.00%	NaN	0.000
+NOTCH1 regulation of human endothelial cell calcification	0	1	18	0.00%	NaN	0.000
+Notch Signaling Pathway Netpath	0	0	62	NaN%	NaN	0.000
+Notch Signaling	0	0	48	NaN%	NaN	0.000
+Novel intracellular components of RIG-I-like receptor (RLR) pathway	0	0	64	NaN%	NaN	0.000
+NRF2-ARE regulation	0	0	24	NaN%	NaN	0.000
+NRF2 pathway	0	2	145	0.00%	NaN	0.000
+Nuclear Receptors in Lipid Metabolism and Toxicity	0	0	48	NaN%	NaN	0.000
+Nuclear Receptors Meta-Pathway	0	7	339	0.00%	NaN	0.000
+Nuclear Receptors	0	0	44	NaN%	NaN	0.000
+Nucleotide-binding Oligomerization Domain (NOD) pathway	0	0	43	NaN%	NaN	0.000
+Nucleotide Excision Repair	0	0	44	NaN%	NaN	0.000
+Nucleotide GPCRs	0	0	15	NaN%	NaN	0.000
+Nucleotide Metabolism	0	0	37	NaN%	NaN	0.000
+Oligodendrocyte Specification and differentiation(including remyelination), leading to Myelin Components for CNS	0	0	46	NaN%	NaN	0.000
+Omega-3/Omega-6 FA synthesis	0	0	53	NaN%	NaN	0.000
+Omega-9 FA synthesis	0	0	44	NaN%	NaN	0.000
+Oncostatin M Signaling Pathway	0	0	66	NaN%	NaN	0.000
+One carbon metabolism and related pathways	0	1	94	0.00%	NaN	0.000
+One Carbon Metabolism	0	1	57	0.00%	NaN	0.000
+Ophthalmate biosynthesis in hepatocytes	0	0	10	NaN%	NaN	0.000
+Osteoblast differentiation	0	0	119	NaN%	NaN	0.000
+Osteoblast Signaling	0	0	18	NaN%	NaN	0.000
+Osteoclast Signaling	0	0	21	NaN%	NaN	0.000
+Osteopontin Signaling	0	0	14	NaN%	NaN	0.000
+Ovarian Infertility Genes	0	0	33	NaN%	NaN	0.000
+Overview of interferons-mediated signaling pathway	0	0	38	NaN%	NaN	0.000
+Overview of leukocyte-intrinsic Hippo pathway functions	0	2	37	0.00%	NaN	0.000
+Overview of nanoparticle effects	0	1	41	0.00%	NaN	0.000
+Oxidation by Cytochrome P450	0	0	75	NaN%	NaN	0.000
+Oxidative Damage	0	8	44	0.00%	NaN	0.000
+Oxidative phosphorylation	0	1	68	0.00%	NaN	0.000
+Oxidative Stress	0	1	35	0.00%	NaN	0.000
+Oxysterols derived from cholesterol	0	0	37	NaN%	NaN	0.000
+Oxytocin signaling	0	0	10	NaN%	NaN	0.000
+p38 MAPK Signaling Pathway	0	0	36	NaN%	NaN	0.000
+Pancreatic adenocarcinoma pathway	0	0	97	NaN%	NaN	0.000
+Parkin-Ubiquitin Proteasomal System pathway	0	0	75	NaN%	NaN	0.000
+Parkinsons Disease Pathway	0	0	84	NaN%	NaN	0.000
+Pathogenic Escherichia coli infection	0	1	79	0.00%	NaN	0.000
+Pathways Affected in Adenoid Cystic Carcinoma	0	0	72	NaN%	NaN	0.000
+Pathways in clear cell renal cell carcinoma	0	4	92	0.00%	NaN	0.000
+Pathways of nucleic acid metabolism and innate immune sensing	0	0	39	NaN%	NaN	0.000
+Pathways Regulating Hippo Signaling	0	1	104	0.00%	NaN	0.000
+PDGF Pathway	0	0	53	NaN%	NaN	0.000
+Pentose Phosphate Metabolism	0	0	21	NaN%	NaN	0.000
+Peptide GPCRs	0	0	79	NaN%	NaN	0.000
+Peroxisomal beta-oxidation of tetracosanoyl-CoA	0	1	17	0.00%	NaN	0.000
+Phase I biotransformations, non P450	0	2	13	0.00%	NaN	0.000
+Phosphatidylcholine catabolism	0	0	32	NaN%	NaN	0.000
+Phosphodiesterases in neuronal function	0	0	66	NaN%	NaN	0.000
+Photodynamic therapy-induced HIF-1 survival signaling	0	1	38	0.00%	NaN	0.000
+Photodynamic therapy-induced NF-kB survival signaling	0	0	36	NaN%	NaN	0.000
+Photodynamic therapy-induced NFE2L2 (NRF2) survival signaling	0	0	24	NaN%	NaN	0.000
+Photodynamic therapy-induced unfolded protein response	0	0	28	NaN%	NaN	0.000
+Physiological and Pathological Hypertrophy  of the Heart	0	1	27	0.00%	NaN	0.000
+Phytochemical activity on NRF2 transcriptional activation	0	0	20	NaN%	NaN	0.000
+PI3K/AKT/mTOR - VitD3 Signalling	0	0	34	NaN%	NaN	0.000
+PI3K-AKT-mTOR signaling pathway and therapeutic opportunities	0	0	33	NaN%	NaN	0.000
+PI3K-Akt Signaling Pathway	0	7	359	0.00%	NaN	0.000
+PKC-gamma calcium signaling pathway in ataxia	0	0	29	NaN%	NaN	0.000
+Polyol Pathway	0	0	17	NaN%	NaN	0.000
+PPAR Alpha Pathway	0	5	28	0.00%	NaN	0.000
+PPAR signaling pathway	0	7	76	0.00%	NaN	0.000
+Prader-Willi and Angelman Syndrome	0	0	90	NaN%	NaN	0.000
+Pregnane X Receptor pathway	0	0	35	NaN%	NaN	0.000
+Preimplantation Embryo	0	0	60	NaN%	NaN	0.000
+Primary Focal Segmental Glomerulosclerosis FSGS	0	5	77	0.00%	NaN	0.000
+Prion disease pathway	0	1	36	0.00%	NaN	0.000
+Prolactin Signaling Pathway	0	1	79	0.00%	NaN	0.000
+Proprotein convertase subtilisin/kexin type 9 (PCSK9) mediated LDL receptor degradation	0	0	3	NaN%	NaN	0.000
+Prostaglandin Synthesis and Regulation	0	0	61	NaN%	NaN	0.000
+Proteasome Degradation	0	0	67	NaN%	NaN	0.000
+Proteoglycan biosynthesis	0	0	36	NaN%	NaN	0.000
+PTF1A related regulatory pathway	0	0	12	NaN%	NaN	0.000
+Purine metabolism and related disorders	0	0	138	NaN%	NaN	0.000
+Purine metabolism	0	0	94	NaN%	NaN	0.000
+Pyrimidine metabolism and related diseases	0	1	93	0.00%	NaN	0.000
+Pyrimidine metabolism	0	1	140	0.00%	NaN	0.000
+RAC1/PAK1/p38/MMP2 Pathway	0	1	74	0.00%	NaN	0.000
+RalA downstream regulated genes	0	0	13	NaN%	NaN	0.000
+RANKL/RANK (Receptor activator of NFKB (ligand)) Signaling Pathway	0	0	58	NaN%	NaN	0.000
+Ras Signaling	0	0	192	NaN%	NaN	0.000
+Regucalcin in proximal tubule epithelial kidney cells	0	0	68	NaN%	NaN	0.000
+Regulation of Actin Cytoskeleton	0	7	159	0.00%	NaN	0.000
+Regulation of Apoptosis by Parathyroid Hormone-related Protein	0	0	24	NaN%	NaN	0.000
+Regulation of Microtubule Cytoskeleton	0	0	47	NaN%	NaN	0.000
+Regulation of sister chromatid separation at the metaphase-anaphase transition	0	0	16	NaN%	NaN	0.000
+Regulation of toll-like receptor signaling pathway	0	3	153	0.00%	NaN	0.000
+Regulation of Wnt/B-catenin Signaling by Small Molecule Compounds	0	0	33	NaN%	NaN	0.000
+Regulatory circuits of the STAT3 signaling pathway	0	1	79	0.00%	NaN	0.000
+Relationship between inflammation, COX-2 and EGFR	0	0	29	NaN%	NaN	0.000
+Renin Angiotensin Aldosterone System (RAAS)	0	1	57	0.00%	NaN	0.000
+Resistin as a regulator of inflammation	0	0	34	NaN%	NaN	0.000
+Retinoblastoma Gene in Cancer	0	0	98	NaN%	NaN	0.000
+Rett syndrome causing genes	0	0	60	NaN%	NaN	0.000
+Robo4 and VEGF Signaling Pathways Crosstalk	0	0	7	NaN%	NaN	0.000
+Role of Altered Glycolysation of MUC1 in Tumour Microenvironment	0	0	10	NaN%	NaN	0.000
+Role of Osx and miRNAs in tooth development	0	0	39	NaN%	NaN	0.000
+SCFA and skeletal muscle substrate metabolism	0	0	17	NaN%	NaN	0.000
+Secretion of Hydrochloric Acid in Parietal Cells	0	0	15	NaN%	NaN	0.000
+Selective expression of chemokine receptors during T-cell polarization	0	0	30	NaN%	NaN	0.000
+Selenium Micronutrient Network	0	18	198	0.00%	NaN	0.000
+Senescence and Autophagy in Cancer	0	5	112	0.00%	NaN	0.000
+Serotonin and anxiety-related events	0	0	16	NaN%	NaN	0.000
+Serotonin and anxiety	0	0	22	NaN%	NaN	0.000
+Serotonin Receptor 2 and ELK-SRF/GATA4 signaling	0	0	24	NaN%	NaN	0.000
+Serotonin Receptor 2 and STAT3 Signaling	0	0	6	NaN%	NaN	0.000
+Serotonin Receptor 4/6/7 and NR3C Signaling	0	0	22	NaN%	NaN	0.000
+Serotonin Transporter Activity	0	0	15	NaN%	NaN	0.000
+Signaling of Hepatocyte Growth Factor Receptor	0	0	35	NaN%	NaN	0.000
+Signaling Pathways in Glioblastoma	0	0	88	NaN%	NaN	0.000
+Signal Transduction of S1P Receptor	0	0	26	NaN%	NaN	0.000
+Signal transduction through IL1R	0	1	34	0.00%	NaN	0.000
+Simplified Depiction of MYD88 Distinct Input-Output Pathway	0	0	20	NaN%	NaN	0.000
+Simplified Interaction Map Between LOXL4 and Oxidative Stress Pathway	0	1	19	0.00%	NaN	0.000
+Small cell lung cancer	0	1	104	0.00%	NaN	0.000
+Small Ligand GPCRs	0	0	25	NaN%	NaN	0.000
+Somatroph axis (GH) and its relationship to dietary restriction and aging	0	0	12	NaN%	NaN	0.000
+Somitogenesis in the context of spondylocostal dysostosis	0	0	10	NaN%	NaN	0.000
+Sphingolipid Metabolism (general overview)	0	0	55	NaN%	NaN	0.000
+Sphingolipid Metabolism (integrated pathway)	0	0	97	NaN%	NaN	0.000
+Sphingolipid pathway	0	0	63	NaN%	NaN	0.000
+Spinal Cord Injury	0	2	127	0.00%	NaN	0.000
+Splicing factor NOVA regulated synaptic proteins	0	1	44	0.00%	NaN	0.000
+SREBF and miR33 in cholesterol and lipid homeostasis	0	0	19	NaN%	NaN	0.000
+SRF and miRs in Smooth Muscle Differentiation and Proliferation	0	0	18	NaN%	NaN	0.000
+Statin Pathway	0	11	50	0.00%	NaN	0.000
+Steroid Biosynthesis	0	2	25	0.00%	NaN	0.000
+Sterol Regulatory Element-Binding Proteins (SREBP) signalling	0	2	77	0.00%	NaN	0.000
+Striated Muscle Contraction Pathway	0	4	39	0.00%	NaN	0.000
+Structural Pathway of Interleukin 1 (IL-1)	0	1	52	0.00%	NaN	0.000
+Sudden Infant Death Syndrome (SIDS) Susceptibility Pathways	0	5	182	0.00%	NaN	0.000
+Sulfation Biotransformation Reaction	0	0	29	NaN%	NaN	0.000
+Sulindac Metabolic Pathway	0	0	11	NaN%	NaN	0.000
+Supression of HMGB1 mediated inflammation by THBD	0	0	10	NaN%	NaN	0.000
+Synaptic signaling pathways associated with autism spectrum disorder	0	0	55	NaN%	NaN	0.000
+Synaptic Vesicle Pathway	0	0	59	NaN%	NaN	0.000
+Synthesis and Degradation of Ketone Bodies	0	0	13	NaN%	NaN	0.000
+T-Cell antigen Receptor (TCR) pathway during Staphylococcus aureus infection	0	1	70	0.00%	NaN	0.000
+T-Cell antigen Receptor (TCR)  Signaling Pathway	0	0	93	NaN%	NaN	0.000
+T-Cell Receptor and Co-stimulatory Signaling	0	0	45	NaN%	NaN	0.000
+Tamoxifen metabolism	0	0	36	NaN%	NaN	0.000
+Target Of Rapamycin (TOR) Signaling	0	0	40	NaN%	NaN	0.000
+TCA Cycle (aka Krebs or citric acid cycle)	0	0	49	NaN%	NaN	0.000
+TCA Cycle and Deficiency of Pyruvate Dehydrogenase complex (PDHc)	0	0	37	NaN%	NaN	0.000
+TCA Cycle Nutrient Utilization and Invasiveness of Ovarian Cancer	0	0	11	NaN%	NaN	0.000
+TFs Regulate miRNAs related to cardiac hypertrophy	0	0	16	NaN%	NaN	0.000
+TGF-beta Receptor Signaling	0	1	56	0.00%	NaN	0.000
+TGF-beta Signaling Pathway	0	2	133	0.00%	NaN	0.000
+TGF-B Signaling in Thyroid Cells for Epithelial-Mesenchymal Transition	0	1	20	0.00%	NaN	0.000
+Tgif disruption of Shh signaling	0	0	11	NaN%	NaN	0.000
+Thermogenesis	0	0	140	NaN%	NaN	0.000
+The alternative pathway of fetal androgen synthesis	0	0	48	NaN%	NaN	0.000
+The effect of progerin on the involved genes in Hutchinson-Gilford Progeria Syndrome	0	0	30	NaN%	NaN	0.000
+The human immune response to tuberculosis	0	0	24	NaN%	NaN	0.000
+Thiamine metabolic pathways	0	0	34	NaN%	NaN	0.000
+Thymic Stromal LymphoPoietin (TSLP) Signaling Pathway	0	0	49	NaN%	NaN	0.000
+Thyroid hormones production and their peripheral downstream signalling effects regarding congenital hypothyroidism	0	0	134	NaN%	NaN	0.000
+Thyroxine (Thyroid Hormone) Production	0	0	12	NaN%	NaN	0.000
+TLR4 Signaling and Tolerance	0	0	30	NaN%	NaN	0.000
+TNF alpha Signaling Pathway	0	0	97	NaN%	NaN	0.000
+TNF related weak inducer of apoptosis (TWEAK) Signaling Pathway	0	0	45	NaN%	NaN	0.000
+Toll-like Receptor Signaling Pathway	0	2	117	0.00%	NaN	0.000
+Toll-like Receptor Signaling related to MyD88	0	0	32	NaN%	NaN	0.000
+TP53 Network	0	0	23	NaN%	NaN	0.000
+Trans-sulfuration and one carbon metabolism	0	1	66	0.00%	NaN	0.000
+Trans-sulfuration pathway	0	0	25	NaN%	NaN	0.000
+Transcriptional cascade regulating adipogenesis	0	0	14	NaN%	NaN	0.000
+Transcription co-factors SKI and SKIL protein partners	0	0	19	NaN%	NaN	0.000
+Transcription factor regulation in adipogenesis	0	1	24	0.00%	NaN	0.000
+Translation Factors	0	0	51	NaN%	NaN	0.000
+Translation inhibitors in chronically activated PDGFRA cells	0	0	49	NaN%	NaN	0.000
+Triacylglyceride Synthesis	0	0	37	NaN%	NaN	0.000
+Tryptophan metabolism	0	0	140	NaN%	NaN	0.000
+Tumor suppressor activity of SMARCB1	0	0	35	NaN%	NaN	0.000
+Type 2 papillary renal cell carcinoma	0	0	41	NaN%	NaN	0.000
+Type III interferon signaling	0	0	11	NaN%	NaN	0.000
+Type II diabetes mellitus	0	1	28	0.00%	NaN	0.000
+Type II interferon signaling (IFNG)	0	0	38	NaN%	NaN	0.000
+Type I collagen synthesis in the context of Osteogenesis imperfecta	0	1	35	0.00%	NaN	0.000
+Type I Interferon Induction and Signaling During SARS-CoV-2 Infection	0	0	34	NaN%	NaN	0.000
+TYROBP Causal Network	0	2	61	0.00%	NaN	0.000
+Tyrosine Metabolism	0	0	27	NaN%	NaN	0.000
+Ultraconserved region 339 modulation of tumor suppressor microRNAs in cancer	0	0	6	NaN%	NaN	0.000
+Urea cycle and associated pathways	0	2	78	0.00%	NaN	0.000
+Urea cycle and metabolism of amino groups	0	1	71	0.00%	NaN	0.000
+Valproic acid pathway	0	0	36	NaN%	NaN	0.000
+VEGFA-VEGFR2 Signaling Pathway	0	13	436	0.00%	NaN	0.000
+Viral Acute Myocarditis	0	1	109	0.00%	NaN	0.000
+Vitamins A and D - action mechanisms	0	0	14	NaN%	NaN	0.000
+Vitamin A and Carotenoid Metabolism	0	1	65	0.00%	NaN	0.000
+Vitamin B12 Disorders	0	0	35	NaN%	NaN	0.000
+Vitamin B12 Metabolism	0	13	118	0.00%	NaN	0.000
+Vitamin B6-dependent and responsive disorders	0	0	29	NaN%	NaN	0.000
+Vitamin D-sensitive calcium signaling in depression	0	0	55	NaN%	NaN	0.000
+Vitamin D in inflammatory diseases	0	0	25	NaN%	NaN	0.000
+Vitamin D Metabolism	0	2	22	0.00%	NaN	0.000
+Vitamin D Receptor Pathway	0	7	188	0.00%	NaN	0.000
+White fat cell differentiation	0	0	35	NaN%	NaN	0.000
+Wnt/beta-catenin Signaling Pathway in Leukemia	0	0	29	NaN%	NaN	0.000
+Wnt Signaling in Kidney Disease	0	0	39	NaN%	NaN	0.000
+Wnt Signaling Pathway (Netpath)	0	0	52	NaN%	NaN	0.000
+Wnt Signaling Pathway and Pluripotency	0	0	106	NaN%	NaN	0.000
+Wnt Signaling	0	1	121	0.00%	NaN	0.000
+Zinc homeostasis	0	0	39	NaN%	NaN	0.000
