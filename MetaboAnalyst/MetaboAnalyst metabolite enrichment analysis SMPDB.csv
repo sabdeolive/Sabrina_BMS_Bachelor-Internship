@@ -1,0 +1,22 @@
+,total,expected,hits,Raw p,Holm p,FDR
+Biotin Metabolism,8,0.258,1,0.231,1,1
+Phenylacetate Metabolism,9,0.29,1,0.256,1,1
+D-Arginine and D-Ornithine Metabolism,11,0.354,1,0.304,1,1
+Glucose-Alanine Cycle,13,0.419,1,0.348,1,1
+Alanine Metabolism,17,0.548,1,0.43,1,1
+Alpha Linolenic Acid and Linoleic Acid Metabolism,19,0.612,1,0.466,1,1
+Glutathione Metabolism,21,0.677,1,0.501,1,1
+Carnitine Synthesis,22,0.709,1,0.517,1,1
+Transfer of Acetyl Groups into Mitochondria,22,0.709,1,0.517,1,1
+Caffeine Metabolism,24,0.773,1,0.549,1,1
+Selenoamino Acid Metabolism,28,0.902,1,0.605,1,1
+Urea Cycle,29,0.935,1,0.618,1,1
+Lysine Degradation,30,0.967,1,0.631,1,1
+Bile Acid Biosynthesis,65,2.09,2,0.633,1,1
+Citric Acid Cycle,32,1.03,1,0.655,1,1
+Fatty acid Metabolism,43,1.39,1,0.763,1,1
+Glutamate Metabolism,49,1.58,1,0.807,1,1
+Warburg Effect,58,1.87,1,0.859,1,1
+Glycine and Serine Metabolism,59,1.9,1,0.863,1,1
+Tryptophan Metabolism,60,1.93,1,0.868,1,1
+Purine Metabolism,74,2.38,1,0.919,1,1
