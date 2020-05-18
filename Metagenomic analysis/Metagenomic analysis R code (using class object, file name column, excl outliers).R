@@ -350,7 +350,7 @@ T2D.filhell <- T2D.fil
 otu_table(T2D.filhell) <-otu_table(decostand(otu_table(T2D.filhell), method = "hellinger"), taxa_are_rows=TRUE)
 T2D.filhell_trim <- prune_taxa(keepTaxa.prop,T2D.filhell)
 View(T2D.filhell_trim)
-phyloseq::plot_heatmap(T2D.filhell_trim, method = "PCoA", distance="bray", sample.label="IR_IS_classification", taxa.label="Genus", low="#FFFFCC", high="#000033", na.value="white")
+phyloseq::plot_heatmap(T2D.filhell_trim, method = "PCoA", distance="bray", sample.label ="IR_IS_classification", taxa.label="Genus", low="#FFFFCC", high="#000033", na.value="white")
 # didn't work, not nice graph
 
 ###########################################################################################################################
