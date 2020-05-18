@@ -582,6 +582,14 @@ plot_ordination(T2D.logt, T2D.pcoa.logt, type = "samples",
 # LOOKS WORSE: USE FIRST PCoA
 
 ###############################################################################################
+#### Bar charts for abundance visualization 
+### Bar plot of phylum abundance in IR and IS 
+plot_bar(T2D.fil, x = "IR_IS_classification", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+
+### Bar plot of genus in IR and IS 
+plot_bar(T2D.fil, x = "IR_IS_classification", fill = "Family") + geom_bar(aes(color=Family, fill=Family), stat="identity", position="stack")
+
+###############################################################################################
 
 # write.table(T2D.fil@otu_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps out.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
 # write.table(T2D.fil@tax_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps tax.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
