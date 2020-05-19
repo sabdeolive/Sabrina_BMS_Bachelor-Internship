@@ -589,6 +589,13 @@ plot_bar(T2D.fil, x = "IR_IS_classification", fill = "Phylum") + geom_bar(aes(co
 ### Bar plot of genus in IR and IS 
 plot_bar(T2D.fil, x = "IR_IS_classification", fill = "Family") + geom_bar(aes(color=Family, fill=Family), stat="identity", position="stack")
 
+### Bar plot of phylum in IR subjects
+plot_bar(IR_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+
+### Bar plot of phylum in IS subjects
+plot_bar(IS_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+
+
 ###############################################################################################
 
 # write.table(T2D.fil@otu_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps out.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
