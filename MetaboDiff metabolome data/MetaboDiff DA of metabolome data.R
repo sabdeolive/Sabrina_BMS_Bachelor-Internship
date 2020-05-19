@@ -79,15 +79,44 @@ met.out <- remove_cluster(met,cluster=2) # 60 -> 39 columns (21 samples removed)
 # *Format() - convert into a long or wide DFrame
 # assays() - convert ExperimentList to a SimpleList of matrices
 
+met.out <- remove_cluster(met,cluster=1)
+# A MultiAssayExperiment object of 2 listed
+# experiments with user-defined names and respective classes.
+# Containing an ExperimentList class object of length 2:
+#   [1] raw: SummarizedExperiment with 323 rows and 21 columns
+# [2] imputed: SummarizedExperiment with 323 rows and 21 columns
+# Features:
+#   experiments() - obtain the ExperimentList instance
+# colData() - the primary/phenotype DFrame
+# sampleMap() - the sample availability DFrame
+# `$`, `[`, `[[` - extract colData columns, subset, or experiment
+# *Format() - convert into a long or wide DFrame
+# assays() - convert ExperimentList to a SimpleList of matrices
+
+met.out2 <- remove_cluster(met,cluster=2)
+# A MultiAssayExperiment object of 2 listed
+# experiments with user-defined names and respective classes.
+# Containing an ExperimentList class object of length 2:
+#   [1] raw: SummarizedExperiment with 323 rows and 39 columns
+# [2] imputed: SummarizedExperiment with 323 rows and 39 columns
+# Features:
+#   experiments() - obtain the ExperimentList instance
+# colData() - the primary/phenotype DFrame
+# sampleMap() - the sample availability DFrame
+# `$`, `[`, `[[` - extract colData columns, subset, or experiment
+# *Format() - convert into a long or wide DFrame
+# assays() - convert ExperimentList to a SimpleList of matrices
+
+
 #### Normalization (variance stabilizing normalization)
-met.nor <- normalize_met(met.out)
+met.nor <- normalize_met(met)
 # A MultiAssayExperiment object of 4 listed
 # experiments with user-defined names and respective classes.
 # Containing an ExperimentList class object of length 4:
-#   [1] raw: SummarizedExperiment with 323 rows and 39 columns
-# [2] imputed: SummarizedExperiment with 323 rows and 39 columns
-# [3] norm: SummarizedExperiment with 323 rows and 39 columns
-# [4] norm_imputed: SummarizedExperiment with 323 rows and 39 columns
+#   [1] raw: SummarizedExperiment with 323 rows and 60 columns
+# [2] imputed: SummarizedExperiment with 323 rows and 60 columns
+# [3] norm: SummarizedExperiment with 323 rows and 60 columns
+# [4] norm_imputed: SummarizedExperiment with 323 rows and 60 columns
 # Features:
 #   experiments() - obtain the ExperimentList instance
 # colData() - the primary/phenotype DFrame
@@ -124,12 +153,12 @@ met.test <- diff_test(met.nor,
 str(metadata(met.test), max.level = 2)
 # List of 1
 # $ ttest_IR_IS_classification_IS_vs_IR:'data.frame':	323 obs. of  3 variables:
-#   ..$ pval       : num [1:323] 0.232 0.673 0.137 0.451 0.26 ...
-# ..$ adj_pval   : num [1:323] 0.758 0.939 0.655 0.91 0.805 ...
-# ..$ fold_change: num [1:323] 0.1019 -0.0338 -0.2102 0.0715 0.4798 ...
+#   ..$ pval       : num [1:323] 0.0302 0.08 0.8556 0.3998 0.1194 ...
+# ..$ adj_pval   : num [1:323] 0.326 0.445 0.927 0.758 0.521 ...
+# ..$ fold_change: num [1:323] 0.145 -0.1154 -0.0211 0.0681 0.6101 ...
 
 DA.results <- metadata(met.test)
-View(DA.results) # which rows refer to which metabolites?
+View(DA.results[["ttest_IR_IS_classification_IS_vs_IR"]]) # which rows refer to which metabolites?
 
 ### Visualization of this comparative analysis using volcano plot
 par(mfrow=c(1,2))
@@ -150,7 +179,7 @@ met.net <- met.test %>%
   identify_modules(min_module_size=5) %>%
   name_modules(pathway_annotation="Pathway") %>%
   calculate_MS(group_factors="IR_IS_classification")
-# ..cutHeight not given, setting it to 0.985  ===>  99% of the (truncated) height range in dendro.
+# ..cutHeight not given, setting it to 0.99  ===>  99% of the (truncated) height range in dendro.
 # ..done.
 
 # no alpha given 
@@ -160,7 +189,7 @@ met.net1 <- met.test %>%
   identify_modules(min_module_size=5) %>%
   name_modules(pathway_annotation="Chemical.Class") %>%
   calculate_MS(group_factors="IR_IS_classification")
-# ..cutHeight not given, setting it to 0.985  ===>  99% of the (truncated) height range in dendro.
+# ..cutHeight not given, setting it to 0.99  ===>  99% of the (truncated) height range in dendro.
 # ..done.
 
 # no alpha given 
@@ -190,3 +219,23 @@ MOI_plot(met.net,
          label_colors=c("darkseagreen","dodgerblue"),
          p_adjust = FALSE) + xlim(c(-1,8))
 # DOES NOT WORK: Error in data.frame(mets = mets, x = x, y = y, fc = fc) : arguments imply differing number of rows: 0, 16
+
+############################################################################
+
+# Trying to figure out if there is a sample variable that the 2 clusters refer to 
+metout.BMI <- as.vector(met.out@colData@listData[["BMI"]])
+metout2.BMI <- as.vector(met.out2@colData@listData[["BMI"]])
+mean(metout.BMI) # 28.46095
+mean(metout2.BMI, na.rm = TRUE) # 29.10211
+
+metout.SSPG <- as.vector(met.out@colData@listData[["SSPG"]])
+metout2.SSPG <- as.vector(met.out2@colData@listData[["SSPG"]])
+mean(metout.SSPG) # 166.0624
+mean(metout2.SSPG) # 141.0321
+# seems like a possibility? since study has divided patients into IR if SSPG > 150 mg/dl and IR if SSPG < 150 mg/dl (https://www.nature.com/articles/s41586-019-1236-x)
+# according to 'Subject data T2DM iHMP (testing SSPG vs. class) 4.3' datafile this SSPG criteria was used for classification, hence, there may just be some outliers?
+
+metout.Age <- as.vector(met.out@colData@listData[["Age"]])
+metout2.Age <- as.vector(met.out2@colData@listData[["Age"]])
+mean(metout.Age) # 55.19048
+mean(metout2.Age) # 56.55615
