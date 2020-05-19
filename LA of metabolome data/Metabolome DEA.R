@@ -103,3 +103,6 @@ fit.log<- eBayes(fit.log)
 results.log<- decideTests(fit.log[,"IR_IS_classificationIS"])
 summary(results.log)
 
+##############################################################################
+#### w/ new log transformation
+
