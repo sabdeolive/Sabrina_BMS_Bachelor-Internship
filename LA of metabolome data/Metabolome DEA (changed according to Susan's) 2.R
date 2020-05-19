@@ -88,3 +88,8 @@ fitM.log<- eBayes(fitM.log)
 #Export results
 resultsM.log <- topTable(fitM.log, number=20009, coef="InsgroupMIR")
 write.table(resultsM.log, file="c:/Users/sabde/Documents/metabolome_limma_analysis.log.txt", sep="\t", row.names = TRUE, col.names = NA)
+
+##############################################################################
+#### w/ new log transformation
+install.packages("metabolomics")
+library(metabolomics)
