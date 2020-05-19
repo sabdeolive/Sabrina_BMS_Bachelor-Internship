@@ -1,0 +1,324 @@
+Compounds_ID	Metabolite	KEGG	HMDB		Chemical Class	Pathway
+nHILIC_133.0506_4.4	"2,3-Dihydroxyvaleric acid(1)"	C04039	HMDB00421	1	Cofactors and Vitamins	Pantothenate and CoA Metabolism
+nHILIC_133.0506_2.3	"2,3-Dihydroxyvaleric acid(2)"	C04039	HMDB00421	2	Cofactors and Vitamins	Pantothenate and CoA Metabolism
+nHILIC_224.0617_4.8	"Androstenediol (3beta,17beta) disulfate"	C04295	HMDB03818	3	Lipid	Androgenic Steroids
+nRPLC_201.1133_6.3	"C10:0,DC FA (Sebacic acid)(1)"	C08277	HMDB00792	4	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_201.1133_5.9	"C10:0,DC FA (Sebacic acid)(2)"	C08277	HMDB00792	5	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_187.1339_7.1	"C10:0,OH FA(1)"		HMDB02203	6	Lipid	"Fatty Acid, Monohydroxy"
+nRPLC_187.134_7.5	"C10:0,OH FA(2)"		HMDB02203	7	Lipid	"Fatty Acid, Monohydroxy"
+nRPLC_199.0976_5.6	"C10:1,DC FA"		HMDB00603	8	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_215.1288_6.8	"C11:0,DC FA"		HMDB00888	9	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_229.1445_7.4	"C12:0,DC FA"	C02678	HMDB00623	10	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_215.1653_8.4	"C12:0,OH FA(1)"		HMDB00387	11	Lipid	"Fatty Acid, Monohydroxy"
+nRPLC_215.1652_8.1	"C12:0,OH FA(2)"		HMDB00387	12	Lipid	"Fatty Acid, Monohydroxy"
+nRPLC_257.176_8.5	"C14:0,DC FA(1)"		HMDB00872	13	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_257.1759_8.8	"C14:0,DC FA(2)"		HMDB00872	14	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_285.2072_9.6	"C16:0,DC FA(1)"	C19615	HMDB00672	15	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_285.2071_9.2	"C16:0,DC FA(2)"	C19615	HMDB00672	16	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_271.228_10.3	"C16:0,OH FA(1)"		HMDB31057	17	Lipid	"Fatty Acid, Monohydroxy"
+nRPLC_271.2279_9.6	"C16:0,OH FA(2)"		HMDB31057	18	Lipid	"Fatty Acid, Monohydroxy"
+nRPLC_313.2385_10.3	"C18:0,DC FA(1)"		HMDB00782	19	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_313.2386_9.1	"C18:0,DC FA(2)"		HMDB00782	20	Lipid	"Fatty Acid, Dicarboxylate"
+nRPLC_313.2385_9.9	"C18:0,DC FA(3)"		HMDB00782	21	Lipid	"Fatty Acid, Dicarboxylate"
+pHILIC_360.2736_6.1	"C18:0,OH AC"		HMDB13164	22	Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+nRPLC_343.2853_9.8	"C20:0,2OH FA"		HMDB31923	23	Lipid	"Fatty Acid, Dihydroxy"
+pHILIC_290.1593_10.7	"C6:0,DC AC(1)"		HMDB61677	24	Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pHILIC_290.1594_11	"C6:0,DC AC(2)"		HMDB61677	25	Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+nRPLC_187.0976_5.4	"C9:0,DC FA (Azelaic acid)"	C08261	HMDB00784	26	Lipid	"Fatty Acid, Dicarboxylate"
+pRPLC_312.1305_2.8	"N2,N2-Dimethylguanosine"		HMDB04824	27	Nucleotide	"Purine Metabolism, Guanine containing"
+pHILIC_189.1596_18.3	"N6,N6,N6-Trimethyl-L-lysine"	C03793	HMDB01325	28	Amino Acid	Lysine Metabolism
+nRPLC_131.0714_1.6	(S)-(-)-2-Hydroxyisocaproic acid 		HMDB0000746	29	Amino Acid	"Leucine, Isoleucine and Valine Metabolism"
+nHILIC_481.244_5.2	11-beta-Hydroxyandrosterone-3-glucuronide		HMDB10351	30	Lipid	Androgenic Steroids
+pHILIC_298.1139_4.7	1-Methylguanosine	C04545	HMDB01563	31	Nucleotide	"Pyrimidine Metabolism, Uracil containing"
+pHILIC_170.0923_8.5	1-Methylhistidine	C01152	HMDB00001	32	Amino Acid	Histidine Metabolism
+nHILIC_181.0367_6.8	1-Methyluric acid	C16359	HMDB03099	33	Xenobiotics	Xanthine Metabolism
+nRPLC_165.0418_1.9	1-Methylxanthine	C16358	HMDB10738	34	Xenobiotics	Xanthine Metabolism
+pHILIC_104.0705_8.1	2-Aminobutyrate	C02261	HMDB00650	35	Amino Acid	Glutathione Metabolism
+nHILIC_188.0023_1.6	2-Aminophenol sulfate		HMDB61116	36	Xenobiotics	Chemical
+nRPLC_151.04_2.3	2-Hydroxyphenylacetate	C05852	HMDB00669	37	Amino Acid	Tyrosine Metabolism
+pRPLC_100.0756_1.2	2-Piperidinone		HMDB11749	38	Xenobiotics	Food Component/Plant
+nRPLC_239.0924_7.1	3-carboxy-4-methyl-5-propyl-2-furanpropanoate (CMPF)		HMDB61112	39	Lipid	"Fatty Acid, Dicarboxylate"
+nHILIC_188.0716_2.1	3-Indolepropionic acid		HMDB02302	40	Amino Acid	Tryptophan Metabolism
+nHILIC_212.0022_3	3-indoxyl sulfate		HMDB00682	41	Amino Acid	Tryptophan Metabolism
+nRPLC_129.0558_1	3-Methyl-2-oxovaleric acid	C00671	HMDB03736	42	Amino Acid	"Leucine, Isoleucine and Valine Metabolism"
+nHILIC_168.0778_10.2	3-Methyl-L-histidine	 C01152	HMDB00479	43	Amino Acid	Histidine Metabolism
+pHILIC_892.6501_5	3-O-Sulfogalactosylceramide (d18:1/24:0)	C06125	HMDB00024	44		
+nRPLC_149.0607_4.6	3-Phenylpropionate (hydrocinnamate)	C05629	HMDB00764	45	Xenobiotics	Benzoate Metabolism
+nHILIC_179.0348_2.2	4-Hydroxyphenylpyruvic acid	C01179	HMDB00707	46	Amino Acid	Tyrosine Metabolism
+nHILIC_130.0509_8.8	4-Hydroxyproline	C01157	HMDB00725	47	Amino Acid	Urea cycle; Arginine and Proline Metabolism
+nHILIC_197.0679_1.4	5-Acetylamino-6-amino-3-methyluracil(1)	C16366	HMDB04400	48	Xenobiotics	Xanthine Metabolism
+nHILIC_197.0678_4.1	5-Acetylamino-6-amino-3-methyluracil(2)	C16366	HMDB04400	49	Xenobiotics	Xanthine Metabolism
+nHILIC_167.0349_1.3	5-Methoxysalicylic acid		HMDB01868	50	Xenobiotics	Benzoate Metabolism
+nHILIC_257.0777_2.2	5-methyluridine (ribothymidine)		HMDB00884		Nucleotide	"Pyrimidine Metabolism, Uracil containing"
+nHILIC_128.0352_7.6	5-oxoproline	C01879	HMDB00267		Amino Acid	Glutathione Metabolism
+nRPLC_429.3008_10.3	7-alpha-hydroxy-3-oxo-4-cholestenoate (7-Hoca)	C17337	HMDB12458		Lipid	Sterol
+pRPLC_166.0724_1.2	7-Methylguanine	C02242	HMDB00897		Nucleotide	"Purine Metabolism, Guanine containing"
+nRPLC_295.2279_9.6	9-HODE	C14826	HMDB04702		Lipid	Long Chain Fatty Acid
+pHILIC_269.1239_8.3	Acetylcarnosine		HMDB12881		Amino Acid	Histidine Metabolism
+pHILIC_146.1175_11	Acetylcholine		HMDB0000895		Lipid	Phospholipid Metabolism
+nHILIC_157.0366_6.1	Allantoin	C01551	HMDB00462		Nucleotide	"Purine Metabolism, (Hypo)Xanthine/Inosine containing"
+pHILIC_178.0532_7.5	Alliin	C08265	HMDB33592		Xenobiotics	Food Component/Plant
+nHILIC_115.0399_2	Alpha-ketoisovaleric acid	C00141	HMDB00019		Amino Acid	"Leucine, Isoleucine and Valine Metabolism"
+pRPLC_265.1184_2.6	Alpha-N-Phenylacetyl-L-glutamine	C04148	HMDB06344		Peptide	Acetylated Peptides
+nHILIC_160.0615_10.7	Aminoadipic acid	C00956	HMDB00510		Amino Acid	Lysine Metabolism
+nRPLC_465.2489_8.6	Androsterone glucuronide(1)	C11135	HMDB02829		Lipid	Androgenic Steroids
+nRPLC_465.249_8.3	Androsterone glucuronide(2)	C11135	HMDB02829		Lipid	Androgenic Steroids
+nRPLC_369.1741_9.5	Androsterone sulfate(1)		HMDB02759		Lipid	Androgenic Steroids
+nRPLC_369.1729_8.9	Androsterone sulfate(2)		HMDB02759		Lipid	Androgenic Steroids
+pHILIC_118.0861_7	Betaine	C00719	HMDB00043		Amino Acid	"Glycine, Serine and Threonine Metabolism"
+pHILIC_160.0967_7.5	Betonicine	C08269	HMDB29412		Xenobiotics	Food Component/Plant
+pHILIC_585.2694_4.9	Bilirubin	C00486	HMDB00054		Cofactors and Vitamins	Hemoglobin and Porphyrin Metabolism
+pHILIC_583.2539_5.3	Biliverdin(1)	C00500	HMDB01008		Cofactors and Vitamins	Hemoglobin and Porphyrin Metabolism
+nHILIC_581.2411_5.9	Biliverdin(2)	C00500	HMDB01008		Cofactors and Vitamins	Hemoglobin and Porphyrin Metabolism
+nHILIC_87.045_4.2	Butyric acid|Isobutyric acid	C00246|C02632	HMDB00039|HMDB01873		Energy	Butanoate metabolism
+pRPLC_316.2484_6.6	C10:0 AC		HMDB00651		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pRPLC_314.2328_6.1	C10:1 AC		HMDB13205		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pRPLC_312.2171_5.4	C10:2 AC		HMDB13325		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+nRPLC_183.139_8.5	C11:1 FA	C13910	HMDB33724		Lipid	Medium Chain Fatty Acid
+pRPLC_344.2796_7.8	C12:0 AC		HMDB02250		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pRPLC_342.2639_7.2	C12:1 AC		HMDB13326		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+nRPLC_197.1547_9.1	C12:1 FA(1)		HMDB00529		Lipid	Medium Chain Fatty Acid
+nRPLC_197.1547_9	C12:1 FA(2)		HMDB00529		Lipid	Medium Chain Fatty Acid
+pHILIC_372.31_5.6	C14:0 AC		HMDB05066		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+nRPLC_227.2017_10.2	C14:0 FA	C06424	HMDB00806		Lipid	Long Chain Fatty Acid
+pRPLC_370.2952_8.2	C14:1 AC		HMDB02014		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+nRPLC_225.186_9.8	C14:1 FA(1)	C08322	HMDB02000		Lipid	Long Chain Fatty Acid
+nRPLC_225.186_10	C14:1 FA(2)	C08322	HMDB02000		Lipid	Long Chain Fatty Acid
+pRPLC_368.2795_7.7	C14:2 AC		HMDB13331		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pRPLC_352.2248_8.5	C16 Sphingosine 1-phosphate		HMDB60061		Lipid	Sphingolipid Metabolism
+pHILIC_400.3413_5.6	C16:0 AC	C02990	HMDB00222		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+nRPLC_253.2172_10.3	C16:1 FA	C08362	HMDB03229		Lipid	Long Chain Fatty Acid
+nRPLC_267.233_10.6	C17:1 FA		HMDB60038		Lipid	Long Chain Fatty Acid
+pRPLC_380.2561_9.4	C18 Sphingosine 1-phosphate	C06124	HMDB00277		Lipid	Sphingolipid Metabolism
+pHILIC_428.3736_5.5	C18:0 AC		HMDB00848		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pRPLC_426.3576_9.5	C18:1 AC		HMDB05065		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+nHILIC_281.2484_1	C18:1 FA	C00712	HMDB00207		Lipid	Long Chain Fatty Acid
+pRPLC_424.3421_9.2	C18:2 AC		HMDB06461		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+nHILIC_279.2328_1	C18:2 FA	C01595	HMDB00673		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nHILIC_277.2171_1	C18:3 FA	C06426	HMDB03073		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nRPLC_275.2017_10	C18:4 FA	C16300	HMDB06547		Lipid	Long Chain Fatty Acid
+nRPLC_297.2799_11.7	C19:0 FA(1)	C16535	HMDB00772		Lipid	Long Chain Fatty Acid
+nRPLC_297.2797_11.2	C19:0 FA(2)	C16535	HMDB00772		Lipid	Long Chain Fatty Acid
+nRPLC_295.2642_11.1	C19:1 FA		HMDB13622		Lipid	Long Chain Fatty Acid
+nRPLC_311.2957_11.4	C20:0 FA	C06425	HMDB02212		Lipid	Long Chain Fatty Acid
+nRPLC_309.2801_11.4	C20:1 FA	C16526	HMDB02231		Lipid	Long Chain Fatty Acid
+nRPLC_307.2644_11	C20:2 FA	C16525	HMDB05060		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nRPLC_305.2486_10.7	C20:3 FA	C03242	HMDB02925		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nHILIC_303.2327_1	C20:4 FA	C00219	HMDB01043		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nRPLC_301.2173_10.3	C20:5 FA	C06428	HMDB01999		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nRPLC_335.2957_11.7	C22:2 FA		HMDB61714		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nRPLC_333.2799_11.2	C22:3 FA		HMDB02823		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nRPLC_331.2644_10.9	C22:4 FA	C16527	HMDB02226		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nRPLC_329.2487_10.7	C22:5 FA	C16513	HMDB06528		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nHILIC_327.2328_1	C22:6 FA	C06429	HMDB02183		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nRPLC_359.2957_11.5	C24:4 FA		HMDB06246		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nRPLC_357.2801_11.2	C24:5 FA		HMDB06322		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+nRPLC_355.2643_10.9	C24:6 FA		HMDB02007		Lipid	Polyunsaturated Fatty Acid (n3 and n6)
+pHILIC_218.1384_7.3	C3:0 AC	C03017	HMDB00824		Lipid	Fatty Acid Metabolism (also BCAA Metabolism)
+pHILIC_216.1227_7	C3:1 AC		HMDB13124		Lipid	Fatty Acid Metabolism (also BCAA Metabolism)
+pRPLC_232.1543_0.9	C4:0 AC	C02862	HMDB02013		Lipid	Fatty Acid Metabolism (also BCAA Metabolism)
+pRPLC_244.1544_1.7	C5:1 AC		HMDB02366		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pRPLC_260.1858_3.3	C6:0 AC		HMDB00705		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pHILIC_288.2161_5.8	C8:0 AC(1)	C02838	HMDB00791		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pRPLC_288.2172_5.1	C8:0 AC(2)	C02838	HMDB00791		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pRPLC_286.2015_4.3	C8:1 AC		HMDB13324		Lipid	Fatty Acid Metabolism(Acyl Carnitine)
+pRPLC_195.0875_4.6	Caffeine	C07481	HMDB01847		Xenobiotics	Xanthine Metabolism
+nHILIC_188.9862_0.9	Catechol sulfate		HMDB59724		Xenobiotics	Benzoate Metabolism
+nHILIC_512.2684_5.7	Chenodeoxycholic acid 3-sulfate	C11301	HMDB02639		Lipid	Secondary Bile Acid Metabolism
+nRPLC_448.3069_9.4	Chenodeoxycholic acid glycine conjugate(1)	C05466	HMDB00637		Lipid	Primary Bile Acid Metabolism
+nRPLC_448.3067_8.6	Chenodeoxycholic acid glycine conjugate(2)	C05466	HMDB00637		Lipid	Primary Bile Acid Metabolism
+nRPLC_391.2856_9.8	Chenodeoxycholic Acid(1)		HMDB0000518		Lipid	Primary Bile Acid Metabolism
+nRPLC_391.2856_9.5	Chenodeoxycholic Acid(2)		HMDB0000518		Lipid	Primary Bile Acid Metabolism
+nRPLC_391.2856_9.2	Chenodeoxycholic Acid(3)		HMDB0000518		Lipid	Primary Bile Acid Metabolism
+nRPLC_407.2804_9.2	Cholic Acid		HMDB0000619		Lipid	Primary Bile Acid Metabolism
+pHILIC_104.1069_6.6	Choline	C00114	HMDB00097		Lipid	Phospholipid Metabolism
+nRPLC_204.0666_4.3	Cinnamoylglycine		HMDB11621		Xenobiotics	Food Component/Plant
+nHILIC_191.0197_11.2	Citric acid	C00158	HMDB00094		Energy	TCA Cycle
+nHILIC_174.0883_10.1	Citrulline	C00327	HMDB00904		Amino Acid	Urea cycle; Arginine and Proline Metabolism
+pHILIC_132.0766_9	Creatine	C00300	HMDB00064		Amino Acid	Creatine Metabolism
+pHILIC_114.0661_2.5	Creatinine	C00791	HMDB00562		Amino Acid	Creatine Metabolism
+nHILIC_177.0339_6.7	Cys Gly	C01419	HMDB00078		Amino Acid	Glutathione Metabolism
+nHILIC_425.0806_12.4	Cysteineglutathione disulfide		HMDB00656		Amino Acid	Glutathione Metabolism
+nRPLC_367.1585_8.9	Dehydroisoandrosterone sulfate (DHEA-S)(1)	C04555	HMDB01032		Lipid	Androgenic Steroids
+nRPLC_367.1582_8.7	Dehydroisoandrosterone sulfate (DHEA-S)(2)	C04555	HMDB01032		Lipid	Androgenic Steroids
+nRPLC_415.3217_11.4	Dihydroxyvitamin D3(1)		HMDB00430		Cofactors and Vitamins	Vitamin D Metabolism
+nRPLC_415.3217_10.9	Dihydroxyvitamin D3(2)		HMDB00430		Cofactors and Vitamins	Vitamin D Metabolism
+nHILIC_274.1407_13.3	Epsilon-(gamma-Glutamyl)-lysine		HMDB03869		Peptide	Gamma-glutamyl Amino Acid
+nHILIC_121.0505_3.5	Erythritol|D-Threitol	C00503|C16884	HMDB02994|HMDB04136		Xenobiotics	Food Component/Plant
+nHILIC_238.0929_7.3	ethyl glucuronide		HMDB10325		Xenobiotics	Chemical
+nHILIC_131.0349_5.1	Ethylmalonate		HMDB00622		Amino Acid	"Leucine, Isoleucine and Valine Metabolism"
+nRPLC_263.1289_6.8	gamma-CEHC		HMDB01931		Cofactors and Vitamins	Tocopherol Metabolism
+pHILIC_276.1548_13.2	gamma-glutamyl-epsilon-lysine		HMDB03869		Peptide	Gamma-glutamyl Amino Acid
+pRPLC_261.1446_1	gamma-glutamylleucine(1)		HMDB11171		Peptide	Gamma-glutamyl Amino Acid
+pRPLC_261.1446_0.8	gamma-glutamylleucine(2)		HMDB11171		Peptide	Gamma-glutamyl Amino Acid
+pRPLC_295.1292_1.3	gamma-glutamylphenylalanine		HMDB00594		Peptide	Gamma-glutamyl Amino Acid
+pHILIC_249.1078_10.4	gamma-glutamylthreonine(1)		HMDB29159		Peptide	Gamma-glutamyl Amino Acid
+pHILIC_249.1077_10.8	gamma-glutamylthreonine(2)		HMDB29159		Peptide	Gamma-glutamyl Amino Acid
+nRPLC_153.0193_2.1	Gentisic acid	C00628	HMDB00152		Amino Acid	Tyrosine Metabolism
+nHILIC_209.0302_11	Glucaric acid	C00818	HMDB00663		Carbohydrate	Ascorbate and aldarate metabolism
+nHILIC_195.051_8.7	Gluconic acid	C00257	HMDB00625		Carbohydrate	Pentose Metabolism
+nHILIC_105.0192_7.8	Glyceric acid	C00258	HMDB00139		Carbohydrate	"Glycolysis, Gluconeogenesis, and Pyruvate Metabolism"
+pHILIC_258.1097_10.8	Glycerophosphocholine	C00670	HMDB00086		Lipid	Phospholipid Metabolism
+nHILIC_74.0246_9.6	Glycine	C00037	HMDB00123		Amino Acid	"Glycine, Serine and Threonine Metabolism"
+nRPLC_464.3015_8.8	Glycocholic acid	C01921	HMDB00138		Lipid	Primary Bile Acid Metabolism
+pRPLC_180.0654_2	Hippuric acid	C01586	HMDB00714		Xenobiotics	Benzoate Metabolism
+pHILIC_189.1345_14.4	Homoarginine	C01924	HMDB00670		Amino Acid	Urea cycle; Arginine and Proline Metabolism
+pHILIC_158.1174_6.2	Homostachydrine	C08283	HMDB33433		Xenobiotics	Food Component/Plant
+nHILIC_181.0506_6.2	Hydroxyphenyllactic acid	C03672	HMDB00755		Amino Acid	Tyrosine Metabolism
+pHILIC_137.0457_3.1	Hypoxanthine	C00262	HMDB00157		Nucleotide	"Purine Metabolism, (Hypo)Xanthine/Inosine containing"
+pHILIC_157.0607_8.3	Imidazolelactic acid	C05132	HMDB02320		Amino Acid	Histidine Metabolism
+nHILIC_132.0302_8.3	Iminodiacetate (IDA)	C19911	HMDB11753		Xenobiotics	Chemical
+nHILIC_174.056_3.8	Indoleacetic acid	C00954	HMDB00197		Amino Acid	Tryptophan Metabolism
+nHILIC_302.1148_6.5	Indoleacetyl glutamine		HMDB13240		Amino Acid	Tryptophan Metabolism
+nHILIC_204.0665_5.1	Indolelactic acid	C02043	HMDB00671		Amino Acid	Tryptophan Metabolism
+pRPLC_204.0655_4.8	Indolepyruvate	C00331	HMDB60484		Amino Acid	Tryptophan Metabolism
+pHILIC_146.0811_7.5	Isobutyrylglycine		HMDB00730		Amino Acid	"Leucine, Isoleucine and Valine Metabolism"
+nRPLC_188.0352_3.1	Kynurenic acid	C01717	HMDB00715		Amino Acid	Tryptophan Metabolism
+nRPLC_117.0557_0.6	L-_-Hydroxyisovaleric acid		HMDB00407		Amino Acid	"Leucine, Isoleucine and Valine Metabolism"
+nHILIC_274.1407_12.3	L-a-glutamyl-L-Lysine	C04700	HMDB04207		Peptide	Dipeptide
+nHILIC_88.0403_8.9	L-Alanine	C00041	HMDB00161		Amino Acid	Alanine and Aspartate Metabolism
+pHILIC_175.1188_15.1	L-Arginine	C00062	HMDB00517		Amino Acid	Urea cycle; Arginine and Proline Metabolism
+nHILIC_131.0461_9.7	L-Asparagine	C00152	HMDB00168		Amino Acid	Alanine and Aspartate Metabolism
+pRPLC_162.1123_0.6	L-Carnitine	C00318	HMDB00062		Lipid	Carnitine Metabolism
+nHILIC_120.0124_7.6	L-Cysteine	C00097	HMDB00574		Amino Acid	"Methionine, Cysteine, SAM and Taurine Metabolism"
+nHILIC_296.0378_11	L-Cysteinylglycine disulfide		HMDB00709		Amino Acid	Glutathione Metabolism
+nHILIC_239.0164_12.1	L-Cystine	C00491	HMDB00192		Amino Acid	"Methionine, Cysteine, SAM and Taurine Metabolism"
+nHILIC_235.0723_6.5	L-Formylkynurenine	C02700	HMDB60485		Amino Acid	Tryptophan Metabolism
+nHILIC_168.0276_10.3	L-Glutamic acid	C00025	HMDB00148		Amino Acid	Glutamate Metabolism
+pHILIC_147.0763_9.7	L-Glutamine	C00064	HMDB00641		Amino Acid	Glutamate Metabolism
+nHILIC_154.0621_9.6	L-Histidine	C00135	HMDB00177		Amino Acid	Histidine Metabolism
+nHILIC_130.0872_6.3	L-Isoleucine|L-Leucine	C00407|C00123	HMDB00172|HMDB00687		Amino Acid	"Leucine, Isoleucine and Valine Metabolism"
+nHILIC_89.0243_5.8	L-Lactic acid	C00186	HMDB00190		Carbohydrate	"Glycolysis, Gluconeogenesis, and Pyruvate Metabolism"
+pHILIC_147.1126_15.9	L-Lysine	C00047	HMDB00182		Amino Acid	Lysine Metabolism
+nHILIC_133.0142_10.4	L-Malic acid	C00149	HMDB00156		Energy	TCA Cycle
+pHILIC_150.0581_7	L-Methionine	C00073	HMDB00696		Amino Acid	"Methionine, Cysteine, SAM and Taurine Metabolism"
+pHILIC_166.0861_6.2	L-Phenylalanine	C00079	HMDB00159		Amino Acid	Phenylalanine Metabolism
+nHILIC_114.0559_7.8	L-Proline	C00148	HMDB00162		Amino Acid	Urea cycle; Arginine and Proline Metabolism
+nHILIC_104.0352_9.7	L-Serine	C00065	HMDB00187		Amino Acid	"Glycine, Serine and Threonine Metabolism"
+nHILIC_118.0509_8.9	L-Threonine	C00188	HMDB00167		Amino Acid	"Glycine, Serine and Threonine Metabolism"
+pHILIC_205.0969_6.7	L-Tryptophan	C00078	HMDB00929		Amino Acid	Tryptophan Metabolism
+pHILIC_182.081_7.7	L-Tyrosine	C00082	HMDB00158		Amino Acid	Tyrosine Metabolism
+nHILIC_116.0716_7.3	L-Valine	C00183	HMDB00883		Amino Acid	"Leucine, Isoleucine and Valine Metabolism"
+pRPLC_468.3085_9.3	LysoPC(14:0)	C04230	HMDB10379		Lipid	Phospholipid Metabolism
+pRPLC_482.324_9.7	LysoPC(15:0)	C04230	HMDB10381		Lipid	Phospholipid Metabolism
+pRPLC_496.3395_10	LysoPC(16:0)	C04230	HMDB10382		Lipid	Phospholipid Metabolism
+pRPLC_494.324_9.5	LysoPC(16:1)	C04230	HMDB10383		Lipid	Phospholipid Metabolism
+pRPLC_510.3554_10.3	LysoPC(17:0)	C04230	HMDB12108		Lipid	Phospholipid Metabolism
+pRPLC_524.3708_10.6	LysoPC(18:0)	C04230	HMDB10384		Lipid	Phospholipid Metabolism
+pRPLC_520.3396_9.8	LysoPC(18:2)	C04230	HMDB10386		Lipid	Phospholipid Metabolism
+pRPLC_552.402_11.1	LysoPC(20:0)	C04230	HMDB10390		Lipid	Phospholipid Metabolism
+pRPLC_550.3864_10.7	LysoPC(20:1)	C04230	HMDB10391		Lipid	Phospholipid Metabolism
+pRPLC_548.3709_10.4	LysoPC(20:2)	C04230	HMDB10392		Lipid	Phospholipid Metabolism
+pRPLC_546.3545_10.1	LysoPC(20:3)	C04230	HMDB10393		Lipid	Phospholipid Metabolism
+pRPLC_544.3392_9.8	LysoPC(20:4)	C04230	HMDB10395		Lipid	Phospholipid Metabolism
+pHILIC_542.3221_6	LysoPC(20:5)	C04230	HMDB10397		Lipid	Phospholipid Metabolism
+pRPLC_580.4347_11.8	LysoPC(22:0)	C04230	HMDB10398		Lipid	Phospholipid Metabolism
+pRPLC_572.3708_10.3	LysoPC(22:4)	C04230	HMDB10401		Lipid	Phospholipid Metabolism
+pRPLC_568.339_9.8	LysoPC(22:6)	C04230	HMDB10404		Lipid	Phospholipid Metabolism
+pRPLC_510.3913_10.9	LysoPC(O-18:0)	C04317	HMDB11149		Lipid	Phospholipid Metabolism
+pRPLC_480.3446_10.3	LysoPC(P-16:0)	C04230	HMDB10407		Lipid	Phospholipid Metabolism
+pRPLC_508.376_10.5	LysoPC(P-18:0)	C04230	HMDB13122		Lipid	Phospholipid Metabolism
+pRPLC_506.3601_10.4	LysoPC(P-18:1)	C04230	HMDB10408		Lipid	Phospholipid Metabolism
+pRPLC_454.2927_9.9	LysoPE(16:0)		HMDB11473		Lipid	Phospholipid Metabolism
+nRPLC_450.2624_9.5	LysoPE(16:1)		HMDB11474		Lipid	Phospholipid Metabolism
+pRPLC_482.3238_10.5	LysoPE(18:0)		HMDB11129		Lipid	Phospholipid Metabolism
+nRPLC_478.2939_10.1	LysoPE(18:1)		HMDB11475		Lipid	Phospholipid Metabolism
+pRPLC_478.2927_9.7	LysoPE(18:2)		HMDB11477		Lipid	Phospholipid Metabolism
+nRPLC_508.3404_10.6	LysoPE(20:0)		HMDB11481		Lipid	Phospholipid Metabolism
+pRPLC_508.3397_9.9	LysoPE(20:1)		HMDB11482		Lipid	Phospholipid Metabolism
+nHILIC_504.3095_5.8	LysoPE(20:2)		HMDB11483		Lipid	Phospholipid Metabolism
+pRPLC_504.3082_10	LysoPE(20:3)		HMDB11484		Lipid	Phospholipid Metabolism
+pRPLC_502.2927_9.7	LysoPE(20:4)		HMDB11487		Lipid	Phospholipid Metabolism
+pRPLC_538.3863_10.8	LysoPE(22:0)		HMDB11490		Lipid	Phospholipid Metabolism
+nRPLC_528.309_10.2	LysoPE(22:4)		HMDB11493		Lipid	Phospholipid Metabolism
+nRPLC_526.2939_9.9	LysoPE(22:5)		HMDB11494		Lipid	Phospholipid Metabolism
+pRPLC_526.2924_9.8	LysoPE(22:6)		HMDB11496		Lipid	Phospholipid Metabolism
+pRPLC_438.2976_10.2	LysoPE(P-16:0)		HMDB11152		Lipid	Phospholipid Metabolism
+nRPLC_597.3048_11.9	LysoPI(18:1)		HMDB61693		Lipid	Phospholipid Metabolism
+nRPLC_619.2888_11.3	LysoPI(20:4)		HMDB61690		Lipid	Phospholipid Metabolism
+nRPLC_299.2228_9.6	MG(14:1)(1)		HMDB11531		Lipid	Monoacylglycerol
+nRPLC_299.2228_9.3	MG(14:1)(2)		HMDB11531		Lipid	Monoacylglycerol
+nRPLC_299.2227_9.9	MG(14:1)(3)		HMDB11531		Lipid	Monoacylglycerol
+nRPLC_315.2541_9.4	MG(15:0)(1)		HMDB11532		Lipid	Monoacylglycerol
+nRPLC_315.2541_9.2	MG(15:0)(2)		HMDB11532		Lipid	Monoacylglycerol
+nRPLC_315.2539_9.7	MG(15:0)(3)		HMDB11532		Lipid	Monoacylglycerol
+nRPLC_327.2538_10.5	MG(16:1)		HMDB11534		Lipid	Monoacylglycerol
+pRPLC_359.3154_11	MG(18:0)		HMDB11131		Lipid	Monoacylglycerol
+nRPLC_355.2852_11	MG(18:1)		HMDB11536		Lipid	Monoacylglycerol
+nRPLC_351.254_10.3	MG(18:3)		HMDB11539		Lipid	Monoacylglycerol
+nRPLC_385.332_10.8	MG(20:0)		HMDB11542		Lipid	Monoacylglycerol
+nRPLC_377.2696_10.5	MG(20:4)(1)		HMDB04666		Lipid	Monoacylglycerol
+nRPLC_377.2698_9.2	MG(20:4)(2)		HMDB04666		Lipid	Monoacylglycerol
+nRPLC_375.254_10.2	MG(20:5)		HMDB11550		Lipid	Monoacylglycerol
+nRPLC_409.3322_11.2	MG(22:2)		HMDB11553		Lipid	Monoacylglycerol
+nRPLC_441.3947_11.3	MG(24:0)(1)		HMDB11558		Lipid	Monoacylglycerol
+nRPLC_441.395_11.2	MG(24:0)(2)		HMDB11558		Lipid	Monoacylglycerol
+nRPLC_439.3792_11.1	MG(24:1)		HMDB11559		Lipid	Monoacylglycerol
+pHILIC_280.1384_8	N-(1-Deoxy-1-fructosyl)valine		HMDB37844		Amino Acid	"Leucine, Isoleucine and Valine Metabolism"
+pRPLC_153.0658_1.2	N1-Methyl-2-pyridone-5-carboxamide(1)	C05842	HMDB04193		Cofactors and Vitamins	Nicotinate and Nicotinamide Metabolism
+pRPLC_153.0658_1.7	N1-Methyl-2-pyridone-5-carboxamide(2)	C05842	HMDB04193		Cofactors and Vitamins	Nicotinate and Nicotinamide Metabolism
+pHILIC_282.119_6.7	N1-methyladenosine	C02494	HMDB03331		Nucleotide	"Purine Metabolism, Adenine containing"
+pHILIC_189.1233_8.4	N6-Acetyl-L-lysine	C02727	HMDB00206		Amino Acid	Lysine Metabolism
+nRPLC_411.127_3.6	N6-Carbamoyl-L-threonyladenosine		HMDB41623		Nucleotide	"Purine Metabolism, Adenine containing"
+nRPLC_172.098_2.8	N-Acetylleucine|N-Acetylisoleucine	|C02710	HMDB11756|HMDB61684		Amino Acid	"Leucine, Isoleucine and Valine Metabolism"
+nRPLC_206.0821_3.4	N-Acetyl-L-phenylalanine	C03519	HMDB00512		Amino Acid	Phenylalanine Metabolism
+nHILIC_146.0458_7.6	N-Acetylserine		HMDB02931		Amino Acid	"Glycine, Serine and Threonine Metabolism"
+pHILIC_161.1283_16.4	Ne-Methyl-Lysine	C02728	HMDB02038		Amino Acid	Lysine Metabolism
+nHILIC_176.0387_4.9	N-formylmethionine	C03145	HMDB01015		Amino Acid	"Methionine, Cysteine, SAM and Taurine Metabolism"
+pHILIC_133.097_16.1	Ornithine	C00077	HMDB03374		Amino Acid	Urea cycle; Arginine and Proline Metabolism
+nHILIC_287.052_8.1	Orotidine	C01103	HMDB00788		Nucleotide	"Pyrimidine Metabolism, Orotate containing"
+nHILIC_88.988_11	Oxalate (ethanedioate)	C00209	HMDB02329		Cofactors and Vitamins	Ascorbate and Aldarate Metabolism
+nRPLC_312.2546_10.4	Palmitoylglycine		HMDB13034		Lipid	Fatty Acid Metabolism(Acyl Glycine)
+nHILIC_218.1032_6.5	Pantothenic acid	C00864	HMDB00210		Cofactors and Vitamins	Pantothenate and CoA Metabolism
+pRPLC_181.0718_3.1	Paraxanthine	C13747	HMDB01860		Xenobiotics	Xanthine Metabolism
+nRPLC_283.0822_2.4	p-Cresol glucuronide		HMDB11686		Amino Acid	Tyrosine Metabolism
+nRPLC_187.007_2.3	p-Cresol sulfate		HMDB0011635		Amino Acid	Tyrosine Metabolism
+nRPLC_172.9914_0.9	Phenol sulphate	C00850	HMDB60015		Amino Acid	Tyrosine Metabolism
+pRPLC_313.1548_3.5	Phenylalanylphenylalanine		HMDB13302		Peptide	Dipeptide
+pRPLC_352.1657_3.7	Phenylalanyl-Tryptophan		HMDB29006		Peptide	Dipeptide
+nRPLC_163.0765_7.4	Phenylbutyric acid		HMDB00329		Xenobiotics	Benzoate Metabolism
+nRPLC_165.0556_2.3	Phenyllactate (PLA)	C05607	HMDB00779		Amino Acid	Phenylalanine Metabolism
+nHILIC_163.04_1.4	Phenylpyruvic acid	C00166	HMDB00205		Amino Acid	Phenylalanine Metabolism
+pHILIC_130.0862_7.6	Pipecolic acid	C00408	HMDB00070		Amino Acid	Lysine Metabolism
+pRPLC_286.1439_8.5	Piperine(1)	C03882	HMDB29377		Xenobiotics	Food Component/Plant
+pRPLC_286.1439_8.4	Piperine(2)	C03882	HMDB29377		Xenobiotics	Food Component/Plant
+nRPLC_495.2962_9.1	Pregnanediol-3-glucuronide	C03033	HMDB10318		Lipid	Progestin Steroids
+nRPLC_395.1897_10	Pregnenolone sulfate		HMDB00774		Lipid	Progestin Steroids
+pHILIC_219.0795_5	Pro-Cys or Cys-Pro	||	HMDB28783|HMDB29014|		Peptide	Dipeptide
+pHILIC_229.1181_10.9	pro-hydroxy-pro(1)		HMDB06695		Amino Acid	Urea cycle; Arginine and Proline Metabolism
+pHILIC_229.1181_10.5	pro-hydroxy-pro(2)		HMDB06695		Amino Acid	Urea cycle; Arginine and Proline Metabolism
+pHILIC_144.1018_6.7	Proline betaine	C10172	HMDB04827		Xenobiotics	Food Component/Plant
+pRPLC_676.417_10.7	PS(28:2)		HMDB12342			
+nHILIC_243.0621_5.8	Pseudouridine	C02067	HMDB00767		Nucleotide	"Pyrimidine Metabolism, Uracil containing"
+nRPLC_182.0458_1	Pyridoxic acid	C00847	HMDB00017		Cofactors and Vitamins	Vitamin B6 Metabolism
+nHILIC_87.0087_4.4	Pyruvic acid		HMDB0000243		Carbohydrate	"Glycolysis, Gluconeogenesis, and Pyruvate Metabolism"
+nHILIC_191.0561_8.5	Quinic acid	C06746	HMDB03072		Xenobiotics	Food Component/Plant
+pRPLC_269.2264_10.4	Retinol (Vitamin A)	C00473	HMDB00305		Cofactors and Vitamins	Vitamin A Metabolism
+pRPLC_647.5116_11.7	SM(d18:1/12:0)	C00550	HMDB12096			
+pRPLC_675.5429_12.6	SM(d18:1/14:0)		HMDB12097			
+pHILIC_703.5724_5.7	SM(d18:1/16:0)	C00550	HMDB13464			
+pHILIC_731.6033_5.7	SM(d18:1/18:0)	C00550	HMDB12088			
+pHILIC_785.6497_5.6	SM(d18:1/22:1)	C00550	HMDB12104			
+pHILIC_813.6806_5.6	SM(d18:1/24:1)	C00550	HMDB12107			
+nHILIC_214.0488_7.2	sn-glycero-3-Phosphoethanolamine	C01233	HMDB00114		Lipid	Phospholipid Metabolism
+pHILIC_302.3046_1.8	Sphinganine	C00836	HMDB00269		Lipid	Sphingolipid Metabolism
+pRPLC_382.2719_9.6	Sphinganine 1-phosphate	C01120	HMDB01383		Lipid	Sphingolipid Metabolism
+nRPLC_455.2472_11	Sulfolithocholic acid		HMDB00907		Lipid	Secondary Bile Acid Metabolism
+nRPLC_512.2683_10.8	Sulfolithocholylglycine	C11301	HMDB02639		Lipid	Secondary Bile Acid Metabolism
+pHILIC_203.1501_13.6	Symmetric dimethylarginine	C03626	HMDB01539		Amino Acid	Urea cycle; Arginine and Proline Metabolism
+nHILIC_124.0073_8.7	Taurine	C00245	HMDB00251		Amino Acid	"Methionine, Cysteine, SAM and Taurine Metabolism"
+nRPLC_514.2838_9.6	Taurocholic acid(1)	C05122	HMDB00036		Lipid	Primary Bile Acid Metabolism
+nRPLC_514.2853_8.8	Taurocholic acid(2)	C05122	HMDB00036		Lipid	Primary Bile Acid Metabolism
+nRPLC_498.2892_10.3	Tauroursodeoxycholic acid		HMDB00874		Lipid	Secondary Bile Acid Metabolism
+nRPLC_539.2494_7	Tetrahydroaldosterone-3-glucuronide(1)		HMDB10357		Lipid	Androgenic Steroids
+nRPLC_539.2489_8.8	Tetrahydroaldosterone-3-glucuronide(2)		HMDB10357		Lipid	Androgenic Steroids
+nRPLC_365.2333_9.7	Tetrahydrocortisol	C05472	HMDB00949		Lipid	Androgenic Steroids
+pRPLC_181.0719_3.4	Theophylline		HMDB0001889		Xenobiotics	Xanthine Metabolism
+nHILIC_135.0299_7.9	Threonic acid	C01620	HMDB00943		Cofactors and Vitamins	Ascorbate and Aldarate Metabolism
+pRPLC_777.6945_7.2	Thyroxine	C01829	HMDB01918		Amino Acid	Tyrosine Metabolism
+pHILIC_247.1437_5.3	Tryptophan betaine	C09213	HMDB61115		Amino Acid	Tryptophan Metabolism
+nHILIC_111.0199_3.4	Uracil	C00106	HMDB00300		Nucleotide	"Pyrimidine Metabolism, Uracil containing"
+nHILIC_335.0495_8.3	Uric acid	C00366	HMDB00289		Nucleotide	"Purine Metabolism, (Hypo)Xanthine/Inosine containing"
+nHILIC_243.0621_3.4	Uridine	C00299	HMDB00296		Nucleotide	"Pyrimidine Metabolism, Uracil containing"
+pHILIC_139.0501_7.6	Urocanic acid	C00785	HMDB00301		Amino Acid	Histidine Metabolism
+nHILIC_151.0261_4.3	Xanthine	C00385	HMDB00292		Nucleotide	"Purine Metabolism, (Hypo)Xanthine/Inosine containing"
