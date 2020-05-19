@@ -119,7 +119,7 @@ multiplot(
 #### Hypothesis testing w/ correction for multiple testing (applies a Student's T-Test since there are only 2 groups and p-values are corrected using Benjamini-Hochberg procedure)
 #(do the individual metabolites show differential abundance between the 2 groups?)
 met.test <- diff_test(met.nor,
-                group_factors = c("IR_IS_classification"))
+                group_factors = "IR_IS_classification")
 
 str(metadata(met.test), max.level = 2)
 # List of 1
@@ -142,25 +142,45 @@ volcano_plot(met.test,
              label_colors=c("darkseagreen","dodgerblue"),
              p_adjust = TRUE)
 
+dev.off()
 
 #### Metabolic correlation network analysis 
 met.net <- met.test %>%
   diss_matrix %>%
   identify_modules(min_module_size=5) %>%
-  name_modules(pathway_annotation="SUB_PATHWAY") %>%
-  calculate_MS(group_factors=c("IR_IS_classification"))
+  name_modules(pathway_annotation="Pathway") %>%
+  calculate_MS(group_factors="IR_IS_classification")
+# ..cutHeight not given, setting it to 0.985  ===>  99% of the (truncated) height range in dendro.
+# ..done.
+
+# no alpha given 
+
+met.net1 <- met.test %>%
+  diss_matrix %>%
+  identify_modules(min_module_size=5) %>%
+  name_modules(pathway_annotation="Chemical.Class") %>%
+  calculate_MS(group_factors="IR_IS_classification")
 # ..cutHeight not given, setting it to 0.985  ===>  99% of the (truncated) height range in dendro.
 # ..done.
 
 # no alpha given 
 
 ### Association of sample traits with correlation modules (MS plot)
-# (which metabolic subpathways (i.e. modeules) differ between groups?) 
+# (which metabolic subpathways (i.e. modules) differ between groups?) 
 MS_plot(met.net,
         group_factor="IR_IS_classification",
         p_value_cutoff=0.05,
         p_adjust=FALSE)
-# no pathways mentioned and no significant module significance  
+# looks weird and no significant module significance  
+dev.off()
+
+# (which chemical classes differ between groups?) 
+MS_plot(met.net1,
+        group_factor="IR_IS_classification",
+        p_value_cutoff=0.05,
+        p_adjust=FALSE)
+# no significant module significance  
+dev.off()
 
 ### Exploration of individual metabolites with correlation module (MOI plot)
 # (which metabolite is most closely related to the individual subpathway (i.e. modules)?)
