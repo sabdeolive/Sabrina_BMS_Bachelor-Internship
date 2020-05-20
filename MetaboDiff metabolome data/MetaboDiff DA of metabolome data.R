@@ -11,7 +11,8 @@ library(MetaboDiff)
 
 #### Load data (NOTE: make first column row names)
 assay <- metabolome_abundance.11
-rowData <- `iPOP_Metablolite_Annotation.(w.1.HMDB.per.metabolite).2B`
+rowData <- `iPOP_Metablolite_Annotation.(excl..metabolites.without.HMDB.identifier).B`
+# rowData <- `iPOP_Metablolite_Annotation.(w.1.HMDB.per.metabolite).2B`
 colData <- Subject.data.T2DM.iHMP.4..2
 colData <- colData[,-8]
 
@@ -65,19 +66,6 @@ outlier_heatmap(met,
                 label_colors=c("darkseagreen","dodgerblue"),
                 k=2)
 # remove outliers (CHECK if necessary)
-met.out <- remove_cluster(met,cluster=2) # 60 -> 39 columns (21 samples removed)
-# A MultiAssayExperiment object of 2 listed
-# experiments with user-defined names and respective classes.
-# Containing an ExperimentList class object of length 2:
-#   [1] raw: SummarizedExperiment with 323 rows and 39 columns
-# [2] imputed: SummarizedExperiment with 323 rows and 39 columns
-# Features:
-#   experiments() - obtain the ExperimentList instance
-# colData() - the primary/phenotype DFrame
-# sampleMap() - the sample availability DFrame
-# `$`, `[`, `[[` - extract colData columns, subset, or experiment
-# *Format() - convert into a long or wide DFrame
-# assays() - convert ExperimentList to a SimpleList of matrices
 
 met.out <- remove_cluster(met,cluster=1)
 # A MultiAssayExperiment object of 2 listed
@@ -149,6 +137,10 @@ multiplot(
 #(do the individual metabolites show differential abundance between the 2 groups?)
 met.test <- diff_test(met.nor,
                 group_factors = "IR_IS_classification")
+
+# write.table(met.test@metadata[["ttest_IR_IS_classification_IS_vs_IR"]], file="c:/Users/sabde/Documents/DA of metabolome data MetaboDiff.txt", sep="\t", row.names = TRUE, col.names = NA)
+# write.table(met.test@ExperimentList@listData[["norm_imputed"]]@NAMES, file="c:/Users/sabde/Documents/names of metabolites for metabolome DA MetaboDiff.txt", sep="\t", row.names = TRUE, col.names = NA)
+
 
 str(metadata(met.test), max.level = 2)
 # List of 1
