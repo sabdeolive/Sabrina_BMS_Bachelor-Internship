@@ -321,5 +321,40 @@ phyloseqobj.f=phyloseq(updatedotus, updatedtaxa)
 ### compute the sparse inverse covariance matrix (using meinshausen-buhlmann neighborhood selection as method parameter, no of repetitions = 20)
 spiec.out=spiec.easi(phyloseqobj.f, method="mb",icov.select.params=list(rep.num=20))
 
+### Convert output of SPIEC-EASI into a network
+spiec.graph=adj2igraph(spiec.out$refit, vertex.attr=list(name=taxa_names(phyloseqobj.f)))
+# spiec.graph=adj2igraph(getRefit(spiec.out), vertex.attr=list(name=taxa_names(phyloseqobj.f))) # for more recent versions
+
+plot_network(spiec.graph, phyloseqobj.f, type='taxa', color="Rank3", label=NULL)
+
+#### SPIEC-EASI analysis
+### How many + and - edges are inferred by the SPIEC-EASI?
+## Extract regression coefficient from the SPIEC-EASI ouput (function = getOptBeta)
+# NOTE: The regression coefficient = not symmetrical but can be made sym with symBeta.
+betaMat=as.matrix(symBeta(getOptBeta(spiec.out)))
+
+## No. of +, - and total edges
+positive=length(betaMat[betaMat>0])/2
+negative=length(betaMat[betaMat<0])/2
+total=length(betaMat[betaMat!=0])/2
+# NOTE: divide by 2 since an edge = represented by 2 entries in the matrix
+
+### Clustering of the SPIEC-EASI network and list the taxa present in each cluster. 
+clusters=cluster_fast_greedy(spiec.graph)
+clusterOneIndices=which(clusters$membership==1)
+clusterOneOtus=clusters$names[clusterOneIndices]
+clusterTwoIndices=which(clusters$membership==2)
+clusterTwoOtus=clusters$names[clusterTwoIndices]
+
+## Analyzing these clusters by summarizing and sorting
+sort(table(getTaxonomy(clusterOneOtus,taxa.f,useRownames = TRUE)),decreasing = TRUE)
+sort(table(getTaxonomy(clusterTwoOtus,taxa.f,useRownames = TRUE)),decreasing = TRUE)
+
+
+#### Exporting data for use in Cytoscape 
+write.graph(spiec.graph,file="c:/Users/sabde/Documents/T2D.fil spiec.graph for Cytoscape.txt", format="ncol")
+
+write.table(taxa.f,file="c:/Users/sabde/Documents/T2D.fil taxa file for Cytoscape.txt", sep="\t", quote=FALSE)
+# NEED TO EDIT BOTH BEFORE IMPORTING INTO CYTOSCAPE (http://psbweb05.psb.ugent.be/conet/microbialnetworks/spieceasi.php)
 
 
