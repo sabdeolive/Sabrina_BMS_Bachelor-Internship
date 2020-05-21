@@ -74,7 +74,7 @@ View(T2D.rm@sam_data)
 
 #### Only include subjects that are in the metabolome data, that have gut 16s data and that IR/IS classification
 ### Make vector of subjects to include (should be 50)
-subjects.to.incl_df <- `SUBJEC~1`
+subjects.to.incl_df <- `Subject.data.T2DM.iHMP.(to.use.as.vector)`
 View(subjects.to.incl_df)
 subjectIDs.to.incl_vec <- as.vector(subjects.to.incl_df[,2])
 subjectIDs.to.incl_vec
@@ -316,16 +316,18 @@ updatedotus=otu_table(otus.f, taxa_are_rows = TRUE)
 updatedtaxa=tax_table(taxa.f)
 phyloseqobj.f=phyloseq(updatedotus, updatedtaxa)
 
+ps_otu1 <- phyloseqobj.f@otu_table@.Data + 1 
+phyloseqobj.f@otu_table@.Data <- ps_otu1
 
 #### Run SPIEC-EASI 
 ### compute the sparse inverse covariance matrix (using meinshausen-buhlmann neighborhood selection as method parameter, no of repetitions = 20)
-spiec.out=spiec.easi(phyloseqobj.f, method="mb",icov.select.params=list(rep.num=20))
+spiec.out=spiec.easi(phyloseqobj.f, method="mb", pulsar.params=list(rep.num=20))
+# TAKES WAY TOO LONG, CHECK THIS
 
 ### Convert output of SPIEC-EASI into a network
-spiec.graph=adj2igraph(spiec.out$refit, vertex.attr=list(name=taxa_names(phyloseqobj.f)))
-# spiec.graph=adj2igraph(getRefit(spiec.out), vertex.attr=list(name=taxa_names(phyloseqobj.f))) # for more recent versions
+spiec.graph=adj2igraph(getRefit(spiec.out), vertex.attr=list(name=taxa_names(phyloseqobj.f))) # for more recent versions
 
-plot_network(spiec.graph, phyloseqobj.f, type='taxa', color="Rank3", label=NULL)
+plot_network(spiec.graph, phyloseqobj.f, type='taxa', color="Phylum", label=NULL)
 
 #### SPIEC-EASI analysis
 ### How many + and - edges are inferred by the SPIEC-EASI?
@@ -357,4 +359,6 @@ write.graph(spiec.graph,file="c:/Users/sabde/Documents/T2D.fil spiec.graph for C
 write.table(taxa.f,file="c:/Users/sabde/Documents/T2D.fil taxa file for Cytoscape.txt", sep="\t", quote=FALSE)
 # NEED TO EDIT BOTH BEFORE IMPORTING INTO CYTOSCAPE (http://psbweb05.psb.ugent.be/conet/microbialnetworks/spieceasi.php)
 
+#### Saving spiec-easi file as RDS (https://mibwurrepo.github.io/Microbial-bioinformatics-introductory-course-Material-2018/inference-of-microbial-ecological-networks.html#prepare-data-for-spieceasi)
+saveRDS(spiec.out, file = "c:/Users/sabde/Documents/T2D.fil spiec.graph for Cytoscape RDS.rds")
 
