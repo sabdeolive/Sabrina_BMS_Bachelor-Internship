@@ -1,0 +1,31 @@
+,total,expected,hits,Raw p,Holm p,FDR
+Glutathione Metabolism,21,0.656,2,0.137,1,1
+Malate-Aspartate Shuttle,10,0.312,1,0.273,1,1
+Glucose-Alanine Cycle,13,0.406,1,0.34,1,1
+Alanine Metabolism,17,0.531,1,0.42,1,1
+Alpha Linolenic Acid and Linoleic Acid Metabolism,19,0.594,1,0.456,1,1
+Cysteine Metabolism,26,0.812,1,0.567,1,1
+Phenylalanine and Tyrosine Metabolism,28,0.875,1,0.594,1,1
+Phospholipid Biosynthesis,29,0.906,1,0.607,1,1
+Folate Metabolism,29,0.906,1,0.607,1,1
+Urea Cycle,29,0.906,1,0.607,1,1
+Lysine Degradation,30,0.938,1,0.62,1,1
+Ammonia Recycling,32,1,1,0.644,1,1
+Amino Sugar Metabolism,33,1.03,1,0.655,1,1
+Androgen and Estrogen Metabolism,33,1.03,1,0.655,1,1
+Beta-Alanine Metabolism,34,1.06,1,0.666,1,1
+Aspartate Metabolism,35,1.09,1,0.677,1,1
+Nicotinate and Nicotinamide Metabolism,37,1.16,1,0.698,1,1
+Porphyrin Metabolism,40,1.25,1,0.726,1,1
+Sphingolipid Metabolism,40,1.25,1,0.726,1,1
+Propanoate Metabolism,42,1.31,1,0.744,1,1
+Histidine Metabolism,43,1.34,1,0.752,1,1
+Glutamate Metabolism,49,1.53,1,0.797,1,1
+Arginine and Proline Metabolism,53,1.66,1,0.822,1,1
+Warburg Effect,58,1.81,1,0.85,1,1
+Glycine and Serine Metabolism,59,1.84,1,0.855,1,1
+"Valine, Leucine and Isoleucine Degradation",60,1.88,1,0.86,1,1
+Tryptophan Metabolism,60,1.88,1,0.86,1,1
+Arachidonic Acid Metabolism,69,2.16,1,0.896,1,1
+Tyrosine Metabolism,72,2.25,1,0.907,1,1
+Purine Metabolism,74,2.31,1,0.913,1,1
