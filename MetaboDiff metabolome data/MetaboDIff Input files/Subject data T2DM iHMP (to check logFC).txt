@@ -1,0 +1,12 @@
+SubjectID	Study	Race	Sex	Age	BMI	SSPG	IR_IS_classification
+ZJTKAE3	HMP	C	F	58.65	31.24	162	IR
+ZJXC41N	"HMP, Exercise"	B	F	49.69	28.24	75	IS
+ZK112BX	"HMP, Exercise"	A	F	57.72	28.89	234	IR
+ZK4CK8Y	"HMP, Exercise"	C	F	50.02	26.94	40	IS
+							
+							
+nHILIC_133.0506_4.4	IR 	18.38687					
+	IS 	18.14409					
+	IR-IS	0.24278	CORRECT WOOOO!				
+							
+			NOTE: minus the values because the initial values are logged 				
