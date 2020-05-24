@@ -18,6 +18,14 @@ colData <- colData[,-8]
 
 #### Merge all objects into MultiAssayExperiment object2
 met <- create_mae(assay, rowData, colData)
+# Warning messages:
+#   1: In MultiAssayExperiment(experiments = experiment_list, colData = colData,  :
+#                                sampleMap[['primary']] coerced to character()
+#                              2: In MultiAssayExperiment(experiments = experiment_list, colData = colData,  :
+#                                                           sampleMap[['colname']] coerced to character()
+
+
+met
 # A MultiAssayExperiment object of 1 listed
 # experiment with a user-defined name and respective class.
 # Containing an ExperimentList class object of length 1:
@@ -141,6 +149,21 @@ met.test <- diff_test(met.nor,
 # write.table(met.test@metadata[["ttest_IR_IS_classification_IS_vs_IR"]], file="c:/Users/sabde/Documents/DA of metabolome data MetaboDiff.txt", sep="\t", row.names = TRUE, col.names = NA)
 # write.table(met.test@ExperimentList@listData[["norm_imputed"]]@NAMES, file="c:/Users/sabde/Documents/names of metabolites for metabolome DA MetaboDiff.txt", sep="\t", row.names = TRUE, col.names = NA)
 
+met.test
+# A MultiAssayExperiment object of 4 listed
+# experiments with user-defined names and respective classes.
+# Containing an ExperimentList class object of length 4:
+#   [1] raw: SummarizedExperiment with 323 rows and 60 columns
+# [2] imputed: SummarizedExperiment with 323 rows and 60 columns
+# [3] norm: SummarizedExperiment with 323 rows and 60 columns
+# [4] norm_imputed: SummarizedExperiment with 323 rows and 60 columns
+# Features:
+#   experiments() - obtain the ExperimentList instance
+# colData() - the primary/phenotype DFrame
+# sampleMap() - the sample availability DFrame
+# `$`, `[`, `[[` - extract colData columns, subset, or experiment
+# *Format() - convert into a long or wide DFrame
+# assays() - convert ExperimentList to a SimpleList of matrices
 
 str(metadata(met.test), max.level = 2)
 # List of 1
@@ -231,3 +254,4 @@ metout.Age <- as.vector(met.out@colData@listData[["Age"]])
 metout2.Age <- as.vector(met.out2@colData@listData[["Age"]])
 mean(metout.Age) # 55.19048
 mean(metout2.Age) # 56.55615
+
