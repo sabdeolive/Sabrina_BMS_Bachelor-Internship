@@ -1,0 +1,5 @@
+SubjectID	IR_IS_classification
+ZJTKAE3	IR
+ZJXC41N	IS
+ZK112BX	IR
+ZK4CK8Y	IS
