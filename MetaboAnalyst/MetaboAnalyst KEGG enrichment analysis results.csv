@@ -1,0 +1,4 @@
+,total,expected,hits,Raw p,Holm p,FDR
+Sphingolipid metabolism,21,0.436,1,0.358,1,1
+Porphyrin and chlorophyll metabolism,30,0.623,1,0.47,1,1
+Glycerophospholipid metabolism,36,0.747,1,0.534,1,1
