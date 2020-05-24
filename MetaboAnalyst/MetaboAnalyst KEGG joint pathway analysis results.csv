@@ -1,0 +1,17 @@
+,Total,Expected,Hits,Raw p,minus log(p),Holm adjust,FDR,Impact
+Porphyrin and chlorophyll metabolism,53,0.21721,2,0.018636,3.9827,1,0.61911,0.076923
+Glutathione metabolism,56,0.22951,2,0.02069,3.8781,1,0.61911,0.14545
+Sphingolipid metabolism,58,0.2377,2,0.022111,3.8117,1,0.61911,0.21053
+Nitrogen metabolism,10,0.040984,1,0.040309,3.2112,1,0.6437,0.22222
+D-Glutamine and D-glutamate metabolism,10,0.040984,1,0.040309,3.2112,1,0.6437,0.33333
+Glycerophospholipid metabolism,86,0.35246,2,0.045979,3.0796,1,0.6437,0.070588
+Biotin metabolism,21,0.086066,1,0.082955,2.4895,1,0.99546,0.15
+Arginine biosynthesis,27,0.11066,1,0.10549,2.2491,1,1,0.19231
+Butanoate metabolism,29,0.11885,1,0.11289,2.1813,1,1,0.035714
+Histidine metabolism,32,0.13115,1,0.12389,2.0884,1,1,0.064516
+Biosynthesis of unsaturated fatty acids,47,0.19262,1,0.17705,1.7313,1,1,0.021739
+Glyoxylate and dicarboxylate metabolism,56,0.22951,1,0.20754,1.5724,1,1,0.018182
+"Alanine, aspartate and glutamate metabolism",61,0.25,1,0.22404,1.4959,1,1,0.11667
+Aminoacyl-tRNA biosynthesis,74,0.30328,1,0.26549,1.3262,1,1,0.013699
+Arginine and proline metabolism,78,0.31967,1,0.27784,1.2807,1,1,0.051948
+Tyrosine metabolism,88,0.36066,1,0.30789,1.178,1,1,0.011494
