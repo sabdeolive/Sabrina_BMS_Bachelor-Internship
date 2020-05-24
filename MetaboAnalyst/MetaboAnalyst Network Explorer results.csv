@@ -1,0 +1,10 @@
+"Pathway","Total","Expected","Hits","Pval","FDR"
+"Glutathione metabolism",47,0.106,2,0.00459,0.734
+"Porphyrin and chlorophyll metabolism",96,0.217,2,0.0183,1
+"D-Glutamine and D-glutamate metabolism",12,0.0271,1,0.0268,1
+"Arginine biosynthesis",14,0.0316,1,0.0312,1
+"Aminoacyl-tRNA biosynthesis",22,0.0497,1,0.0487,1
+"Nitrogen metabolism",23,0.0519,1,0.0508,1
+"Biotin metabolism",23,0.0519,1,0.0508,1
+"Sphingolipid metabolism",38,0.0858,1,0.0828,1
+"Histidine metabolism",51,0.115,1,0.11,1
