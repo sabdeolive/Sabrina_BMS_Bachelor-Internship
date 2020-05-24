@@ -443,7 +443,7 @@ library(PMA)
 
 cca_res <- CCA(t(X), t(metabolomics.EO.fil.log), penaltyx = .15, penaltyz = .15)
 # 12345678910111213
-# cca_res
+cca_res
 # Num non-zeros u's:  27 
 # Num non-zeros v's:  10 
 # Type of x:  standard 
@@ -541,6 +541,9 @@ coef <- coefficients(permanova)["IR_IS_classification1",]
 top.coef <- coef[rev(order(abs(coef)))[1:20]]
 par(mar=c(3, 14, 2, 1)) # changing margins: c(bottom, left, top, right) -> ives the number of lines of margin to be specified on the four sides of the plot.
 barplot(sort(top.coef), horiz = T, las = 1, main = "Top taxa")
+
+top.coef.df <- as.data.frame(top.coef)
+write.table(top.coef.df, file="c:/Users/sabde/Documents/PERMONOVA top taxa excl. outliers.txt", sep="\t", row.names = TRUE, col.names = NA)
 
 #############################################################################
 #### USE FIRST PCoA, THIS ENDS UP LOOKING WORSE
