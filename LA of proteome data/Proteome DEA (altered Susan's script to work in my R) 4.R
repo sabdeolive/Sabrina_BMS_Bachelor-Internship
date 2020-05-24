@@ -17,12 +17,12 @@ setwd(DATA.DIR)
 getwd()
 
 # Read the proteome data
-prot <- read.delim("proteome_abundance9.txt", as.is=TRUE)
-rownames(prot) <- prot[,1]
-prot <- prot[,-1]
+prot <- `proteome_abundance.10.(to.check.logFC)`
 
 #load study description
-desc <- read.delim("Subjectdata _2DM_iHMP5.txt", as.is=TRUE)
+desc <- `Subject.data.T2DM.iHMP.6.(to.check.logFC)`
+# rownames(desc) <- desc[,1]
+# desc <- desc[,-1]
 
 #check order of description and normalised data columns
 colnames(prot) == desc$SubjectID
