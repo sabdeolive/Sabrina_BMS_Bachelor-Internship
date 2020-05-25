@@ -364,8 +364,9 @@ names.OTU.IR <- taxa_names(IR_ps.fil)
 names.OTU.IS <- taxa_names(IS_ps.fil)
 library("grid")
 grid.newpage()
-venn.diagram(names.OTU.IR,names.OTU.IS, "IR", "IS", colors= c("#e87396","#2a96a0","#9bc6ff", euler=T)) # to attempt to scale the relative volumes of the sets
-
+venn.diagram(x = list(names.OTU.IR,names.OTU.IS), category.names = c("IR", "IS"), filename = "Venn_diagram_0.10_PT2.png", output = TRUE, col=c("#440154ff", "#21908dff"),
+             fill = c(alpha("#440154ff",0.3), alpha("#21908dff",0.3)), cat.col = c("#440154ff", '#21908dff')) # to attempt to scale the relative volumes of the sets
+getwd()
 ###########################################################################################################################
 #### Histograms
 
