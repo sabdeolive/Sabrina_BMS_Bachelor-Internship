@@ -620,7 +620,7 @@ Actino.mean <- as.data.frame(Actino.mean)
 Actino.mean <- t(Actino.mean)
 rownames(Actino.mean) <- "Actinobacteria abundance"
 Actinobacteria@otu_table@.Data <- Actino.mean # worked
-boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,25) + xlab("Classification")
 
 
 ### Box plot for Bacteroidetes
@@ -630,7 +630,7 @@ Bacter.mean <- as.data.frame(Bacter.mean)
 Bacter.mean <- t(Bacter.mean)
 rownames(Bacter.mean) <- "Bacteroidetes abundance"
 Bacteroidetes@otu_table@.Data <- Bacter.mean # worked
-boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,150) + xlab("Classification")
 
 ### Box plot for Firmicutes
 Firmicutes <- subset_taxa(T2D.fil, Phylum == "Firmicutes") # worked
@@ -639,7 +639,7 @@ Firmi.mean <- as.data.frame(Firmi.mean)
 Firmi.mean <- t(Firmi.mean)
 rownames(Firmi.mean) <- "Firmicutes abundance"
 Firmicutes@otu_table@.Data <- Firmi.mean # worked
-boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)+ ylim(0,20) + xlab("Classification")
 
 ### Box plot for Proteobacteria
 Proteobacteria <- subset_taxa(T2D.fil, Phylum == "Proteobacteria") # worked
@@ -648,7 +648,7 @@ Proteo.mean <- as.data.frame(Proteo.mean)
 Proteo.mean <- t(Proteo.mean)
 rownames(Proteo.mean) <- "Proteobacteria abundance"
 Proteobacteria@otu_table@.Data <- Proteo.mean # worked
-boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)+ ylim(0,50) + xlab("Classification")
 
 
 ### Box plot for Synergistetes
@@ -658,7 +658,7 @@ Synerg.mean <- as.data.frame(Synerg.mean)
 Synerg.mean <- t(Synerg.mean)
 rownames(Synerg.mean) <- "Synergistetes abundance"
 Synergistetes@otu_table@.Data <- Synerg.mean # worked
-boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
 
 
 ### Box plot for Verrucomicrobia
@@ -668,9 +668,7 @@ Verruco.mean <- as.data.frame(Verruco.mean)
 Verruco.mean <- t(Verruco.mean)
 rownames(Verruco.mean) <- "Verrucomicrobia abundance"
 Verrucomicrobia@otu_table@.Data <- Verruco.mean # worked
-boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
-
-
+boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,25) + xlab("Classification")
 
 
 
