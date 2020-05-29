@@ -455,6 +455,10 @@ cca_res
 # Therefore, 27 microbes and 10 metabolites have been selected based on their ability to explain covariation between the tables. 
 # These 37 features result in a correlation of 0.482 between the 2 tables (not very good correlation value)
 
+# Export the identifiers of these 37 features
+View(feature_info)
+write.table(feature_info, file="c:/Users/sabde/Documents/features explaining covariation CCA.txt", sep="\t", row.names = TRUE, col.names = NA)
+
 ### Performing a PCA
 install.packages("magrittr")  # for piping %>%
 install.packages("ade4")      # PCA computation
@@ -599,8 +603,94 @@ plot_bar(IR_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylu
 ### Bar plot of phylum in IS subjects
 plot_bar(IS_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
 
+### Bar plot of phylum in IR samples
+plot_bar(IR_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+
+### Bar plot of phylum in IS ssamples
+plot_bar(IS_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
 
 ###############################################################################################
+#### Box plots for each phylum 
+library("microbiome")
+
+boxplot_abundance(T2D.fil, x = "IR_IS_classification", y = "Actinobacteria",line = "Sample.ID.from.phyloseq", violin = FALSE, na.rm = FALSE, show.points = TRUE)
+# does not work
+
+# T2D.f.Actino <- filter_taxa(T2D.fil, T2D.fil@tax_table@.Data$Phylum = "Actinobacteria", TRUE)
+
+
+# T2D.fil1 <- T2D.fil
+# 
+# T2D.fil1@tax_table@.Data[is.na(T2D.fil@tax_table@.Data)] <- 0
+# names <- get_taxa_unique(T2D.fil1, "Phylum")
+# ps.phymerged <- merge_taxa(T2D.fil1, eqtaxa = names, archetype = "Actinobacteria")
+# 
+# data(GlobalPatterns)
+# get_taxa_unique(GlobalPatterns, "Phylum")
+# tax_glom()
+#  
+# prune_taxa()
+
+### Box plot for Actinobacteria
+Actinobacteria <- subset_taxa(T2D.fil, Phylum == "Actinobacteria") # worked
+Actino.mean <- colMeans(Actinobacteria@otu_table@.Data)
+Actino.mean <- as.data.frame(Actino.mean)
+Actino.mean <- t(Actino.mean)
+rownames(Actino.mean) <- "Actinobacteria abundance"
+Actinobacteria@otu_table@.Data <- Actino.mean # worked
+boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+
+
+### Box plot for Bacteroidetes
+Bacteroidetes <- subset_taxa(T2D.fil, Phylum == "Bacteroidetes") # worked
+Bacter.mean <- colMeans(Bacteroidetes@otu_table@.Data)
+Bacter.mean <- as.data.frame(Bacter.mean)
+Bacter.mean <- t(Bacter.mean)
+rownames(Bacter.mean) <- "Bacteroidetes abundance"
+Bacteroidetes@otu_table@.Data <- Bacter.mean # worked
+boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+
+### Box plot for Firmicutes
+Firmicutes <- subset_taxa(T2D.fil, Phylum == "Firmicutes") # worked
+Firmi.mean <- colMeans(Firmicutes@otu_table@.Data)
+Firmi.mean <- as.data.frame(Firmi.mean)
+Firmi.mean <- t(Firmi.mean)
+rownames(Firmi.mean) <- "Firmicutes abundance"
+Firmicutes@otu_table@.Data <- Firmi.mean # worked
+boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+
+### Box plot for Proteobacteria
+Proteobacteria <- subset_taxa(T2D.fil, Phylum == "Proteobacteria") # worked
+Proteo.mean <- colMeans(Proteobacteria@otu_table@.Data)
+Proteo.mean <- as.data.frame(Proteo.mean)
+Proteo.mean <- t(Proteo.mean)
+rownames(Proteo.mean) <- "Proteobacteria abundance"
+Proteobacteria@otu_table@.Data <- Proteo.mean # worked
+boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+
+
+### Box plot for Synergistetes
+Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes") # worked
+Synerg.mean <- colMeans(Synergistetes@otu_table@.Data)
+Synerg.mean <- as.data.frame(Synerg.mean)
+Synerg.mean <- t(Synerg.mean)
+rownames(Synerg.mean) <- "Synergistetes abundance"
+Synergistetes@otu_table@.Data <- Synerg.mean # worked
+boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+
+
+### Box plot for Verrucomicrobia
+Verrucomicrobia <- subset_taxa(T2D.fil, Phylum == "Verrucomicrobia") # worked
+Verruco.mean <- colMeans(Verrucomicrobia@otu_table@.Data)
+Verruco.mean <- as.data.frame(Verruco.mean)
+Verruco.mean <- t(Verruco.mean)
+rownames(Verruco.mean) <- "Verrucomicrobia abundance"
+Verrucomicrobia@otu_table@.Data <- Verruco.mean # worked
+boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)
+
+
+
+
 
 # write.table(T2D.fil@otu_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps out.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
 # write.table(T2D.fil@tax_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps tax.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
