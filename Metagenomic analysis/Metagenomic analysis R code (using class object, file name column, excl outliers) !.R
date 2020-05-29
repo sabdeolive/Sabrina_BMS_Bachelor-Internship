@@ -613,24 +613,6 @@ plot_bar(IS_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylu
 #### Box plots for each phylum 
 library("microbiome")
 
-boxplot_abundance(T2D.fil, x = "IR_IS_classification", y = "Actinobacteria",line = "Sample.ID.from.phyloseq", violin = FALSE, na.rm = FALSE, show.points = TRUE)
-# does not work
-
-# T2D.f.Actino <- filter_taxa(T2D.fil, T2D.fil@tax_table@.Data$Phylum = "Actinobacteria", TRUE)
-
-
-# T2D.fil1 <- T2D.fil
-# 
-# T2D.fil1@tax_table@.Data[is.na(T2D.fil@tax_table@.Data)] <- 0
-# names <- get_taxa_unique(T2D.fil1, "Phylum")
-# ps.phymerged <- merge_taxa(T2D.fil1, eqtaxa = names, archetype = "Actinobacteria")
-# 
-# data(GlobalPatterns)
-# get_taxa_unique(GlobalPatterns, "Phylum")
-# tax_glom()
-#  
-# prune_taxa()
-
 ### Box plot for Actinobacteria
 Actinobacteria <- subset_taxa(T2D.fil, Phylum == "Actinobacteria") # worked
 Actino.mean <- colMeans(Actinobacteria@otu_table@.Data)
