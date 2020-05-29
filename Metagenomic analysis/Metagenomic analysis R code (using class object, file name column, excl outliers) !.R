@@ -620,8 +620,24 @@ Actino.mean <- as.data.frame(Actino.mean)
 Actino.mean <- t(Actino.mean)
 rownames(Actino.mean) <- "Actinobacteria abundance"
 Actinobacteria@otu_table@.Data <- Actino.mean # worked
-boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,25) + xlab("Classification")
+Actino.plot <- boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,25) + xlab("Classification") 
+print(Actino.plot)
 
+## Calculating p-values 
+
+# library(ggpubr)
+# Actinobacteria.meta <- microbiome::meta(Actinobacteria)
+# # View(Actinobacteria.meta)
+# sensitivity_A <- levels(Actinobacteria.meta$IR_IS_classification)
+# sens.pairs_A <- combn(seq_along(sensitivity_A),2, simplify = FALSE, FUN = function(i)sensitivity_A[i])
+# Wilcox.A <- stat_compare_means(comparisons = sens.pairs_A) # Wilcoxon test (CHECK)
+
+Actinobacteria <- subset_taxa(T2D.fil, Phylum == "Actinobacteria")
+Act.IR <- subset_samples(Actinobacteria, IR_IS_classification == "IR")
+Act.IS <- subset_samples(Actinobacteria, IR_IS_classification == "IS")
+Wilcox.Act <- wilcox.test(Act.IR@otu_table@.Data, Act.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Act
+# p-value = 0.07872
 
 ### Box plot for Bacteroidetes
 Bacteroidetes <- subset_taxa(T2D.fil, Phylum == "Bacteroidetes") # worked
@@ -632,6 +648,14 @@ rownames(Bacter.mean) <- "Bacteroidetes abundance"
 Bacteroidetes@otu_table@.Data <- Bacter.mean # worked
 boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,150) + xlab("Classification")
 
+## Calculating p-values
+Bacteroidetes <- subset_taxa(T2D.fil, Phylum == "Bacteroidetes")
+Bac.IR <- subset_samples(Bacteroidetes, IR_IS_classification == "IR")
+Bac.IS <- subset_samples(Bacteroidetes, IR_IS_classification == "IS")
+Wilcox.Bac <- wilcox.test(Bac.IR@otu_table@.Data, Bac.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Bac
+# p-value = 0.0009306
+
 ### Box plot for Firmicutes
 Firmicutes <- subset_taxa(T2D.fil, Phylum == "Firmicutes") # worked
 Firmi.mean <- colMeans(Firmicutes@otu_table@.Data)
@@ -640,6 +664,14 @@ Firmi.mean <- t(Firmi.mean)
 rownames(Firmi.mean) <- "Firmicutes abundance"
 Firmicutes@otu_table@.Data <- Firmi.mean # worked
 boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)+ ylim(0,20) + xlab("Classification")
+
+## Calculating p-values
+Firmicutes <- subset_taxa(T2D.fil, Phylum == "Firmicutes")
+Firmi.IR <- subset_samples(Firmicutes, IR_IS_classification == "IR")
+Firmi.IS <- subset_samples(Firmicutes, IR_IS_classification == "IS")
+Wilcox.Firmi <- wilcox.test(Firmi.IR@otu_table@.Data, Firmi.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Firmi
+# p-value = 5.451e-11
 
 ### Box plot for Proteobacteria
 Proteobacteria <- subset_taxa(T2D.fil, Phylum == "Proteobacteria") # worked
@@ -650,6 +682,13 @@ rownames(Proteo.mean) <- "Proteobacteria abundance"
 Proteobacteria@otu_table@.Data <- Proteo.mean # worked
 boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)+ ylim(0,50) + xlab("Classification")
 
+## Calculating p-values
+Proteobacteria <- subset_taxa(T2D.fil, Phylum == "Proteobacteria")
+Proteo.IR <- subset_samples(Proteobacteria, IR_IS_classification == "IR")
+Proteo.IS <- subset_samples(Proteobacteria, IR_IS_classification == "IS")
+Wilcox.Proteo <- wilcox.test(Proteo.IR@otu_table@.Data, Proteo.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Proteo
+# p-value = 0.01214
 
 ### Box plot for Synergistetes
 Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes") # worked
@@ -660,6 +699,13 @@ rownames(Synerg.mean) <- "Synergistetes abundance"
 Synergistetes@otu_table@.Data <- Synerg.mean # worked
 boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
 
+## Calculating p-values
+Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes")
+Synerg.IR <- subset_samples(Synergistetes, IR_IS_classification == "IR")
+Synerg.IS <- subset_samples(Synergistetes, IR_IS_classification == "IS")
+Wilcox.Synerg <- wilcox.test(Synerg.IR@otu_table@.Data, Synerg.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Synerg
+# p-value = 3.754e-06
 
 ### Box plot for Verrucomicrobia
 Verrucomicrobia <- subset_taxa(T2D.fil, Phylum == "Verrucomicrobia") # worked
@@ -670,7 +716,13 @@ rownames(Verruco.mean) <- "Verrucomicrobia abundance"
 Verrucomicrobia@otu_table@.Data <- Verruco.mean # worked
 boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,25) + xlab("Classification")
 
-
+## Calculating p-values
+Verrucomicrobia <- subset_taxa(T2D.fil, Phylum == "Verrucomicrobia")
+Verruco.IR <- subset_samples(Verrucomicrobia, IR_IS_classification == "IR")
+Verruco.IS <- subset_samples(Verrucomicrobia, IR_IS_classification == "IS")
+Wilcox.Verruco <- wilcox.test(Verruco.IR@otu_table@.Data, Verruco.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Verruco
+# p-value = 0.002507
 
 # write.table(T2D.fil@otu_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps out.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
 # write.table(T2D.fil@tax_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps tax.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
