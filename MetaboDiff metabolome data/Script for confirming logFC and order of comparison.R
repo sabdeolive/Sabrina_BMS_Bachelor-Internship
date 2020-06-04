@@ -14,7 +14,7 @@ library(MetaboDiff)
 assay <- `metabolome_abundance.(to.check.logFC)`
 rowData <- `iPOP_Metablolite_Annotation.(excl..metabolites.without.HMDB.identifier).B`
 # rowData <- `iPOP_Metablolite_Annotation.(w.1.HMDB.per.metabolite).2B`
-colData <- `Subject.data.T2DM.iHMP.(to.check.logFC)`
+colData <- `Subject.data.T2DM.iHMP.to.check.logFC.(correct)`
 
 #### Merge all objects into MultiAssayExperiment object2
 met <- create_mae(assay, rowData, colData)
