@@ -457,7 +457,7 @@ cca_res
 
 # Export the identifiers of these 37 features
 View(feature_info)
-write.table(feature_info, file="c:/Users/sabde/Documents/features explaining covariation CCA.txt", sep="\t", row.names = TRUE, col.names = NA)
+# write.table(feature_info, file="c:/Users/sabde/Documents/features explaining covariation CCA.txt", sep="\t", row.names = TRUE, col.names = NA)
 
 ### Performing a PCA
 install.packages("magrittr")  # for piping %>%
@@ -646,7 +646,8 @@ Bacter.mean <- as.data.frame(Bacter.mean)
 Bacter.mean <- t(Bacter.mean)
 rownames(Bacter.mean) <- "Bacteroidetes abundance"
 Bacteroidetes@otu_table@.Data <- Bacter.mean # worked
-boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,150) + xlab("Classification")
+Bacter.plot <- boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,150) + xlab("Classification")
+print(Bacter.plot)
 
 ## Calculating p-values
 Bacteroidetes <- subset_taxa(T2D.fil, Phylum == "Bacteroidetes")
@@ -663,7 +664,8 @@ Firmi.mean <- as.data.frame(Firmi.mean)
 Firmi.mean <- t(Firmi.mean)
 rownames(Firmi.mean) <- "Firmicutes abundance"
 Firmicutes@otu_table@.Data <- Firmi.mean # worked
-boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)+ ylim(0,20) + xlab("Classification")
+Firmi.plot <- boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)+ ylim(0,20) + xlab("Classification")
+print(Firmi.plot)
 
 ## Calculating p-values
 Firmicutes <- subset_taxa(T2D.fil, Phylum == "Firmicutes")
@@ -680,7 +682,8 @@ Proteo.mean <- as.data.frame(Proteo.mean)
 Proteo.mean <- t(Proteo.mean)
 rownames(Proteo.mean) <- "Proteobacteria abundance"
 Proteobacteria@otu_table@.Data <- Proteo.mean # worked
-boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)+ ylim(0,50) + xlab("Classification")
+Proteo.plot <- boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)+ ylim(0,50) + xlab("Classification")
+print(Proteo.plot)
 
 ## Calculating p-values
 Proteobacteria <- subset_taxa(T2D.fil, Phylum == "Proteobacteria")
@@ -697,7 +700,8 @@ Synerg.mean <- as.data.frame(Synerg.mean)
 Synerg.mean <- t(Synerg.mean)
 rownames(Synerg.mean) <- "Synergistetes abundance"
 Synergistetes@otu_table@.Data <- Synerg.mean # worked
-boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
+Synerg.plot <- boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
+print(Synerg.plot)
 
 ## Calculating p-values
 Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes")
@@ -714,7 +718,8 @@ Verruco.mean <- as.data.frame(Verruco.mean)
 Verruco.mean <- t(Verruco.mean)
 rownames(Verruco.mean) <- "Verrucomicrobia abundance"
 Verrucomicrobia@otu_table@.Data <- Verruco.mean # worked
-boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,25) + xlab("Classification")
+Verruco.plot <- boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,25) + xlab("Classification")
+print(Verruco.plot)
 
 ## Calculating p-values
 Verrucomicrobia <- subset_taxa(T2D.fil, Phylum == "Verrucomicrobia")
@@ -723,6 +728,19 @@ Verruco.IS <- subset_samples(Verrucomicrobia, IR_IS_classification == "IS")
 Wilcox.Verruco <- wilcox.test(Verruco.IR@otu_table@.Data, Verruco.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Verruco
 # p-value = 0.002507
+
+
+#### Creating one figure with all box plots
+library(ggpubr)
+ggarrange(Actino.plot, Bacter.plot, Firmi.plot, Proteo.plot, Synerg.plot, Verruco.plot, labels = c("A", "B", "C", "D", "E", "F"), ncol=3, nrow =2)
+
+## Trying to add p-values
+# install.packages("ggpval")
+# library(ggpval)
+# add_pval(Actino.plot, pairs = list(c(1, 2)))
+# 
+# add_pval(Actino.plot, pairs = list(c(1, 2)), annotation = "0.079", heights = 20, log = FALSE, fold_change = FALSE)
+# Actino.plot + stat_pvalue_manual(Wilcox.Act, x= "IS", y.position = 20, label = "p",  position = position_dodge(0.8))
 
 # write.table(T2D.fil@otu_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps out.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
 # write.table(T2D.fil@tax_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps tax.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
