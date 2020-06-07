@@ -754,7 +754,7 @@ Wilcox.Verruco
 # p-value = 0.002507
 
 
-#### Creating one figure with all box plots
+#### Creating one figure with all box plots for phylum
 library(ggpubr)
 ggarrange(Actino.plot, Bacter.plot, Firmi.plot, Proteo.plot, Synerg.plot, Verruco.plot, labels = c("A", "B", "C", "D", "E", "F"), ncol=3, nrow =2)
 
@@ -765,6 +765,121 @@ ggarrange(Actino.plot, Bacter.plot, Firmi.plot, Proteo.plot, Synerg.plot, Verruc
 # 
 # add_pval(Actino.plot, pairs = list(c(1, 2)), annotation = "0.079", heights = 20, log = FALSE, fold_change = FALSE)
 # Actino.plot + stat_pvalue_manual(Wilcox.Act, x= "IS", y.position = 20, label = "p",  position = position_dodge(0.8))
+
+
+#### Investigating genus abundances of Bacteroidetes
+### Box plot for Bacteroides
+Bacteroides <- subset_taxa(T2D.fil, Genus == "Bacteroides") # worked
+Bactero.mean <- colMeans(Bacteroides@otu_table@.Data)
+Bactero.mean <- as.data.frame(Bactero.mean)
+Bactero.mean <- t(Bactero.mean)
+rownames(Bactero.mean) <- "Bacteroides abundance"
+Bacteroides@otu_table@.Data <- Bactero.mean # worked
+Bactero.plot <- boxplot_abundance(Bacteroides, x = "IR_IS_classification", y = "Bacteroides abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
+print(Bactero.plot)
+
+## Calculating p-values
+Bacteroides <- subset_taxa(T2D.fil, Genus == "Bacteroides")
+Baco.IR <- subset_samples(Bacteroides, IR_IS_classification == "IR")
+Baco.IS <- subset_samples(Bacteroides, IR_IS_classification == "IS")
+Wilcox.Baco <- wilcox.test(Baco.IR@otu_table@.Data, Baco.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Baco
+# p-value = 0.002864
+
+### Box plot for Butyricimonas
+Butyricimonas <- subset_taxa(T2D.fil, Genus == "Butyricimonas") # worked
+Butyri.mean <- colMeans(Butyricimonas@otu_table@.Data)
+Butyri.mean <- as.data.frame(Butyri.mean)
+Butyri.mean <- t(Butyri.mean)
+rownames(Butyri.mean) <- "Butyricimonas abundance"
+Butyricimonas@otu_table@.Data <- Butyri.mean # worked
+Butyri.plot <- boxplot_abundance(Butyricimonas, x = "IR_IS_classification", y = "Butyricimonas abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
+print(Butyri.plot)
+
+## Calculating p-values
+Butyricimonas <- subset_taxa(T2D.fil, Genus == "Butyricimonas")
+Butyri.IR <- subset_samples(Butyricimonas, IR_IS_classification == "IR")
+Butyri.IS <- subset_samples(Butyricimonas, IR_IS_classification == "IS")
+Wilcox.Butyri <- wilcox.test(Butyri.IR@otu_table@.Data, Butyri.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Butyri
+# p-value = 1.272e-11
+
+### Box plot for Odoribacter
+Odoribacter <- subset_taxa(T2D.fil, Genus == "Odoribacter") # worked
+Odori.mean <- colMeans(Odoribacter@otu_table@.Data)
+Odori.mean <- as.data.frame(Odori.mean)
+Odori.mean <- t(Odori.mean)
+rownames(Odori.mean) <- "Odoribacter abundance"
+Odoribacter@otu_table@.Data <- Odori.mean # worked
+Odori.plot <- boxplot_abundance(Odoribacter, x = "IR_IS_classification", y = "Odoribacter abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
+print(Odori.plot)
+
+## Calculating p-values
+Odoribacter <- subset_taxa(T2D.fil, Genus == "Odoribacter")
+Odori.IR <- subset_samples(Odoribacter, IR_IS_classification == "IR")
+Odori.IS <- subset_samples(Odoribacter, IR_IS_classification == "IS")
+Wilcox.Odori <- wilcox.test(Odori.IR@otu_table@.Data, Odori.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Odori
+# p-value = 0.0005225
+
+### Box plot for Parabacteroides 
+Parabacteroides <- subset_taxa(T2D.fil, Genus == "Parabacteroides") # worked
+Parabac.mean <- colMeans(Parabacteroides@otu_table@.Data)
+Parabac.mean <- as.data.frame(Parabac.mean)
+Parabac.mean <- t(Parabac.mean)
+rownames(Parabac.mean) <- "Parabacteroides abundance"
+Parabacteroides@otu_table@.Data <- Parabac.mean # worked
+Parabac.plot <- boxplot_abundance(Parabacteroides, x = "IR_IS_classification", y = "Parabacteroides abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
+print(Parabac.plot)
+
+## Calculating p-values
+Parabacteroides <- subset_taxa(T2D.fil, Genus == "Parabacteroides")
+Parabac.IR <- subset_samples(Parabacteroides, IR_IS_classification == "IR")
+Parabac.IS <- subset_samples(Parabacteroides, IR_IS_classification == "IS")
+Wilcox.Parabac <- wilcox.test(Parabac.IR@otu_table@.Data, Parabac.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Parabac
+# p-value = 8.027e-06
+
+### Box plot for Paraprevotella 
+Paraprevotella <- subset_taxa(T2D.fil, Genus == "Paraprevotella") # worked
+Parapr.mean <- colMeans(Paraprevotella@otu_table@.Data)
+Parapr.mean <- as.data.frame(Parapr.mean)
+Parapr.mean <- t(Parapr.mean)
+rownames(Parapr.mean) <- "Paraprevotella abundance"
+Paraprevotella@otu_table@.Data <- Parapr.mean # worked
+Parapr.plot <- boxplot_abundance(Paraprevotella, x = "IR_IS_classification", y = "Paraprevotella abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
+print(Parapr.plot)
+
+## Calculating p-values
+Paraprevotella <- subset_taxa(T2D.fil, Genus == "Paraprevotella")
+Parapr.IR <- subset_samples(Paraprevotella, IR_IS_classification == "IR")
+Parapr.IS <- subset_samples(Paraprevotella, IR_IS_classification == "IS")
+Wilcox.Parapr <- wilcox.test(Parapr.IR@otu_table@.Data, Parapr.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Parapr
+# p-value = 2.433e-05
+
+### Box plot for Prevotella
+Prevotella <- subset_taxa(T2D.fil, Genus == "Prevotella") # worked
+Prevo.mean <- colMeans(Prevotella@otu_table@.Data)
+Prevo.mean <- as.data.frame(Prevo.mean)
+Prevo.mean <- t(Prevo.mean)
+rownames(Prevo.mean) <- "Prevotella abundance"
+Prevotella@otu_table@.Data <- Prevo.mean # worked
+Prevo.plot <- boxplot_abundance(Prevotella, x = "IR_IS_classification", y = "Prevotella abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
+print(Prevo.plot)
+
+## Calculating p-values
+Prevotella <- subset_taxa(T2D.fil, Genus == "Prevotella")
+Prevo.IR <- subset_samples(Prevotella, IR_IS_classification == "IR")
+Prevo.IS <- subset_samples(Prevotella, IR_IS_classification == "IS")
+Wilcox.Prevo <- wilcox.test(Prevo.IR@otu_table@.Data, Prevo.IS@otu_table@.Data, paired = FALSE)
+Wilcox.Prevo
+# p-value < 2.2e-16
+
+#### Creating one figure with all box plots for Bacteroidets genus
+library(ggpubr)
+ggarrange(Bactero.plot, Butyri.plot, Odori.plot, Parabac.plot, Parapr.plot, Prevo.plot, labels = c("A", "B", "C", "D", "E", "F"), ncol=3, nrow =2)
+
 
 # write.table(T2D.fil@otu_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps out.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
 # write.table(T2D.fil@tax_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps tax.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
