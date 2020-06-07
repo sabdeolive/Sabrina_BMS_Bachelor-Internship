@@ -604,10 +604,34 @@ plot_bar(IR_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylu
 plot_bar(IS_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
 
 ### Bar plot of phylum in IR samples
-plot_bar(IR_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
-### Bar plot of phylum in IS ssamples
-plot_bar(IS_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+pIR <- plot_bar(IR_ps.fil, x = "file_name", fill = "Phylum")
+pdIR <- pIR$data
+
+head(pdIR)
+ggplot(pdIR, aes(x = file_name, y = Abundance, fill = Phylum)) + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack") +
+         scale_fill_manual(values=cbPalette) + xlab("IR samples") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
+# print(plotIR)
+# Axis(side = 1, labels = FALSE)
+# ggplot(plot_bar(IR_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack"))
+
+
+# + labs(x = NULL)
+xlab()
+print(b)
+Axis(side = 1, labels = FALSE)
+
+### Bar plot of phylum in IS samples
+pIS <- plot_bar(IS_ps.fil, x = "file_name", fill = "Phylum")
+pdIS <- pIS$data
+head(pdIS)
+
+ggplot(pdIS, aes(x = file_name, y = Abundance, fill = Phylum)) + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack") +
+  scale_fill_manual(values=cbPalette) + xlab("IS samples") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
+
+# plot_bar(IS_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
 
 ###############################################################################################
 #### Box plots for each phylum 
