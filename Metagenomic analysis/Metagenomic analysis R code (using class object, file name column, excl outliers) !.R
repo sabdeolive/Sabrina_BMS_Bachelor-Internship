@@ -279,6 +279,17 @@ T2D.fil #6109 taxa
 T2D.fil <- prune_taxa(keepTaxa.T2D.fil, T2D.fil)
 T2D.fil #981 taxa
 
+#### Further filtering to allow for CCA
+T2D.fil <- prune_taxa(taxa_sums(T2D.fil) > 4, T2D.fil)
+T2D.fil
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 981 taxa and 402 samples ]
+# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 981 taxa by 7 taxonomic ranks ]
+T2D.fil <- filter_taxa(microbe, filterfun(kOverA(3,2)),TRUE)
+T2D.fil
+
+
 ########################################################################################################
 
 #### PCoA comparing IR and IS
@@ -457,13 +468,13 @@ BiocManager::install("genefilter")
 
 library("genefilter")
 
-microbe <- prune_taxa(taxa_sums(T2D.fil) > 4, T2D.fil)
+microbe <- prune_taxa(taxa_sums(T2D.fil) > 4, T2D.fil) #not necessary: done before now.
 microbe
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 981 taxa and 402 samples ]
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 981 taxa by 7 taxonomic ranks ]
-microbe <- filter_taxa(microbe, filterfun(kOverA(3,2)),TRUE)
+microbe <- filter_taxa(microbe, filterfun(kOverA(3,2)),TRUE) #not necessary: done before now.
 microbe
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 888 taxa and 402 samples ]
@@ -471,7 +482,7 @@ microbe
 # tax_table()   Taxonomy Table:    [ 888 taxa by 7 taxonomic ranks ]
 X <- otu_table(microbe)
 X[X>50] <- 50 
-dim(X) # 888 402 (no change in taxa)
+dim(X) # 888 402 (no change in taxa), therefore, no need to include. 
 View(X)
 
 
