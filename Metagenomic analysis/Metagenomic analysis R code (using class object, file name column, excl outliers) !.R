@@ -294,6 +294,43 @@ plot_ordination(pslog, out.pcoa.log, color = "IR_IS_classification", shape = "Ra
 labs(col = "classification") +
   coord_fixed(sqrt(evals[2] / evals[1]))
 
+#### PERMANOVA significance test for PCoA
+library(microbiome)
+library(ggplot2)
+library(dplyr)
+### Pick relative abundance (compositional) and sample metadata
+T2D.fil.rel <- microbiome::transform(T2D.fil, "compositional")
+T2D.fil.rel
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 981 taxa and 402 samples ]
+# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 981 taxa by 7 taxonomic ranks ]
+# T2D.fil.rel@otu_table@.Data[T2D.fil.rel@otu_table@.Data>50] <- 50 #no need to do this because no OTU value is >50. (CHECK!!!)
+T2D.fil.otu <- abundances(T2D.fil.rel)
+T2D.fil.meta <- meta(T2D.fil.rel)
+
+### Perform PERMANOVA
+library(vegan)
+permanova.pcoa <- adonis(t(T2D.fil.otu)~IR_IS_classification, 
+                    data = T2D.fil.meta, permutations=99, method = "bray")
+print(permanova.pcoa)
+## Get p-value
+print(as.data.frame(permanova.pcoa$aov.tab)["IR_IS_classification", "Pr(>F)"])
+# 0.01
+
+print(as.data.frame(permanova.pcoa$aov.tab)["IR_IS_classification", "R2"])
+# 0.02075211
+
+#### Check homogeneity condition to see if can do PERMANOVA
+dist <- vegdist(t(T2D.fil.otu))
+anova(betadisper(dist, T2D.fil.meta$IR_IS_classification))
+# Analysis of Variance Table
+# 
+# Response: Distances
+# Df Sum Sq   Mean Sq F value Pr(>F)
+# Groups      1 0.0037 0.0037416  0.3736 0.5414
+# Residuals 400 4.0055 0.0100138
+
 ###########################################################################################################################
 
 #### Alpha diversity
@@ -501,7 +538,7 @@ ggplot() +  geom_point(data = sample_info1, aes(x = Axis1, y = Axis2, col = samp
                                                                                                                                      y = sprintf("Axis2 [%s%% Variance]", 100 * round(pca_res$eig[2] / sum(pca_res$eig), 2)),
                                                                                                                                   fill = "Feature Type", col = "Sample Type")    
 #############################################################################
-#### PERMANOVA significance test
+#### PERMANOVA significance test for PCA
 library(microbiome)
 library(ggplot2)
 library(dplyr)
@@ -634,17 +671,18 @@ ggplot(pdIS, aes(x = file_name, y = Abundance, fill = Phylum)) + geom_bar(aes(co
 # plot_bar(IS_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
 
 ###############################################################################################
-#### Box plots for each phylum 
+#### Box plots for each phylum (log2 transformed)
 library("microbiome")
 
 ### Box plot for Actinobacteria
 Actinobacteria <- subset_taxa(T2D.fil, Phylum == "Actinobacteria") # worked
-Actino.mean <- colMeans(Actinobacteria@otu_table@.Data)
+Actino.mean <- colMeans(Actinobacteria@otu_table@.Data) #could log transform these means: log2(Actino.mean)
 Actino.mean <- as.data.frame(Actino.mean)
-Actino.mean <- t(Actino.mean)
-rownames(Actino.mean) <- "Actinobacteria abundance"
-Actinobacteria@otu_table@.Data <- Actino.mean # worked
-Actino.plot <- boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,25) + xlab("Classification") 
+Actino.meanlog <- log2(Actino.mean)
+Actino.meanlog <- t(Actino.meanlog)
+rownames(Actino.meanlog) <- "Actinobacteria abundance (log2)"
+Actinobacteria@otu_table@.Data <- Actino.meanlog # worked
+Actino.plot <- boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Actino.plot)
 
 ## Calculating p-values 
@@ -667,10 +705,11 @@ Wilcox.Act
 Bacteroidetes <- subset_taxa(T2D.fil, Phylum == "Bacteroidetes") # worked
 Bacter.mean <- colMeans(Bacteroidetes@otu_table@.Data)
 Bacter.mean <- as.data.frame(Bacter.mean)
-Bacter.mean <- t(Bacter.mean)
-rownames(Bacter.mean) <- "Bacteroidetes abundance"
-Bacteroidetes@otu_table@.Data <- Bacter.mean # worked
-Bacter.plot <- boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,150) + xlab("Classification")
+Bacter.meanlog <- log2(Bacter.mean)
+Bacter.meanlog <- t(Bacter.meanlog)
+rownames(Bacter.meanlog) <- "Bacteroidetes abundance (log2)"
+Bacteroidetes@otu_table@.Data <- Bacter.meanlog # worked
+Bacter.plot <- boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Bacter.plot)
 
 ## Calculating p-values
@@ -685,10 +724,11 @@ Wilcox.Bac
 Firmicutes <- subset_taxa(T2D.fil, Phylum == "Firmicutes") # worked
 Firmi.mean <- colMeans(Firmicutes@otu_table@.Data)
 Firmi.mean <- as.data.frame(Firmi.mean)
-Firmi.mean <- t(Firmi.mean)
-rownames(Firmi.mean) <- "Firmicutes abundance"
-Firmicutes@otu_table@.Data <- Firmi.mean # worked
-Firmi.plot <- boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)+ ylim(0,20) + xlab("Classification")
+Firmi.meanlog <- log2(Firmi.mean)
+Firmi.meanlog <- t(Firmi.meanlog)
+rownames(Firmi.meanlog) <- "Firmicutes abundance (log2)"
+Firmicutes@otu_table@.Data <- Firmi.meanlog # worked
+Firmi.plot <- boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Firmi.plot)
 
 ## Calculating p-values
@@ -703,10 +743,11 @@ Wilcox.Firmi
 Proteobacteria <- subset_taxa(T2D.fil, Phylum == "Proteobacteria") # worked
 Proteo.mean <- colMeans(Proteobacteria@otu_table@.Data)
 Proteo.mean <- as.data.frame(Proteo.mean)
-Proteo.mean <- t(Proteo.mean)
-rownames(Proteo.mean) <- "Proteobacteria abundance"
-Proteobacteria@otu_table@.Data <- Proteo.mean # worked
-Proteo.plot <- boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE)+ ylim(0,50) + xlab("Classification")
+Proteo.meanlog <- log2(Proteo.mean)
+Proteo.meanlog <- t(Proteo.meanlog)
+rownames(Proteo.meanlog) <- "Proteobacteria abundance (log2)"
+Proteobacteria@otu_table@.Data <- Proteo.meanlog # worked
+Proteo.plot <- boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Proteo.plot)
 
 ## Calculating p-values
@@ -721,11 +762,12 @@ Wilcox.Proteo
 Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes") # worked
 Synerg.mean <- colMeans(Synergistetes@otu_table@.Data)
 Synerg.mean <- as.data.frame(Synerg.mean)
-Synerg.mean <- t(Synerg.mean)
-rownames(Synerg.mean) <- "Synergistetes abundance"
-Synergistetes@otu_table@.Data <- Synerg.mean # worked
-Synerg.plot <- boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
-print(Synerg.plot)
+Synerg.meanlog <- log2(Synerg.mean)
+Synerg.meanlog <- t(Synerg.meanlog)
+rownames(Synerg.meanlog) <- "Synergistetes abundance (log2)"
+Synergistetes@otu_table@.Data <- Synerg.meanlog # worked
+Synerg.plot <- boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+print(Synerg.plot) #WEIRD
 
 ## Calculating p-values
 Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes")
@@ -739,10 +781,11 @@ Wilcox.Synerg
 Verrucomicrobia <- subset_taxa(T2D.fil, Phylum == "Verrucomicrobia") # worked
 Verruco.mean <- colMeans(Verrucomicrobia@otu_table@.Data)
 Verruco.mean <- as.data.frame(Verruco.mean)
-Verruco.mean <- t(Verruco.mean)
-rownames(Verruco.mean) <- "Verrucomicrobia abundance"
-Verrucomicrobia@otu_table@.Data <- Verruco.mean # worked
-Verruco.plot <- boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + ylim(0,25) + xlab("Classification")
+Verruco.meanlog <- log2(Verruco.mean)
+Verruco.meanlog <- t(Verruco.meanlog)
+rownames(Verruco.meanlog) <- "Verrucomicrobia abundance (log2)"
+Verrucomicrobia@otu_table@.Data <- Verruco.meanlog # worked
+Verruco.plot <- boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Verruco.plot)
 
 ## Calculating p-values
