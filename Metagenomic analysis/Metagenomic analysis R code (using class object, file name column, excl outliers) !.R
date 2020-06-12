@@ -280,15 +280,26 @@ T2D.fil <- prune_taxa(keepTaxa.T2D.fil, T2D.fil)
 T2D.fil #981 taxa
 
 #### Further filtering to allow for CCA
+library("genefilter")
 T2D.fil <- prune_taxa(taxa_sums(T2D.fil) > 4, T2D.fil)
 T2D.fil
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 981 taxa and 402 samples ]
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 981 taxa by 7 taxonomic ranks ]
-T2D.fil <- filter_taxa(microbe, filterfun(kOverA(3,2)),TRUE)
+T2D.fil <- filter_taxa(T2D.fil, filterfun(kOverA(4,2)),TRUE)
 T2D.fil
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 850 taxa and 402 samples ]
+# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 850 taxa by 7 taxonomic ranks ]
 
+T2D.fil.new <- filter_taxa(T2D.fil, filterfun(kOverA(40,2)),TRUE)
+T2D.fil.new
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 362 taxa and 402 samples ]
+# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 362 taxa by 7 taxonomic ranks ]
 
 ########################################################################################################
 
@@ -471,18 +482,18 @@ library("genefilter")
 microbe <- prune_taxa(taxa_sums(T2D.fil) > 4, T2D.fil) #not necessary: done before now.
 microbe
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 981 taxa and 402 samples ]
+# otu_table()   OTU Table:         [ 850 taxa and 402 samples ]
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 981 taxa by 7 taxonomic ranks ]
+# tax_table()   Taxonomy Table:    [ 850 taxa by 7 taxonomic ranks ]
 microbe <- filter_taxa(microbe, filterfun(kOverA(3,2)),TRUE) #not necessary: done before now.
 microbe
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 888 taxa and 402 samples ]
+# otu_table()   OTU Table:         [ 850 taxa and 402 samples ]
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 888 taxa by 7 taxonomic ranks ]
+# tax_table()   Taxonomy Table:    [ 850 taxa by 7 taxonomic ranks ]
 X <- otu_table(microbe)
 X[X>50] <- 50 
-dim(X) # 888 402 (no change in taxa), therefore, no need to include. 
+dim(X) # 850 402 (no change in taxa), therefore, no need to include. 
 View(X)
 
 
@@ -640,16 +651,16 @@ plot_ordination(T2D.logt, T2D.pcoa.logt, type = "samples",
 ###############################################################################################
 #### Bar charts for abundance visualization 
 ### Bar plot of phylum abundance in IR and IS 
-plot_bar(T2D.fil, x = "IR_IS_classification", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
-
-### Bar plot of genus in IR and IS 
-plot_bar(T2D.fil, x = "IR_IS_classification", fill = "Family") + geom_bar(aes(color=Family, fill=Family), stat="identity", position="stack")
-
-### Bar plot of phylum in IR subjects
-plot_bar(IR_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
-
-### Bar plot of phylum in IS subjects
-plot_bar(IS_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+# plot_bar(T2D.fil, x = "IR_IS_classification", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+# 
+# ### Bar plot of genus in IR and IS 
+# plot_bar(T2D.fil, x = "IR_IS_classification", fill = "Family") + geom_bar(aes(color=Family, fill=Family), stat="identity", position="stack")
+# 
+# ### Bar plot of phylum in IR subjects
+# plot_bar(IR_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+# 
+# ### Bar plot of phylum in IS subjects
+# plot_bar(IS_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
 
 ### Bar plot of phylum in IR samples
 cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
@@ -689,11 +700,11 @@ library("microbiome")
 Actinobacteria <- subset_taxa(T2D.fil, Phylum == "Actinobacteria") # worked
 Actino.mean <- colMeans(Actinobacteria@otu_table@.Data) #could log transform these means: log2(Actino.mean)
 Actino.mean <- as.data.frame(Actino.mean)
-Actino.meanlog <- log2(Actino.mean)
-Actino.meanlog <- t(Actino.meanlog)
-rownames(Actino.meanlog) <- "Actinobacteria abundance (log2)"
-Actinobacteria@otu_table@.Data <- Actino.meanlog # worked
-Actino.plot <- boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+# Actino.meanlog <- log2(Actino.mean)
+Actino.mean <- t(Actino.mean)
+rownames(Actino.mean) <- "Actinobacteria abundance"
+Actinobacteria@otu_table@.Data <- Actino.mean # worked
+Actino.plot <- boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Actino.plot)
 
 ## Calculating p-values 
@@ -716,11 +727,11 @@ Wilcox.Act
 Bacteroidetes <- subset_taxa(T2D.fil, Phylum == "Bacteroidetes") # worked
 Bacter.mean <- colMeans(Bacteroidetes@otu_table@.Data)
 Bacter.mean <- as.data.frame(Bacter.mean)
-Bacter.meanlog <- log2(Bacter.mean)
-Bacter.meanlog <- t(Bacter.meanlog)
-rownames(Bacter.meanlog) <- "Bacteroidetes abundance (log2)"
-Bacteroidetes@otu_table@.Data <- Bacter.meanlog # worked
-Bacter.plot <- boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+# Bacter.meanlog <- log2(Bacter.mean)
+Bacter.mean <- t(Bacter.mean)
+rownames(Bacter.mean) <- "Bacteroidetes abundance"
+Bacteroidetes@otu_table@.Data <- Bacter.mean # worked
+Bacter.plot <- boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Bacter.plot)
 
 ## Calculating p-values
@@ -735,11 +746,11 @@ Wilcox.Bac
 Firmicutes <- subset_taxa(T2D.fil, Phylum == "Firmicutes") # worked
 Firmi.mean <- colMeans(Firmicutes@otu_table@.Data)
 Firmi.mean <- as.data.frame(Firmi.mean)
-Firmi.meanlog <- log2(Firmi.mean)
-Firmi.meanlog <- t(Firmi.meanlog)
-rownames(Firmi.meanlog) <- "Firmicutes abundance (log2)"
-Firmicutes@otu_table@.Data <- Firmi.meanlog # worked
-Firmi.plot <- boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+# Firmi.meanlog <- log2(Firmi.mean)
+Firmi.mean <- t(Firmi.mean)
+rownames(Firmi.mean) <- "Firmicutes abundance"
+Firmicutes@otu_table@.Data <- Firmi.mean # worked
+Firmi.plot <- boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Firmi.plot)
 
 ## Calculating p-values
@@ -754,11 +765,11 @@ Wilcox.Firmi
 Proteobacteria <- subset_taxa(T2D.fil, Phylum == "Proteobacteria") # worked
 Proteo.mean <- colMeans(Proteobacteria@otu_table@.Data)
 Proteo.mean <- as.data.frame(Proteo.mean)
-Proteo.meanlog <- log2(Proteo.mean)
-Proteo.meanlog <- t(Proteo.meanlog)
-rownames(Proteo.meanlog) <- "Proteobacteria abundance (log2)"
-Proteobacteria@otu_table@.Data <- Proteo.meanlog # worked
-Proteo.plot <- boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+# Proteo.meanlog <- log2(Proteo.mean)
+Proteo.mean <- t(Proteo.mean)
+rownames(Proteo.mean) <- "Proteobacteria abundance"
+Proteobacteria@otu_table@.Data <- Proteo.mean # worked
+Proteo.plot <- boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Proteo.plot)
 
 ## Calculating p-values
@@ -773,11 +784,11 @@ Wilcox.Proteo
 Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes") # worked
 Synerg.mean <- colMeans(Synergistetes@otu_table@.Data)
 Synerg.mean <- as.data.frame(Synerg.mean)
-Synerg.meanlog <- log2(Synerg.mean)
-Synerg.meanlog <- t(Synerg.meanlog)
-rownames(Synerg.meanlog) <- "Synergistetes abundance (log2)"
-Synergistetes@otu_table@.Data <- Synerg.meanlog # worked
-Synerg.plot <- boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+# Synerg.meanlog <- log2(Synerg.mean)
+Synerg.mean <- t(Synerg.mean)
+rownames(Synerg.mean) <- "Synergistetes abundance"
+Synergistetes@otu_table@.Data <- Synerg.mean # worked
+Synerg.plot <- boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Synerg.plot) #WEIRD
 
 ## Calculating p-values
@@ -792,11 +803,11 @@ Wilcox.Synerg
 Verrucomicrobia <- subset_taxa(T2D.fil, Phylum == "Verrucomicrobia") # worked
 Verruco.mean <- colMeans(Verrucomicrobia@otu_table@.Data)
 Verruco.mean <- as.data.frame(Verruco.mean)
-Verruco.meanlog <- log2(Verruco.mean)
-Verruco.meanlog <- t(Verruco.meanlog)
-rownames(Verruco.meanlog) <- "Verrucomicrobia abundance (log2)"
-Verrucomicrobia@otu_table@.Data <- Verruco.meanlog # worked
-Verruco.plot <- boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance (log2)",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+# Verruco.meanlog <- log2(Verruco.mean)
+Verruco.mean <- t(Verruco.mean)
+rownames(Verruco.mean) <- "Verrucomicrobia abundance"
+Verrucomicrobia@otu_table@.Data <- Verruco.mean # worked
+Verruco.plot <- boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Verruco.plot)
 
 ## Calculating p-values
@@ -935,7 +946,7 @@ library(ggpubr)
 ggarrange(Bactero.plot, Butyri.plot, Odori.plot, Parabac.plot, Parapr.plot, Prevo.plot, labels = c("A", "B", "C", "D", "E", "F"), ncol=3, nrow =2)
 
 
-# write.table(T2D.fil@otu_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps out.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
+# write.table(T2D.fil@otu_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps otu.table for Susan.txt", sep="\t", row.names = TRUE, col.names = NA)
 # write.table(T2D.fil@tax_table@.Data, file="c:/Users/sabde/Documents/T2D.fil ps tax.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
 # write.table(T2D.fil@sam_data, file="c:/Users/sabde/Documents/T2D.fil ps sam.table for MicrbiomeAnalyst.txt", sep="\t", row.names = TRUE, col.names = NA)
 
