@@ -287,15 +287,8 @@ T2D.fil
 # otu_table()   OTU Table:         [ 981 taxa and 402 samples ]
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 981 taxa by 7 taxonomic ranks ]
-T2D.fil <- filter_taxa(T2D.fil, filterfun(kOverA(4,2)),TRUE)
+T2D.fil <- filter_taxa(T2D.fil, filterfun(kOverA(40,2)),TRUE)
 T2D.fil
-# phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 850 taxa and 402 samples ]
-# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 850 taxa by 7 taxonomic ranks ]
-
-T2D.fil.new <- filter_taxa(T2D.fil, filterfun(kOverA(40,2)),TRUE)
-T2D.fil.new
 # phyloseq-class experiment-level object
 # otu_table()   OTU Table:         [ 362 taxa and 402 samples ]
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
