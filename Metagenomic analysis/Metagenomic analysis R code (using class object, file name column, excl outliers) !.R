@@ -1,18 +1,18 @@
-#Install Bioconductor
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-BiocManager::install(version = "3.10")
-
-#Install phyloseq
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-BiocManager::install("phyloseq")
-
-# Check if BiocManager is installed
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-# Install HMP2Data package using BiocManager
-BiocManager::install("HMP2Data")
+# #Install Bioconductor
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#   install.packages("BiocManager")
+# BiocManager::install(version = "3.10")
+# 
+# #Install phyloseq
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#   install.packages("BiocManager")
+# BiocManager::install("phyloseq")
+# 
+# # Check if BiocManager is installed
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#   install.packages("BiocManager")
+# # Install HMP2Data package using BiocManager
+# BiocManager::install("HMP2Data")
 
 library(BiocManager)
 library(HMP2Data)
@@ -294,6 +294,14 @@ T2D.fil
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
 # tax_table()   Taxonomy Table:    [ 362 taxa by 7 taxonomic ranks ]
 
+Y <- otu_table(T2D.fil)
+Y[Y>50] <- 50 
+dim(Y) # 362 402 (no change in taxa), therefore, no need to include. 
+View(Y)
+# T2D.fil2 <- T2D.fil
+# T2D.fil2
+T2D.fil@otu_table@.Data <- Y
+
 ########################################################################################################
 
 #### PCoA comparing IR and IS
@@ -317,9 +325,9 @@ library(dplyr)
 T2D.fil.rel <- microbiome::transform(T2D.fil, "compositional")
 T2D.fil.rel
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 981 taxa and 402 samples ]
+# otu_table()   OTU Table:         [ 362 taxa and 402 samples ]
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 981 taxa by 7 taxonomic ranks ]
+# tax_table()   Taxonomy Table:    [ 362 taxa by 7 taxonomic ranks ]
 # T2D.fil.rel@otu_table@.Data[T2D.fil.rel@otu_table@.Data>50] <- 50 #no need to do this because no OTU value is >50. (CHECK!!!)
 T2D.fil.otu <- abundances(T2D.fil.rel)
 T2D.fil.meta <- meta(T2D.fil.rel)
@@ -334,7 +342,7 @@ print(as.data.frame(permanova.pcoa$aov.tab)["IR_IS_classification", "Pr(>F)"])
 # 0.01
 
 print(as.data.frame(permanova.pcoa$aov.tab)["IR_IS_classification", "R2"])
-# 0.02075211
+# 0.02851509
 
 #### Check homogeneity condition to see if can do PERMANOVA
 dist <- vegdist(t(T2D.fil.otu))
@@ -342,14 +350,52 @@ anova(betadisper(dist, T2D.fil.meta$IR_IS_classification))
 # Analysis of Variance Table
 # 
 # Response: Distances
-# Df Sum Sq   Mean Sq F value Pr(>F)
-# Groups      1 0.0037 0.0037416  0.3736 0.5414
-# Residuals 400 4.0055 0.0100138
+# Df  Sum Sq   Mean Sq F value Pr(>F)
+# Groups      1 0.00823 0.0082345  1.8781 0.1713
+# Residuals 400 1.75384 0.0043846 
+
+#### Ivestigation of top taxa separating the groups
+coef.pcoa <- coefficients(permanova.pcoa)["IR_IS_classification1",]
+top.coef.pcoa <- coef.pcoa[rev(order(abs(coef.pcoa)))[1:20]]
+par(mar=c(3, 14, 2, 1)) # changing margins: c(bottom, left, top, right) -> ives the number of lines of margin to be specified on the four sides of the plot.
+barplot(sort(top.coef.pcoa), horiz = T, las = 1, main = "Top taxa", xlab = "PERMANOVA coefficient")
+barplot(sort(top.coef.pc.m), horiz = T, las =1, main = "Top taxa", xlab = "PERMANOVA coefficient")
+
+
+top.coef.pc.clas <- merge.data.frame(top.coef.pc.df,list.of.taxa.names.for.top.taxa.barplot)
+top.coef.pc.cl.m <- as.matrix(top.coef.pc.clas)
+tax.clas <- list.of.taxa.names.for.top.taxa.barplot
+barplot(sort(top.coef.pc.m), horiz = T, las =1, main = "Top taxa") + scale_y_discrete(tax.clas)
+
+top.coef.pc.df <- as.data.frame(top.coef.pcoa)
+write.table(top.coef.pc.df, file="c:/Users/sabde/Documents/PERMONOVA top taxa abundance = 50", sep="\t", row.names = TRUE, col.names = NA)
+# top.coef.pc.m <- as.matrix(top.coef.pcoa)
+# 
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "360518"] <- "Bacteroides"
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "592925"] <- "Prevotella	copri"
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "572476"] <- "Bacteroides	uniformis"
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "530327"] <- "Faecalibacterium	prausnitzii"
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "304211"] <- "Ruminococcus"
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "365965"] <- "Ruminococcus."
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "367456"] <- "Blautia"
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "322715"] <- "Bacteroides	eggerthii"
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "593043"] <- "Akkermansia	muciniphila"
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "194868"] <- "Ruminococcus.."
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "589329"] <- "Prevotella	copri."
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "209685"] <- "Bacteroides."
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "357582"] <- "Bacteroides.."
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "1105984"] <- "Bacteroides..."
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "365372"] <- "Faecalibacterium	prausnitzii."
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "529940"] <- "Faecalibacterium	prausnitzii.."
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "589277"] <- "Bacteroides...."
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "327050"] <- "Bacteroides....."
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "580629"] <- "Bacteroides......"
+# rownames(top.coef.pc.df)[rownames(top.coef.pc.df) == "325503"] <- "Bacteroides......."
 
 ###########################################################################################################################
 
 #### Alpha diversity
-BiocManager::install("microbiome")
+# BiocManager::install("microbiome")
 library(microbiome)
 
 #### Calculating alpha diversity values
@@ -408,7 +454,7 @@ phyloseq::plot_heatmap(T2D.filhell_trim, method = "PCoA", distance="bray", sampl
 ###########################################################################################################################
 
 #### Venn diagrams (DOESN'T WORK)
-install.packages("VennDiagram")
+# install.packages("VennDiagram")
 library(VennDiagram)
 
 names.OTU <- taxa_names(T2D.fil)
@@ -444,9 +490,9 @@ metabolomics.EO <- metabolomics.exclout
 
 T2D.fil
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 981 taxa and 402 samples ]
+# otu_table()   OTU Table:         [ 362 taxa and 402 samples ]
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 981 taxa by 7 taxonomic ranks ]
+# tax_table()   Taxonomy Table:    [ 362 taxa by 7 taxonomic ranks ]
 
 # same number of samples
 
@@ -465,56 +511,56 @@ metabolomics.EO.fil.log <- log(1 + metabolomics.EO.fil,base = 10)
 dim(metabolomics.EO.fil.log) #323 402
 
 ### Removing microbes that are zero across many samples
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-
-BiocManager::install("genefilter")
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#   install.packages("BiocManager")
+# 
+# BiocManager::install("genefilter")
 
 library("genefilter")
 
 microbe <- prune_taxa(taxa_sums(T2D.fil) > 4, T2D.fil) #not necessary: done before now.
 microbe
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 850 taxa and 402 samples ]
+# otu_table()   OTU Table:         [ 362 taxa and 402 samples ]
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 850 taxa by 7 taxonomic ranks ]
+# tax_table()   Taxonomy Table:    [ 362 taxa by 7 taxonomic ranks ]
 microbe <- filter_taxa(microbe, filterfun(kOverA(3,2)),TRUE) #not necessary: done before now.
 microbe
 # phyloseq-class experiment-level object
-# otu_table()   OTU Table:         [ 850 taxa and 402 samples ]
+# otu_table()   OTU Table:         [ 362 taxa and 402 samples ]
 # sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
-# tax_table()   Taxonomy Table:    [ 850 taxa by 7 taxonomic ranks ]
+# tax_table()   Taxonomy Table:    [ 362 taxa by 7 taxonomic ranks ]
 X <- otu_table(microbe)
 X[X>50] <- 50 
-dim(X) # 850 402 (no change in taxa), therefore, no need to include. 
+dim(X) # 362 402 (no change in taxa), therefore, no need to include. 
 View(X)
 
 
 ### Applying CCA as a screening procedure
-install.packages("PMA")
+# install.packages("PMA")
 library(PMA)
 
 cca_res <- CCA(t(X), t(metabolomics.EO.fil.log), penaltyx = .15, penaltyz = .15)
-# 12345678910111213
+# 123456789101112131415
 cca_res
-# Num non-zeros u's:  27 
-# Num non-zeros v's:  10 
+# Num non-zeros u's:  13 
+# Num non-zeros v's:  11 
 # Type of x:  standard 
 # Type of z:  standard 
 # Penalty for x: L1 bound is  0.15 
 # Penalty for z: L1 bound is  0.15 
-# Cor(Xu,Zv):  0.4820405
-# Therefore, 27 microbes and 10 metabolites have been selected based on their ability to explain covariation between the tables. 
-# These 37 features result in a correlation of 0.482 between the 2 tables (not very good correlation value)
+# Cor(Xu,Zv):  0.4555165
+# Therefore, 13 microbes and 11 metabolites have been selected based on their ability to explain covariation between the tables. 
+# These 24 features result in a correlation of 0.455 between the 2 tables (not very good correlation value)
 
 # Export the identifiers of these 37 features
 View(feature_info)
 # write.table(feature_info, file="c:/Users/sabde/Documents/features explaining covariation CCA.txt", sep="\t", row.names = TRUE, col.names = NA)
 
 ### Performing a PCA
-install.packages("magrittr")  # for piping %>%
-install.packages("ade4")      # PCA computation
-install.packages("factoextra")# PCA visualization
+# install.packages("magrittr")  # for piping %>%
+# install.packages("ade4")      # PCA computation
+# install.packages("factoextra")# PCA visualization
 
 library(ade4)
 library(factoextra)
@@ -655,6 +701,23 @@ plot_ordination(T2D.logt, T2D.pcoa.logt, type = "samples",
 # ### Bar plot of phylum in IS subjects
 # plot_bar(IS_ps.fil, x = "SubjectID", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
 
+### Redo IR and IS subsets
+IR_ps.fil <- subset_samples(T2D.fil, IR_IS_classification == "IR")
+IR_ps.fil # T2D.fil = 402 samples, IR_ps.fil = 200 samples.
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 362 taxa and 200 samples ]
+# sample_data() Sample Data:       [ 200 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 362 taxa by 7 taxonomic ranks ]
+View(IR_ps.fil)
+
+IS_ps.fil <- subset_samples(T2D.fil, IR_IS_classification == "IS")
+IS_ps.fil # T2D = 402 samples, IS_ps.fil = 202 samples (CHECK).
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 362 taxa and 202 samples ]
+# sample_data() Sample Data:       [ 202 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 362 taxa by 7 taxonomic ranks ]
+View(IS_ps.fil)
+
 ### Bar plot of phylum in IR samples
 cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
@@ -662,28 +725,23 @@ pIR <- plot_bar(IR_ps.fil, x = "file_name", fill = "Phylum")
 pdIR <- pIR$data
 
 head(pdIR)
-ggplot(pdIR, aes(x = file_name, y = Abundance, fill = Phylum)) + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack") +
+IR.bp <- ggplot(pdIR, aes(x = file_name, y = Abundance, fill = Phylum)) + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack") +
          scale_fill_manual(values=cbPalette) + xlab("IR samples") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
-# print(plotIR)
-# Axis(side = 1, labels = FALSE)
-# ggplot(plot_bar(IR_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack"))
-
-
-# + labs(x = NULL)
-xlab()
-print(b)
-Axis(side = 1, labels = FALSE)
 
 ### Bar plot of phylum in IS samples
 pIS <- plot_bar(IS_ps.fil, x = "file_name", fill = "Phylum")
 pdIS <- pIS$data
 head(pdIS)
 
-ggplot(pdIS, aes(x = file_name, y = Abundance, fill = Phylum)) + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack") +
+IS.bp <- ggplot(pdIS, aes(x = file_name, y = Abundance, fill = Phylum)) + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack") +
   scale_fill_manual(values=cbPalette) + xlab("IS samples") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
 
 
 # plot_bar(IS_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+
+library("ggpubr")
+ggarrange(IR.bp, IS.bp, labels = c("A", "B"), ncol=1, nrow =2)
+
 
 ###############################################################################################
 #### Box plots for each phylum (log2 transformed)
@@ -714,7 +772,7 @@ Act.IR <- subset_samples(Actinobacteria, IR_IS_classification == "IR")
 Act.IS <- subset_samples(Actinobacteria, IR_IS_classification == "IS")
 Wilcox.Act <- wilcox.test(Act.IR@otu_table@.Data, Act.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Act
-# p-value = 0.07872
+# p-value = 0.3705
 
 ### Box plot for Bacteroidetes
 Bacteroidetes <- subset_taxa(T2D.fil, Phylum == "Bacteroidetes") # worked
@@ -733,7 +791,7 @@ Bac.IR <- subset_samples(Bacteroidetes, IR_IS_classification == "IR")
 Bac.IS <- subset_samples(Bacteroidetes, IR_IS_classification == "IS")
 Wilcox.Bac <- wilcox.test(Bac.IR@otu_table@.Data, Bac.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Bac
-# p-value = 0.0009306
+# p-value = 8.901e-13
 
 ### Box plot for Firmicutes
 Firmicutes <- subset_taxa(T2D.fil, Phylum == "Firmicutes") # worked
@@ -752,7 +810,7 @@ Firmi.IR <- subset_samples(Firmicutes, IR_IS_classification == "IR")
 Firmi.IS <- subset_samples(Firmicutes, IR_IS_classification == "IS")
 Wilcox.Firmi <- wilcox.test(Firmi.IR@otu_table@.Data, Firmi.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Firmi
-# p-value = 5.451e-11
+# p-value < 2.2e-16
 
 ### Box plot for Proteobacteria
 Proteobacteria <- subset_taxa(T2D.fil, Phylum == "Proteobacteria") # worked
@@ -771,26 +829,26 @@ Proteo.IR <- subset_samples(Proteobacteria, IR_IS_classification == "IR")
 Proteo.IS <- subset_samples(Proteobacteria, IR_IS_classification == "IS")
 Wilcox.Proteo <- wilcox.test(Proteo.IR@otu_table@.Data, Proteo.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Proteo
-# p-value = 0.01214
+# p-value = 0.008858
 
-### Box plot for Synergistetes
-Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes") # worked
-Synerg.mean <- colMeans(Synergistetes@otu_table@.Data)
-Synerg.mean <- as.data.frame(Synerg.mean)
-# Synerg.meanlog <- log2(Synerg.mean)
-Synerg.mean <- t(Synerg.mean)
-rownames(Synerg.mean) <- "Synergistetes abundance"
-Synergistetes@otu_table@.Data <- Synerg.mean # worked
-Synerg.plot <- boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
-print(Synerg.plot) #WEIRD
-
-## Calculating p-values
-Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes")
-Synerg.IR <- subset_samples(Synergistetes, IR_IS_classification == "IR")
-Synerg.IS <- subset_samples(Synergistetes, IR_IS_classification == "IS")
-Wilcox.Synerg <- wilcox.test(Synerg.IR@otu_table@.Data, Synerg.IS@otu_table@.Data, paired = FALSE)
-Wilcox.Synerg
-# p-value = 3.754e-06
+### Box plot for Synergistetes (none of this Phylum after kOverA(40,2))
+# Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes") # worked
+# Synerg.mean <- colMeans(Synergistetes@otu_table@.Data)
+# Synerg.mean <- as.data.frame(Synerg.mean)
+# # Synerg.meanlog <- log2(Synerg.mean)
+# Synerg.mean <- t(Synerg.mean)
+# rownames(Synerg.mean) <- "Synergistetes abundance"
+# Synergistetes@otu_table@.Data <- Synerg.mean # worked
+# Synerg.plot <- boxplot_abundance(Synergistetes, x = "IR_IS_classification", y = "Synergistetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+# print(Synerg.plot) #WEIRD
+# 
+# ## Calculating p-values
+# Synergistetes <- subset_taxa(T2D.fil, Phylum == "Synergistetes")
+# Synerg.IR <- subset_samples(Synergistetes, IR_IS_classification == "IR")
+# Synerg.IS <- subset_samples(Synergistetes, IR_IS_classification == "IS")
+# Wilcox.Synerg <- wilcox.test(Synerg.IR@otu_table@.Data, Synerg.IS@otu_table@.Data, paired = FALSE)
+# Wilcox.Synerg
+# # p-value = 3.754e-06
 
 ### Box plot for Verrucomicrobia
 Verrucomicrobia <- subset_taxa(T2D.fil, Phylum == "Verrucomicrobia") # worked
@@ -809,12 +867,12 @@ Verruco.IR <- subset_samples(Verrucomicrobia, IR_IS_classification == "IR")
 Verruco.IS <- subset_samples(Verrucomicrobia, IR_IS_classification == "IS")
 Wilcox.Verruco <- wilcox.test(Verruco.IR@otu_table@.Data, Verruco.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Verruco
-# p-value = 0.002507
+# p-value = 0.3914
 
 
 #### Creating one figure with all box plots for phylum
 library(ggpubr)
-ggarrange(Actino.plot, Bacter.plot, Firmi.plot, Proteo.plot, Synerg.plot, Verruco.plot, labels = c("A", "B", "C", "D", "E", "F"), ncol=3, nrow =2)
+ggarrange(Actino.plot, Bacter.plot, Firmi.plot, Proteo.plot, Verruco.plot, labels = c("A", "B", "C", "D", "E", "F"), ncol=3, nrow =2)
 
 ## Trying to add p-values
 # install.packages("ggpval")
@@ -842,7 +900,7 @@ Baco.IR <- subset_samples(Bacteroides, IR_IS_classification == "IR")
 Baco.IS <- subset_samples(Bacteroides, IR_IS_classification == "IS")
 Wilcox.Baco <- wilcox.test(Baco.IR@otu_table@.Data, Baco.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Baco
-# p-value = 0.002864
+# p-value = 0.0004153
 
 ### Box plot for Butyricimonas
 Butyricimonas <- subset_taxa(T2D.fil, Genus == "Butyricimonas") # worked
@@ -860,7 +918,7 @@ Butyri.IR <- subset_samples(Butyricimonas, IR_IS_classification == "IR")
 Butyri.IS <- subset_samples(Butyricimonas, IR_IS_classification == "IS")
 Wilcox.Butyri <- wilcox.test(Butyri.IR@otu_table@.Data, Butyri.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Butyri
-# p-value = 1.272e-11
+# p-value = 3.364e-10
 
 ### Box plot for Odoribacter
 Odoribacter <- subset_taxa(T2D.fil, Genus == "Odoribacter") # worked
@@ -878,7 +936,7 @@ Odori.IR <- subset_samples(Odoribacter, IR_IS_classification == "IR")
 Odori.IS <- subset_samples(Odoribacter, IR_IS_classification == "IS")
 Wilcox.Odori <- wilcox.test(Odori.IR@otu_table@.Data, Odori.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Odori
-# p-value = 0.0005225
+# p-value = 2.633e-08
 
 ### Box plot for Parabacteroides 
 Parabacteroides <- subset_taxa(T2D.fil, Genus == "Parabacteroides") # worked
@@ -896,7 +954,7 @@ Parabac.IR <- subset_samples(Parabacteroides, IR_IS_classification == "IR")
 Parabac.IS <- subset_samples(Parabacteroides, IR_IS_classification == "IS")
 Wilcox.Parabac <- wilcox.test(Parabac.IR@otu_table@.Data, Parabac.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Parabac
-# p-value = 8.027e-06
+# p-value = 4.1e-06
 
 ### Box plot for Paraprevotella 
 Paraprevotella <- subset_taxa(T2D.fil, Genus == "Paraprevotella") # worked
@@ -914,7 +972,7 @@ Parapr.IR <- subset_samples(Paraprevotella, IR_IS_classification == "IR")
 Parapr.IS <- subset_samples(Paraprevotella, IR_IS_classification == "IS")
 Wilcox.Parapr <- wilcox.test(Parapr.IR@otu_table@.Data, Parapr.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Parapr
-# p-value = 2.433e-05
+# p-value = 1.295e-05
 
 ### Box plot for Prevotella
 Prevotella <- subset_taxa(T2D.fil, Genus == "Prevotella") # worked
@@ -932,7 +990,7 @@ Prevo.IR <- subset_samples(Prevotella, IR_IS_classification == "IR")
 Prevo.IS <- subset_samples(Prevotella, IR_IS_classification == "IS")
 Wilcox.Prevo <- wilcox.test(Prevo.IR@otu_table@.Data, Prevo.IS@otu_table@.Data, paired = FALSE)
 Wilcox.Prevo
-# p-value < 2.2e-16
+# p-value = 0.2729
 
 #### Creating one figure with all box plots for Bacteroidets genus
 library(ggpubr)
