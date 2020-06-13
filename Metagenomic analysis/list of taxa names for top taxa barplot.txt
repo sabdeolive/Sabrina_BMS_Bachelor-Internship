@@ -1,0 +1,21 @@
+	taxonomy
+360518	Bacteroides
+592925	Prevotella copri
+572476	Bacteroides uniformis
+530327	Faecalibacterium prausnitzii
+304211	Ruminococcus
+365965	Ruminococcus
+367456	Blautia
+322715	Bacteroides eggerthii
+593043	Akkermansia muciniphila
+194868	Ruminococcus
+589329	Prevotella copri
+209685	Bacteroides
+357582	Bacteroides
+1105984	Bacteroides
+365372	Faecalibacterium prausnitzii
+529940	Faecalibacterium prausnitzii
+589277	Bacteroides
+327050	Bacteroides
+580629	Bacteroides
+325503	Bacteroides
