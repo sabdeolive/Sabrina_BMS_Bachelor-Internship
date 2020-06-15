@@ -301,6 +301,7 @@ View(Y)
 # T2D.fil2 <- T2D.fil
 # T2D.fil2
 T2D.fil@otu_table@.Data <- Y
+View(T2D.fil)
 
 ########################################################################################################
 
@@ -555,7 +556,7 @@ cca_res
 
 # Export the identifiers of these 37 features
 View(feature_info)
-# write.table(feature_info, file="c:/Users/sabde/Documents/features explaining covariation CCA.txt", sep="\t", row.names = TRUE, col.names = NA)
+# write.table(feature_info, file="c:/Users/sabde/Documents/features explaining covariation CCA abundance 50.txt", sep="\t", row.names = TRUE, col.names = NA)
 
 ### Performing a PCA
 # install.packages("magrittr")  # for piping %>%
