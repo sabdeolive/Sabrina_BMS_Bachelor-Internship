@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<expression-data-visualizations>
+  <color-sets>
+    <ColorSet name="color set-1">
+      <no-criteria-met red="180" green="220" blue="180" />
+      <no-gene-found red="180" green="220" blue="220" />
+      <no-data-found red="216" green="216" blue="216" />
+      <ColorGradient name="gradient">
+        <color-value value="-1.0">
+          <color red="0" green="0" blue="255" />
+        </color-value>
+        <color-value value="0.0">
+          <color red="255" green="255" blue="255" />
+        </color-value>
+        <color-value value="1.0">
+          <color red="255" green="0" blue="0" />
+        </color-value>
+      </ColorGradient>
+    </ColorSet>
+    <ColorSet name="color set-2">
+      <no-criteria-met red="180" green="220" blue="180" />
+      <no-gene-found red="180" green="220" blue="220" />
+      <no-data-found red="216" green="216" blue="216" />
+      <ColorCriterion name="rule" expression=" [P.Value]  &lt;= 0.05">
+        <color red="51" green="255" blue="0" />
+      </ColorCriterion>
+      <ColorCriterion name="rule" expression=" [P.Value]  &gt; 0.05">
+        <color red="255" green="255" blue="255" />
+      </ColorCriterion>
+    </ColorSet>
+    <ColorSet name="color set">
+      <no-criteria-met red="180" green="220" blue="180" />
+      <no-gene-found red="180" green="220" blue="220" />
+      <no-data-found red="216" green="216" blue="216" />
+      <ColorGradient name="gradient">
+        <color-value value="-5.300000000000001">
+          <color red="255" green="255" blue="0" />
+        </color-value>
+        <color-value value="12.0">
+          <color red="0" green="0" blue="255" />
+        </color-value>
+      </ColorGradient>
+    </ColorSet>
+  </color-sets>
+  <visualizations>
+    <visualization name="auto-generated">
+      <method name="class org.pathvisio.visualization.plugins.DataNodeLabel" display="DataNode label" adjustFontSize="false" font="Arial narrow-PLAIN-10" overlay="true" alignment="0">
+        <font-color red="0" green="0" blue="0" />
+      </method>
+      <method name="class org.pathvisio.visualization.plugins.ColorByExpression" drawLine="false">
+        <lineColor red="0" green="0" blue="0" />
+        <sample id="0" colorset="color set-1" ambigious="1" maintain-aspect-ratio="true" />
+        <sample id="3" colorset="color set-2" ambigious="1" maintain-aspect-ratio="true" />
+      </method>
+    </visualization>
+  </visualizations>
+</expression-data-visualizations>
+
