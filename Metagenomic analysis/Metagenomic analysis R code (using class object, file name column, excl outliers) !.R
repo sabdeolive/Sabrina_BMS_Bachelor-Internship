@@ -200,7 +200,7 @@ qplot(colSums(otu_table(T2D.fil)),bins=30) +
 
 #################################################################################
 
-####Create a contingency table of the number of taxa in each phylum
+####Create a contingency table of the number of taxa in each phylum (not really necessary for final code except for prevalence.df)
 table(tax_table(T2D.fil)[, "Phylum"]) #1 phylum (Thermotogae) showed count of only 1
 
 ### Compute prevalence of every feature(/taxa?)
@@ -233,7 +233,7 @@ IR_ps.fil #2252 taxa
 keep.IS.taxa <- names.OTU[rowSums(IS_ps.fil@otu_table)>0]
 IS_ps.fil #6109 taxa
 IS_ps.fil <- prune_taxa(keep.IS.taxa, IS_ps.fil)
-IS_ps.fil #2226 taxa (CHECK!!!)
+IS_ps.fil #2226 taxa
 
 ### Prevalence filter IR (filtering of taxa)
 ##Subset the remaining phyla 
@@ -251,7 +251,7 @@ prevalenceThreshold.IR # 20 (i.e. the taxa would have to be prevalent in 0.525 s
 keepTaxa.IR <- rownames(prevalence.df.IR)[(prevalence.df.IR$Prevalence >= prevalenceThreshold.IR)]
 IR_ps.fil #2252 taxa
 IR_ps.fil <- prune_taxa(keepTaxa.IR,IR_ps.fil) 
-IR_ps.fil #2252 taxa -> 981 taxa (CHECK!!!)
+IR_ps.fil #2252 taxa -> 981 taxa
 
 
 ### Prevalence filter IS
@@ -270,8 +270,24 @@ prevalenceThreshold.IS # 20.2 (i.e. the taxa would have to be prevalent in 0.577
 keepTaxa.IS <- rownames(prevalence.df.IS)[(prevalence.df.IS$Prevalence >= prevalenceThreshold.IS)]
 IS_ps.fil #2226 taxa
 IS_ps.fil <- prune_taxa(keepTaxa.IS,IS_ps.fil) 
-IS_ps.fil #2226 taxa -> 950 taxa (CHECK!!!)
+IS_ps.fil #2226 taxa -> 950 taxa
 
+#### Venn diagrams to check PT
+# install.packages("VennDiagram")
+library(VennDiagram)
+
+names.OTU <- taxa_names(T2D.fil)
+names.OTU.IR <- taxa_names(IR_ps.fil)
+names.OTU.IS <- taxa_names(IS_ps.fil)
+library("grid")
+grid.newpage()
+venn.diagram(x = list(names.OTU.IR,names.OTU.IS), category.names = c("IR", "IS"), filename = "Venn_diagram_0.10_PT0.1.png", output = TRUE, col=c("#440154ff", "#21908dff"),
+             fill = c(alpha("#440154ff",0.3), alpha("#21908dff",0.3)), cat.col = c("#440154ff", '#21908dff')) # to attempt to scale the relative volumes of the sets
+getwd()
+
+# IR = 981 taxa
+# IS = 950 taxa
+# -> 31 in IR is not in IS, using a larger PT makes difference less
 
 ### Filter taxa of the whole T2D.rm.gut phyloseq-class object using IR and IS prevalence filtration
 keepTaxa.T2D.fil <- c(keepTaxa.IR, keepTaxa.IS) 
@@ -296,12 +312,16 @@ T2D.fil
 
 Y <- otu_table(T2D.fil)
 Y[Y>50] <- 50 
-dim(Y) # 362 402 (no change in taxa), therefore, no need to include. 
+dim(Y) # 362 402 (no change in taxa)
 View(Y)
 # T2D.fil2 <- T2D.fil
 # T2D.fil2
 T2D.fil@otu_table@.Data <- Y
 View(T2D.fil)
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 362 taxa and 402 samples ]
+# sample_data() Sample Data:       [ 402 samples by 22 sample variables ]
+# tax_table()   Taxonomy Table:    [ 362 taxa by 7 taxonomic ranks ]
 
 ########################################################################################################
 
@@ -363,10 +383,10 @@ barplot(sort(top.coef.pcoa), horiz = T, las = 1, main = "Top taxa", xlab = "PERM
 barplot(sort(top.coef.pc.m), horiz = T, las =1, main = "Top taxa", xlab = "PERMANOVA coefficient")
 
 
-top.coef.pc.clas <- merge.data.frame(top.coef.pc.df,list.of.taxa.names.for.top.taxa.barplot)
-top.coef.pc.cl.m <- as.matrix(top.coef.pc.clas)
-tax.clas <- list.of.taxa.names.for.top.taxa.barplot
-barplot(sort(top.coef.pc.m), horiz = T, las =1, main = "Top taxa") + scale_y_discrete(tax.clas)
+# top.coef.pc.clas <- merge.data.frame(top.coef.pc.df,list.of.taxa.names.for.top.taxa.barplot)
+# top.coef.pc.cl.m <- as.matrix(top.coef.pc.clas)
+# tax.clas <- list.of.taxa.names.for.top.taxa.barplot
+# barplot(sort(top.coef.pc.m), horiz = T, las =1, main = "Top taxa") + scale_y_discrete(tax.clas)
 
 top.coef.pc.df <- as.data.frame(top.coef.pcoa)
 write.table(top.coef.pc.df, file="c:/Users/sabde/Documents/PERMONOVA top taxa abundance = 50", sep="\t", row.names = TRUE, col.names = NA)
@@ -395,7 +415,7 @@ write.table(top.coef.pc.df, file="c:/Users/sabde/Documents/PERMONOVA top taxa ab
 
 ###########################################################################################################################
 
-#### Alpha diversity
+#### Alpha diversity (not necessary)
 # BiocManager::install("microbiome")
 library(microbiome)
 
@@ -428,7 +448,7 @@ print(Shannon.plot)
 
 ###########################################################################################################################
 
-#### Core abundance
+#### Core abundance (not necessary)
 
 AbunCore <- microbiome::core_abundance(T2D.fil, detection = .1/100, prevalence = 50/100)
 length(AbunCore)
@@ -438,7 +458,7 @@ plot(T2D.fil@sam_data[["IR_IS_classification"]], AbunCore, xlab = "classificatio
 # how can I determine the core taxa present in the IR and IS groups?
 
 ###########################################################################################################################
-#### Heat map
+#### Heat map (not necessary)
 library(vegan)
 
 prop  = transform_sample_counts(T2D.fil, function(x) x / sum(x) )
@@ -454,18 +474,18 @@ phyloseq::plot_heatmap(T2D.filhell_trim, method = "PCoA", distance="bray", sampl
 
 ###########################################################################################################################
 
-#### Venn diagrams (DOESN'T WORK)
-# install.packages("VennDiagram")
-library(VennDiagram)
-
-names.OTU <- taxa_names(T2D.fil)
-names.OTU.IR <- taxa_names(IR_ps.fil)
-names.OTU.IS <- taxa_names(IS_ps.fil)
-library("grid")
-grid.newpage()
-venn.diagram(x = list(names.OTU.IR,names.OTU.IS), category.names = c("IR", "IS"), filename = "Venn_diagram_0.10_PT2.png", output = TRUE, col=c("#440154ff", "#21908dff"),
-             fill = c(alpha("#440154ff",0.3), alpha("#21908dff",0.3)), cat.col = c("#440154ff", '#21908dff')) # to attempt to scale the relative volumes of the sets
-getwd()
+#### Venn diagrams
+# # install.packages("VennDiagram")
+# library(VennDiagram)
+# 
+# names.OTU <- taxa_names(T2D.fil)
+# names.OTU.IR <- taxa_names(IR_ps.fil)
+# names.OTU.IS <- taxa_names(IS_ps.fil)
+# library("grid")
+# grid.newpage()
+# venn.diagram(x = list(names.OTU.IR,names.OTU.IS), category.names = c("IR", "IS"), filename = "Venn_diagram_0.10_PT2 abun50.png", output = TRUE, col=c("#440154ff", "#21908dff"),
+#              fill = c(alpha("#440154ff",0.3), alpha("#21908dff",0.3)), cat.col = c("#440154ff", '#21908dff')) # to attempt to scale the relative volumes of the sets
+# getwd()
 ###########################################################################################################################
 #### Histograms
 
