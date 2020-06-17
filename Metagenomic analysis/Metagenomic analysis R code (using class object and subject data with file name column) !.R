@@ -379,10 +379,10 @@ metabolomics.fil.log <- log(1 + metabolomics.fil,base = 10)
 dim(metabolomics.fil.log) #323 441
 
 ### Removing microbes that are zero across many samples
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#  install.packages("BiocManager")
 
-BiocManager::install("genefilter")
+# BiocManager::install("genefilter")
 
 library("genefilter")
 
@@ -405,7 +405,7 @@ View(X)
 
 
 ### Applying CCA as a screening procedure
-install.packages("PMA")
+# install.packages("PMA")
 library(PMA)
 
 cca_res <- CCA(t(X), t(metabolomics.fil.log), penaltyx = .15, penaltyz = .15)
@@ -422,9 +422,9 @@ cca_res
 # These 47 features result in a correlation of 0.509 between the 2 tables (not very good correlation value)
 
 ### Performing a PCA
-install.packages("magrittr")  # for piping %>%
-install.packages("ade4")      # PCA computation
-install.packages("factoextra")# PCA visualization
+# install.packages("magrittr")  # for piping %>%
+# install.packages("ade4")      # PCA computation
+# install.packages("factoextra")# PCA visualization
 
 library(ade4)
 library(factoextra)
@@ -456,6 +456,15 @@ ggplot() +  geom_point(data = sample_info, aes(x = Axis1, y = Axis2, col = sampl
                                                                                                                                                  100 * round(pca_res$eig[1] / sum(pca_res$eig), 2)),
                                                                                                                                      y = sprintf("Axis2 [%s%% Variance]", 100 * round(pca_res$eig[2] / sum(pca_res$eig), 2)),
                                                                                                                                      fill = "Feature Type", col = "Sample Type")
+# without feature info
+ggplot() +  geom_point(data = sample_info, aes(x = Axis1, y = Axis2, col = sample_type), size = 3) + scale_color_brewer(palette = "Set2") +  scale_fill_manual(values = c("#a6d854", "#e78ac3")) +
+  guides(fill = guide_legend(override.aes = list(shape = 32, size = 0))) + coord_fixed(sqrt(pca_res$eig[2] / pca_res$eig[2])) + labs(x = sprintf("Axis1 [%s%% Variance]",
+                                                                                                                                                 100 * round(pca_res$eig[1] / sum(pca_res$eig), 2)), col = "Sample Type")
+
+
+
+
+
 #plot with subject IDs
 ggplot() +  geom_point(data = sample_info1, aes(x = Axis1, y = Axis2, col = sample_type), size = 3) + geom_text(data = sample_info1, aes(x = Axis1, y = Axis2, label = subject),hjust=0, vjust=0, size = 2) + geom_label_repel(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, label = feature, fill = feature_type), size = 2, segment.size = 0.3,label.padding = unit(0.1, "lines"), label.size = 0) +
   geom_point(data = feature_info, aes(x = 5.5 * CS1, y = 5.5 * CS2, fill = feature_type), size = 1, shape = 23, col = "#383838") + scale_color_brewer(palette = "Set2") +  scale_fill_manual(values = c("#a6d854", "#e78ac3")) + guides(fill = guide_legend(override.aes = list(shape = 32, size = 0))) + coord_fixed(sqrt(pca_res$eig[2] / pca_res$eig[2])) + labs(x = sprintf("Axis1 [%s%% Variance]",
