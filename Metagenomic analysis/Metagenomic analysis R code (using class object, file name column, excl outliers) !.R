@@ -755,7 +755,7 @@ pdIR <- pIR$data
 
 head(pdIR)
 IR.bp <- ggplot(pdIR, aes(x = file_name, y = Abundance, fill = Phylum)) + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack") +
-         scale_fill_manual(values=cbPalette) + xlab("IR samples") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
+         scale_fill_manual(values=cbPalette) + xlab("IR samples") + ylab("Abundance count") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
 
 ### Bar plot of phylum in IS samples
 pIS <- plot_bar(IS_ps.fil, x = "file_name", fill = "Phylum")
@@ -763,7 +763,7 @@ pdIS <- pIS$data
 head(pdIS)
 
 IS.bp <- ggplot(pdIS, aes(x = file_name, y = Abundance, fill = Phylum)) + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack") +
-  scale_fill_manual(values=cbPalette) + xlab("IS samples") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
+  scale_fill_manual(values=cbPalette) + xlab("IS samples") + ylab("Abundance count") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
 
 
 # plot_bar(IS_ps.fil, x = "file_name", fill = "Phylum") + geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
@@ -782,9 +782,9 @@ Actino.mean <- colMeans(Actinobacteria@otu_table@.Data) #could log transform the
 Actino.mean <- as.data.frame(Actino.mean)
 # Actino.meanlog <- log2(Actino.mean)
 Actino.mean <- t(Actino.mean)
-rownames(Actino.mean) <- "Actinobacteria abundance"
+rownames(Actino.mean) <- "Actinobacteria abundance count"
 Actinobacteria@otu_table@.Data <- Actino.mean # worked
-Actino.plot <- boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+Actino.plot <- boxplot_abundance(Actinobacteria, x = "IR_IS_classification", y = "Actinobacteria abundance count",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification")
 print(Actino.plot)
 
 ## Calculating p-values 
@@ -809,9 +809,9 @@ Bacter.mean <- colMeans(Bacteroidetes@otu_table@.Data)
 Bacter.mean <- as.data.frame(Bacter.mean)
 # Bacter.meanlog <- log2(Bacter.mean)
 Bacter.mean <- t(Bacter.mean)
-rownames(Bacter.mean) <- "Bacteroidetes abundance"
+rownames(Bacter.mean) <- "Bacteroidetes abundance count"
 Bacteroidetes@otu_table@.Data <- Bacter.mean # worked
-Bacter.plot <- boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+Bacter.plot <- boxplot_abundance(Bacteroidetes, x = "IR_IS_classification", y = "Bacteroidetes abundance count",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") + ylim(c(0,20))
 print(Bacter.plot)
 
 ## Calculating p-values
@@ -828,9 +828,9 @@ Firmi.mean <- colMeans(Firmicutes@otu_table@.Data)
 Firmi.mean <- as.data.frame(Firmi.mean)
 # Firmi.meanlog <- log2(Firmi.mean)
 Firmi.mean <- t(Firmi.mean)
-rownames(Firmi.mean) <- "Firmicutes abundance"
+rownames(Firmi.mean) <- "Firmicutes abundance count"
 Firmicutes@otu_table@.Data <- Firmi.mean # worked
-Firmi.plot <- boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+Firmi.plot <- boxplot_abundance(Firmicutes, x = "IR_IS_classification", y = "Firmicutes abundance count",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") + ylim(c(0,20))
 print(Firmi.plot)
 
 ## Calculating p-values
@@ -847,9 +847,9 @@ Proteo.mean <- colMeans(Proteobacteria@otu_table@.Data)
 Proteo.mean <- as.data.frame(Proteo.mean)
 # Proteo.meanlog <- log2(Proteo.mean)
 Proteo.mean <- t(Proteo.mean)
-rownames(Proteo.mean) <- "Proteobacteria abundance"
+rownames(Proteo.mean) <- "Proteobacteria abundance count"
 Proteobacteria@otu_table@.Data <- Proteo.mean # worked
-Proteo.plot <- boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+Proteo.plot <- boxplot_abundance(Proteobacteria, x = "IR_IS_classification", y = "Proteobacteria abundance count",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") + ylim(c(0,20))
 print(Proteo.plot)
 
 ## Calculating p-values
@@ -885,9 +885,9 @@ Verruco.mean <- colMeans(Verrucomicrobia@otu_table@.Data)
 Verruco.mean <- as.data.frame(Verruco.mean)
 # Verruco.meanlog <- log2(Verruco.mean)
 Verruco.mean <- t(Verruco.mean)
-rownames(Verruco.mean) <- "Verrucomicrobia abundance"
+rownames(Verruco.mean) <- "Verrucomicrobia abundance count"
 Verrucomicrobia@otu_table@.Data <- Verruco.mean # worked
-Verruco.plot <- boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
+Verruco.plot <- boxplot_abundance(Verrucomicrobia, x = "IR_IS_classification", y = "Verrucomicrobia abundance count",  violin = FALSE, na.rm = FALSE, show.points = FALSE) + xlab("Classification") 
 print(Verruco.plot)
 
 ## Calculating p-values
