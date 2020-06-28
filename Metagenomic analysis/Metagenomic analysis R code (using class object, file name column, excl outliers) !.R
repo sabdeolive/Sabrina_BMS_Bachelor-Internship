@@ -773,7 +773,7 @@ ggarrange(IR.bp, IS.bp, labels = c("A", "B"), ncol=1, nrow =2)
 
 
 ###############################################################################################
-#### Box plots for each phylum (log2 transformed)
+#### Box plots for each phylum
 library("microbiome")
 
 ### Box plot for Actinobacteria
